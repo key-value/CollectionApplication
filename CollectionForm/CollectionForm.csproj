@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{391EB218-AE2F-4FD7-9480-44221DAB2E4F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CollectionForm</RootNamespace>
+    <AssemblyName>CollectionForm</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>E:\CodematicDemo\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2D4151A29F99FE7301207765AED7D0F3CC71A76D</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>CollectionForm_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>.\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PopupTool">
+      <HintPath>.\PopupTool.dll</HintPath>
+    </Reference>
+    <Reference Include="QConnectSDK">
+      <HintPath>.\QConnectSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.2774.19990, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnalysisForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnalysisForm.Designer.cs">
+      <DependentUpon>AnalysisForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComparatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ComparatorForm.Designer.cs">
+      <DependentUpon>ComparatorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DistrictForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistrictForm.Designer.cs">
+      <DependentUpon>DistrictForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DownPic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DownPic.Designer.cs">
+      <DependentUpon>DownPic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GreatWallForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GreatWallForm.Designer.cs">
+      <DependentUpon>GreatWallForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KingKeyFinancialCenter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KingKeyFinancialCenter.Designer.cs">
+      <DependentUpon>KingKeyFinancialCenter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LiJiang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiJiang.Designer.cs">
+      <DependentUpon>LiJiang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="River.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="River.Designer.cs">
+      <DependentUpon>River.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StoreListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StoreListControl.Designer.cs">
+      <DependentUpon>StoreListControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AnalysisForm.resx">
+      <DependentUpon>AnalysisForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComparatorForm.resx">
+      <DependentUpon>ComparatorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DistrictForm.resx">
+      <DependentUpon>DistrictForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DownPic.resx">
+      <DependentUpon>DownPic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GreatWallForm.resx">
+      <DependentUpon>GreatWallForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KingKeyFinancialCenter.resx">
+      <DependentUpon>KingKeyFinancialCenter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KingKeyFinancialCenter.zh-Hans.resx">
+      <DependentUpon>KingKeyFinancialCenter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LiJiang.resx">
+      <DependentUpon>LiJiang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="River.resx">
+      <DependentUpon>River.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StoreListControl.resx">
+      <DependentUpon>StoreListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AbstractSite\AbstractSite.csproj">
+      <Project>{29f6c4a5-f9b7-48d0-9b57-f73a909d98ed}</Project>
+      <Name>AbstractSite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationUtility\ApplicationUtility.csproj">
+      <Project>{9e63c6e7-af70-41b9-a5ec-01d5aa7d3034}</Project>
+      <Name>ApplicationUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CollectionLogic\CollectionLogic.csproj">
+      <Project>{bc033ebe-914d-4106-8bb8-91426249fb19}</Project>
+      <Name>CollectionLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cyooy\Cyooy.csproj">
+      <Project>{56e094e0-2267-4d85-aa3a-612efca0d760}</Project>
+      <Name>Cyooy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{0988c62e-247f-471f-a183-db509c7a3839}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DianPing\DianPing.csproj">
+      <Project>{6f71525b-d159-4c8a-98f4-2a9699480fc9}</Project>
+      <Name>DianPing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DuoMiFan\DuoMiFan.csproj">
+      <Project>{fb0a00ac-76ac-473a-a841-2ba294654a99}</Project>
+      <Name>DuoMiFan</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Echiele\Echiele.csproj">
+      <Project>{5976e58a-7cae-4b9c-9892-bc3957601f9e}</Project>
+      <Name>Echiele</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FanQieKuaiDian\FanQieKuaiDianSite.csproj">
+      <Project>{89d670d4-ef5f-43db-add0-e9bf5f040ff9}</Project>
+      <Name>FanQieKuaiDianSite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FanTong\FanTong.csproj">
+      <Project>{0a279dbe-c583-4e6d-aa63-7204622fe9e3}</Project>
+      <Name>FanTong</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ISite\SiteFactory.csproj">
+      <Project>{fb71ef67-2765-4cea-b360-b2b0ce8d42d7}</Project>
+      <Name>SiteFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{53995dbb-9836-4647-ad22-865884fdeb9e}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScFood\ScFood.csproj">
+      <Project>{d5953495-8430-4822-9d55-0539db375c8a}</Project>
+      <Name>ScFood</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SiteBll\SiteLogic.csproj">
+      <Project>{4351db96-568c-4869-879c-d4d1d879c41c}</Project>
+      <Name>SiteLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SiteFactory\ISite.csproj">
+      <Project>{1d8a0ecc-80dc-4247-8e44-3749dffb8230}</Project>
+      <Name>ISite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\YuKuai\YuKuai.csproj">
+      <Project>{d368d96b-6bfc-448d-b1b5-8769567ff396}</Project>
+      <Name>YuKuai</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
