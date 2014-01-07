@@ -12,6 +12,7 @@ using PopupTool;
 using Catalogue = Maticsoft.Model.Catalogue;
 using City = Maticsoft.Model.City;
 using CookingStyles = Maticsoft.Model.CookingStyles;
+using DishesTyep = Maticsoft.Model.DishesTyep;
 using StoreInfo = Maticsoft.Model.StoreInfo;
 
 namespace CollectionForm
@@ -337,6 +338,7 @@ namespace CollectionForm
             var dishTypeListCount = 0;
             if (dishTypeList != null)
             {
+                store.DishTypeList = new List<DishesTyep>();
                 store.DishTypeList = dishTypeList;
                 dishTypeListCount = dishTypeList.Count;
             }

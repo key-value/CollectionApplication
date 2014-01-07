@@ -74,25 +74,25 @@ namespace XiaoMiShuSite
         public override string GetFacilities()
         {
             const string xpath = @"./div[@class='p20 mt5']/div[@class='mt10 f13']/div";
-            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"设施服务:").Replace(@"\r\n", string.Empty);
+            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"设施服务:").Replace(@"<!-- 可以刷卡的列表 -->", string.Empty).Replace(@" ", string.Empty);
         }
 
         public override string GetBasicIntroduction()
         {
             const string xpath = @"./div[@class='p20 mt5']/div[@class='mt10 f13']/div";
-            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"餐厅简介:").Replace(@"\r\n", string.Empty);
+            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"餐厅简介:");
         }
 
         public override string GetBus()
         {
             const string xpath = @"./div[@class='p20 mt5']/div[@class='mt10 f13']/div";
-            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"公交:").Replace(@"修改", string.Empty).Replace(@"\r\n", string.Empty).Trim();
+            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"公交:").Replace(@"修改", string.Empty);
         }
 
         public override string GetCarPark()
         {
             const string xpath = @"./div[@class='p20 mt5']/div[@class='mt10 f13']/div";
-            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"停车:").Replace(@"\r\n", string.Empty).Trim();
+            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"停车:");
         }
     }
 }
