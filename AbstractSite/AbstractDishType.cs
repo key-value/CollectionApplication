@@ -31,12 +31,12 @@ namespace AbstractSite
         public List<Maticsoft.Model.DishesTyep> UpdateDishType()
         {
             var dishTypeList = new List<Maticsoft.Model.DishesTyep>();
-            var dishTypeNodeList = GetSiteDishType();
+            var dishTypeNodeList = GetSiteDishTypeList();
+            dishTypeList.AddRange(GetOlddDishType());
             if (dishTypeNodeList == null || dishTypeNodeList.Count <= 0)
             {
                 return dishTypeList;
             }
-            var dishesTyepList = GetOlddDishType();
             foreach (var dishTypeNode in dishTypeNodeList)
             {
                 var dishTypeName = GetDishTypeName(dishTypeNode);
@@ -44,7 +44,7 @@ namespace AbstractSite
                 {
                     continue;
                 }
-                var dishesTypeInfo = dishesTyepList.Find(x => x.DishesTypeName == dishTypeName);
+                var dishesTypeInfo = dishTypeList.Find(x => x.DishesTypeName == dishTypeName);
                 if (dishesTypeInfo == null)
                 {
                     dishesTypeInfo = new Maticsoft.Model.DishesTyep
@@ -57,6 +57,10 @@ namespace AbstractSite
                     dishTypeList.Add(dishesTypeInfo);
                 }
                 var dishNodeList = GetDishInfoList(dishTypeNode);
+                if (dishNodeList == null)
+                {
+                    continue;
+                }
                 foreach (var dishNode in dishNodeList)
                 {
                     var dishName = GetDishName(dishNode);
@@ -92,7 +96,7 @@ namespace AbstractSite
             return dishTypeNode.InnerText;
         }
 
-        protected virtual HtmlAgilityPack.HtmlNodeCollection GetSiteDishType()
+        protected virtual HtmlAgilityPack.HtmlNodeCollection GetSiteDishTypeList()
         {
             var baseCollectionSite = new BaseCollectionSite(PageUrl);
             var dishTypeHtmlNode = baseCollectionSite.BaseHtmlNode;
@@ -102,7 +106,7 @@ namespace AbstractSite
 
         protected virtual List<Maticsoft.Model.DishesTyep> GetOlddDishType()
         {
-            var dishesTyepList = DishTypeBll.GetModelList(string.Format("StoreId = '{0}'", StoreInfo.storeId));
+            var dishesTyepList = DishTypeBll.GetModelList(string.Format("StoreId = '{0}'", StoreInfo.storeId)) ?? new List<Maticsoft.Model.DishesTyep>();
             foreach (var dishesTyep in dishesTyepList)
             {
                 var dishesList = DishesBll.GetModelList(string.Format(@"DishesTypeID = '{0}'", dishesTyep.DishesTypeID));

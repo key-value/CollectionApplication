@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractCatalogue.cs" />
+    <Compile Include="AbstractDishes.cs" />
     <Compile Include="AbstractDishType.cs" />
     <Compile Include="AbstractPicture.cs" />
     <Compile Include="AbstractStore.cs" />

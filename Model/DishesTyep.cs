@@ -124,6 +124,8 @@ namespace Maticsoft.Model
 
         #region add
         public List<DishesEntity> DishesList { get; set; }
+
+        public string DishHref { get; set; }
         #endregion
 
     }

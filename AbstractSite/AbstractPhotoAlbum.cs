@@ -50,24 +50,10 @@ namespace AbstractSite
             {
                 var picturePathName = StorePictureUrl + pictureNode.Attributes["src"].Value;
                 storePicturesList.Add(BuildStorePicture(storeInfo, picturePathName));
-                //StorePictureBll.Add(storePicture);
-                //StorePicturesTableBll.Add(BuildStorePicturesTable(busphotoAlbumTable, storePicture));
             }
             return storePicturesList;
         }
-        //protected virtual Maticsoft.Model.StorePicturesTable BuildStorePicturesTable(Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable, Maticsoft.Model.StorePicture storePicture)
-        //{
-        //    var storePicturesTable = new Maticsoft.Model.StorePicturesTable
-        //    {
-        //        StorePicturesID = Guid.NewGuid().ToString(),
-        //        BusPhotoAlbumID = busphotoAlbumTable.BusPhotoAlbumID,
-        //        BusinessID = busphotoAlbumTable.BusinessID,
-        //        PictureAddress = storePicture.PictureName,
-        //        PicState = 2,
-        //        UploadTime = DateTime.Now
-        //    };
-        //    return storePicturesTable;
-        //}
+
         protected virtual Maticsoft.Model.BusPhotoAlbumTable BuildBusPhotoAlbumTable(Maticsoft.Model.StoreInfo storeInfo, int albumType)
         {
             var busphotoAlbumTable = new Maticsoft.Model.BusPhotoAlbumTable();

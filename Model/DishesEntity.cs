@@ -293,7 +293,16 @@ namespace Maticsoft.Model
 
         public string PictureHref { get; set; }
 
+        public bool IsNull { get; set; }
         #endregion
+
+    }
+    public class NullDishesEntity : DishesEntity
+    {
+        public NullDishesEntity()
+        {
+            IsNull = true;
+        }
     }
 }
 
