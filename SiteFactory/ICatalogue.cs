@@ -80,6 +80,8 @@ namespace ISite
         /// <returns></returns>
         List<Catalogue> GetPageCatalogue(int poIndex);
 
+        List<Catalogue> GetCataloguePage(int poIndex);
+
         string NextPage { get; set; }
         string BeforePage { get; set; }
 

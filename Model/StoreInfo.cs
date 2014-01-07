@@ -16,6 +16,7 @@
 */
 using System;
 using System.Collections.Generic;
+using System.Security;
 
 namespace Maticsoft.Model
 {
@@ -217,6 +218,7 @@ namespace Maticsoft.Model
         private bool _isNull;
 
         public List<DishesTyep> DishTypeList { get; set; }
+        public string StorePictureHref { get; set; }
 
         #endregion
 

@@ -240,5 +240,11 @@ namespace Cyooy
                 _beforePage = value;
             }
         }
+
+
+        public List<Catalogue> GetCataloguePage(int poIndex)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

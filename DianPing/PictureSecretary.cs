@@ -34,7 +34,6 @@ namespace DianPing
                 }
                 SavePicture(storeInfo, pictureNodeList, busphotoAlbumTable);
             }
-
         }
     }
 }

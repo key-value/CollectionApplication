@@ -101,6 +101,8 @@ namespace Maticsoft.Model
         }
 
         protected bool _isNull;
+
+        public string StorePictureHref { get; set; }
     }
 
     public class NullCatalogue : Catalogue

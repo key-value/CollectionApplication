@@ -127,17 +127,7 @@ namespace AbstractSite
         public virtual List<Catalogue> GetPageCatalogue(int poIndex)
         {
             var catalogueList = new List<Catalogue>();
-            var baseCollectionSite = new BaseCollectionSite(PageUrl);
-            var catalogueHtmlNode = baseCollectionSite.BaseHtmlNode;
-            if (catalogueHtmlNode == null)
-            {
-                return catalogueList;
-            }
-            var restaurantList = catalogueHtmlNode.SelectNodes(CataloguePath);
-            if (restaurantList == null)
-            {
-                return catalogueList;
-            }
+            var restaurantList = GetCatalogueList();
             foreach (var restaurant in restaurantList)
             {
                 InitRestaurant(restaurant);
@@ -157,7 +147,45 @@ namespace AbstractSite
                 }
                 catalogueList.Add(catalogue);
             }
+            return catalogueList;
+        }
+
+        private IEnumerable<HtmlNode> GetCatalogueList()
+        {
+            var baseCollectionSite = new BaseCollectionSite(PageUrl);
+            var catalogueHtmlNode = baseCollectionSite.BaseHtmlNode;
+            if (catalogueHtmlNode == null)
+            {
+                return null;
+            }
             GetPageNum(catalogueHtmlNode);
+            var restaurantList = catalogueHtmlNode.SelectNodes(CataloguePath);
+            return restaurantList;
+        }
+
+        public virtual List<Catalogue> GetCataloguePage(int poIndex)
+        {
+            var catalogueList = new List<Catalogue>();
+            var restaurantList = GetCatalogueList();
+            foreach (var restaurant in restaurantList)
+            {
+                InitRestaurant(restaurant);
+                var catalogue = CreateCatalogue(poIndex);
+                if (catalogue.IsNull)
+                {
+                    continue;
+                }
+                var storeId = Guid.NewGuid().ToString();
+                catalogue.IsRead = CheckStoreIsRead(catalogue.FId, catalogue.title, ref storeId);
+                catalogue.StoreId = storeId;
+                catalogue.StorePictureHref = GetImageHref(restaurant, storeId);
+                var storeInfo = GetStoreInfo(catalogue.title, restaurant);
+                if (!storeInfo.IsNull)
+                {
+                    catalogue.StoreInfo = storeInfo;
+                }
+                catalogueList.Add(catalogue);
+            }
             return catalogueList;
         }
 

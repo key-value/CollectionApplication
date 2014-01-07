@@ -49,6 +49,7 @@
     <Compile Include="AbstractPicture.cs" />
     <Compile Include="AbstractStore.cs" />
     <Compile Include="AbstractStorePicture.cs" />
+    <Compile Include="AbstractPhotoAlbum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -20,21 +20,12 @@ namespace AbstractSite
         #region image
         protected string SaveImageNode(HtmlNode htmlNode, string storeId)
         {
-            if (string.IsNullOrEmpty(ImgNodePath))
+            var imageHref = GetImageHref(htmlNode, storeId);
+            if (string.IsNullOrEmpty(imageHref))
             {
                 return string.Empty;
             }
-            var imgNode = htmlNode.SelectSingleNode(ImgNodePath);
-            if (imgNode != null)
-            {
-                var shopPicturePath = GetshopPicturePath(imgNode);
-                if (string.IsNullOrEmpty(shopPicturePath))
-                {
-                    return string.Empty;
-                }
-                return SavePictureName(storeId, shopPicturePath);
-            }
-            return string.Empty;
+            return SavePictureName(storeId, imageHref);
         }
         protected virtual string SavePictureName(string storeId, string shopPicturePath)
         {
@@ -52,6 +43,24 @@ namespace AbstractSite
 
         protected virtual string GetshopPicturePath(HtmlNode htmlNode)
         {
+            return string.Empty;
+        }
+        protected string GetImageHref(HtmlNode htmlNode, string storeId)
+        {
+            if (string.IsNullOrEmpty(ImgNodePath))
+            {
+                return string.Empty;
+            }
+            var imgNode = htmlNode.SelectSingleNode(ImgNodePath);
+            if (imgNode != null)
+            {
+                var shopPicturePath = GetshopPicturePath(imgNode);
+                if (string.IsNullOrEmpty(shopPicturePath))
+                {
+                    return string.Empty;
+                }
+                return shopPicturePath;
+            }
             return string.Empty;
         }
 

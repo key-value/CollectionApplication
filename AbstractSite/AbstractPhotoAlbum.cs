@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
-using ISite;
 using Maticsoft.BLL;
 
 namespace AbstractSite
 {
-    public abstract class AbstractPicture
+    public abstract class AbstractPhotoAlbum
     {
-        protected AbstractPicture()
+        protected AbstractPhotoAlbum()
         {
-            TypeList = new List<string>();
             StorePictureUrl = string.Empty;
         }
         protected StorePicture StorePictureBll = new StorePicture();
@@ -25,64 +23,51 @@ namespace AbstractSite
             get { return "PhotoAlbum"; }
         }
         public string PicturePath { get; set; }
-
         public string StorePictureUrl { get; set; }
 
-        public virtual void DeletePicture(string storeId)
+        public virtual void GetPicture(Maticsoft.Model.StoreInfo storeInfo)
         {
-            var storePicturelist = StorePictureBll.GetModelList(string.Format("StoreID = '{0}' and picType ='{1}'", storeId, PicturType));
-            foreach (var storePicture in storePicturelist)
+            var typeList = GetTypeList();
+            for (int i = 0; i < typeList.Count; i++)
             {
-                StorePictureBll.Delete(storePicture.PID);
-            }
-            var storePicturesTableBll = new StorePicturesTable();
-            var storePicturesTableList = storePicturesTableBll.GetModelList(string.Format("businessID = '{0}'", storeId));
-            foreach (var storePicturesTable in storePicturesTableList)
-            {
-                storePicturesTableBll.Delete(storePicturesTable.StorePicturesID);
+                var busphotoAlbumTable = BuildBusPhotoAlbumTable(storeInfo, i);
+                busphotoAlbumTable.StorePicturesList.AddRange(CollectionPicture(storeInfo, busphotoAlbumTable, typeList[i]));
             }
         }
 
-        protected List<string> TypeList;
-        public virtual void GetPicture(Maticsoft.Model.StoreInfo storeInfo)
-        {
-            DeletePicture(storeInfo.storeId);
-            for (int i = 0; i < TypeList.Count; i++)
-            {
-                var busphotoAlbumTable = BuildBusPhotoAlbumTable(storeInfo, i);
-                CollectionPicture(storeInfo, busphotoAlbumTable, TypeList[i]);
-            }
-        }
-        protected virtual void CollectionPicture(Maticsoft.Model.StoreInfo storeInfo, Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable, string albumType)
+        protected abstract List<string> GetTypeList();
+        protected virtual List<Maticsoft.Model.StorePicture> CollectionPicture(Maticsoft.Model.StoreInfo storeInfo, Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable, string albumType)
         {
             var baseCollectionSite = new BaseCollectionSite(string.Format(PageUrl, storeInfo.Fid));
             var pictureHtmlNode = baseCollectionSite.BaseHtmlNode;
             var pictureNodeList = pictureHtmlNode.SelectNodes(PicturePath);
-            SavePicture(storeInfo, pictureNodeList, busphotoAlbumTable);
+            return SavePicture(storeInfo, pictureNodeList, busphotoAlbumTable);
         }
-        protected virtual void SavePicture(Maticsoft.Model.StoreInfo storeInfo, IEnumerable<HtmlNode> pictureNodeList, Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable)
+        protected virtual List<Maticsoft.Model.StorePicture> SavePicture(Maticsoft.Model.StoreInfo storeInfo, IEnumerable<HtmlNode> pictureNodeList, Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable)
         {
+            var storePicturesList = new List<Maticsoft.Model.StorePicture>();
             foreach (var pictureNode in pictureNodeList)
             {
                 var picturePathName = StorePictureUrl + pictureNode.Attributes["src"].Value;
-                var storePicture = BuildStorePicture(storeInfo, picturePathName);
-                StorePictureBll.Add(storePicture);
-                StorePicturesTableBll.Add(BuildStorePicturesTable(busphotoAlbumTable, storePicture));
+                storePicturesList.Add(BuildStorePicture(storeInfo, picturePathName));
+                //StorePictureBll.Add(storePicture);
+                //StorePicturesTableBll.Add(BuildStorePicturesTable(busphotoAlbumTable, storePicture));
             }
+            return storePicturesList;
         }
-        protected virtual Maticsoft.Model.StorePicturesTable BuildStorePicturesTable(Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable, Maticsoft.Model.StorePicture storePicture)
-        {
-            var storePicturesTable = new Maticsoft.Model.StorePicturesTable
-            {
-                StorePicturesID = Guid.NewGuid().ToString(),
-                BusPhotoAlbumID = busphotoAlbumTable.BusPhotoAlbumID,
-                BusinessID = busphotoAlbumTable.BusinessID,
-                PictureAddress = storePicture.PictureName,
-                PicState = 2,
-                UploadTime = DateTime.Now
-            };
-            return storePicturesTable;
-        }
+        //protected virtual Maticsoft.Model.StorePicturesTable BuildStorePicturesTable(Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable, Maticsoft.Model.StorePicture storePicture)
+        //{
+        //    var storePicturesTable = new Maticsoft.Model.StorePicturesTable
+        //    {
+        //        StorePicturesID = Guid.NewGuid().ToString(),
+        //        BusPhotoAlbumID = busphotoAlbumTable.BusPhotoAlbumID,
+        //        BusinessID = busphotoAlbumTable.BusinessID,
+        //        PictureAddress = storePicture.PictureName,
+        //        PicState = 2,
+        //        UploadTime = DateTime.Now
+        //    };
+        //    return storePicturesTable;
+        //}
         protected virtual Maticsoft.Model.BusPhotoAlbumTable BuildBusPhotoAlbumTable(Maticsoft.Model.StoreInfo storeInfo, int albumType)
         {
             var busphotoAlbumTable = new Maticsoft.Model.BusPhotoAlbumTable();
@@ -104,7 +89,7 @@ namespace AbstractSite
                 PID = Guid.NewGuid().ToString(),
                 PicType = PicturType,
                 PicturePath = picturePathName,
-                StoreId = storeInfo.storeId
+                StoreId = storeInfo.storeId,
             };
             storePicture.PictureName = string.Format("{0}.jpg", storePicture.PID);
             return storePicture;

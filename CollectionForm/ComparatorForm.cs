@@ -194,7 +194,7 @@ namespace CollectionForm
                 var catalogueLogic = new CollectionLogic.CatalogueLogic(sitePath.SelectedSite);
                 catalogueLogic.SetPath(sitePath.Path);
                 catalogueLogic.PageNum = sitePath.PageIndex;
-                var catalogueList = catalogueLogic.GetStoreInfo(sitePath.PageIndex);
+                var catalogueList = catalogueLogic.GetCataloguePage(sitePath.PageIndex);
                 BeginInvoke(goPathDelegate, catalogueLogic.NextPage, catalogueLogic.BeforePage, catalogueLogic.PageNum, catalogueList);
             }
             catch (Exception ex)
@@ -413,7 +413,6 @@ namespace CollectionForm
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message);
             }
         }

@@ -55,6 +55,10 @@
     <Compile Include="StoreSecretary.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AbstractSite\AbstractSite.csproj">
+      <Project>{29f6c4a5-f9b7-48d0-9b57-f73a909d98ed}</Project>
+      <Name>AbstractSite</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
       <Name>BLL</Name>

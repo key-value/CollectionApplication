@@ -11,6 +11,10 @@ namespace FanQieKuaiDianSite
 {
     public class CatalogueSecretary : ICatalogue
     {
+        public List<Catalogue> GetCataloguePage(int poIndex)
+        {
+            throw new NotImplementedException();
+        }
         private StoreInfo _storeInfoBll = new StoreInfo();
         private StorePicture _storePictureBll = new StorePicture();
 
