@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using Maticsoft.BLL;
 using Maticsoft.Model;
 using System;
@@ -65,7 +66,7 @@ namespace AbstractSite
                 if (temStoreInfo != null)
                 {
                     storeId = temStoreInfo.storeId;
-                    DeleteOldPicture(temStoreInfo);
+                    //DeleteOldPicture(temStoreInfo);
                     return true;
                 }
             }
@@ -214,5 +215,29 @@ namespace AbstractSite
             return catalogue;
         }
         #endregion
+
+        protected string StoreUrl { get; set; }
+
+        protected virtual string GetStoreUrl()
+        {
+            if (!string.IsNullOrWhiteSpace(StoreUrl))
+            {
+                return StoreUrl;
+            }
+            var regex = @"(http|ftp|https):\/\/([\w\-_]+\.[\w\-_]+\.[\w\-_]+)";
+            if (!Regex.IsMatch(PageUrl, regex))
+            {
+                return string.Empty;
+            }
+            var matchCollection = Regex.Match(PageUrl, regex);
+            var httpTop = string.IsNullOrEmpty(matchCollection.Groups[1].Value.Trim())
+                   ? @"http"
+                   : matchCollection.Groups[1].Value;
+            var urlMain = string.IsNullOrEmpty(matchCollection.Groups[2].Value.Trim())
+                   ? string.Empty
+                   : matchCollection.Groups[2].Value;
+            StoreUrl = string.Format("{0}://{1}", httpTop, urlMain);
+            return StoreUrl;
+        }
     }
 }
