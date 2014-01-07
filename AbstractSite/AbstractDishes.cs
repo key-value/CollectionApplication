@@ -10,7 +10,7 @@ using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace AbstractSite
 {
-    public abstract class AbstractDishes : IDishes
+    public abstract class AbstractDishes
     {
         protected StorePicture StorePictureBll = new StorePicture();
         public AbstractDishes()
@@ -24,10 +24,6 @@ namespace AbstractSite
         public virtual bool Conversion()
         {
             return false;
-        }
-
-        public void GetDish(IDishSiteModel dishSiteModel, string storeID)
-        {
         }
 
         public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)

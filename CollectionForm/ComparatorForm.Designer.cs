@@ -176,8 +176,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(1337, 30);
             this.textBox1.TabIndex = 51;
-            this.textBox1.Text = "http://sz.echiele.com/search/shop?src=true&zonecode=44030601&atmosphere=&category" +
-    "_id=10";
+            this.textBox1.Text = "http://www.xiaomishu.com/shop/search-s261/";
             // 
             // textBox2
             // 

@@ -13,7 +13,14 @@ namespace Maticsoft.BLL
         private HtmlNode _catalogueHtmlNode;
         public BaseCollectionSite(string pageUrl)
         {
-            _pageUrl = pageUrl;
+            if (pageUrl.Contains(@"http://"))
+            {
+                _pageUrl = pageUrl;
+            }
+            else
+            {
+                _pageUrl = @"http://" + pageUrl;
+            }
         }
         public string PageUrl
         {

@@ -74,7 +74,7 @@ namespace CollectionForm
         private string InitializeRegex(string path)
         {
             //var regex = @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
-            var regex = @"(http|ftp|https)?:\/\/[\w\-_]+(\.[\w\-_]+)(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
+            var regex = @"(http|ftp|https)?[:\/\/]?[\w\-_]+(\.[\w\-_]+)(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
             if (!Regex.IsMatch(path, regex))
             {
                 return string.Empty;
@@ -85,37 +85,42 @@ namespace CollectionForm
             {
                 case "echiele":
                     _selectedItem = "Echiele";
-                    regex = string.Format(@"(http|ftp|https)?:\/\/[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*zonecode=(\d*)[\w\-\.,@?^=%&amp;:/~\+#]*[page=(\d*)]*[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                    regex = string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*zonecode=(\d*)[\w\-\.,@?^=%&amp;:/~\+#]*[page=(\d*)]*[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
                 case "fantong":
                     _selectedItem = "FanTong";
                     regex =
-                        string.Format(@"(http|ftp|https)?:\/\/[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                        string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
                 case "cyooy":
                     _selectedItem = "Cyooy";
                     regex =
-                        string.Format(@"(http|ftp|https)?:\/\/[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]+=(\d*)-(\d*)-(\d*)-(\d*)-(\d*)-(\d*)-(\d*)", siteName);
+                        string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]+=(\d*)-(\d*)-(\d*)-(\d*)-(\d*)-(\d*)-(\d*)", siteName);
                     break;
                 case "yukuai":
                     _selectedItem = "YuKuai";
                     regex =
-                       string.Format(@"(http|ftp|https)?:\/\/[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                       string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
                 case "scfood":
                     _selectedItem = "ScFood";
                     regex =
-                       string.Format(@"(http|ftp|https)?:\/\/[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                       string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
                 case "duomifan":
                     _selectedItem = "DuoMiFan";
                     regex =
-                        string.Format(@"(http|ftp|https)?:\/\/[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                        string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
                 case "dianping":
                     _selectedItem = "DianPing";
                     regex =
-                       string.Format(@"(http|ftp|https)?:\/\/[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                       string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                    break;
+                case "xiaomishu":
+                    _selectedItem = "XiaoMiShuSite";
+                    regex =
+                       string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
                 default:
                     regex = string.Empty;

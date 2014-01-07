@@ -280,6 +280,10 @@
       <Project>{1d8a0ecc-80dc-4247-8e44-3749dffb8230}</Project>
       <Name>ISite</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XiaoMiShuSite\XiaoMiShuSite.csproj">
+      <Project>{3744c321-ce86-4449-9fa3-278fe2de6595}</Project>
+      <Name>XiaoMiShuSite</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YuKuai\YuKuai.csproj">
       <Project>{d368d96b-6bfc-448d-b1b5-8769567ff396}</Project>
       <Name>YuKuai</Name>
