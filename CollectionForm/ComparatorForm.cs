@@ -584,13 +584,16 @@ namespace CollectionForm
             var oldStoreInfo = textBox4.Tag as Maticsoft.Model.StoreInfoEntity;
             var storeInfoEntity = GetStoreInfoEntity(catalogueInfo, oldStoreInfo, siteStoreInfo);
             var storeBll = new StoreInfoBll();
+            var storeInfoBll = new Maticsoft.BLL.StoreInfo();
             if (storeBll.Exists(storeInfoEntity.BizID))
             {
                 storeBll.Update(storeInfoEntity);
+                storeInfoBll.Update(storeInfo);
             }
             else
             {
                 storeInfoEntity.ShortID = storeBll.GetMaxShortID();
+                storeInfoBll.Add(storeInfo);
                 storeBll.Add(storeInfoEntity);
             }
             var storeSpecialBll = new Maticsoft.BLL.StoreSpecialTag();
