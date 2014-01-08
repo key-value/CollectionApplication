@@ -22,41 +22,70 @@ namespace AbstractSite
         {
             get { return "PhotoAlbum"; }
         }
-        public string PicturePath { get; set; }
+
+        public abstract string PicturePath();
         public string StorePictureUrl { get; set; }
 
-        public virtual void GetPicture(Maticsoft.Model.StoreInfo storeInfo)
+        public virtual List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
         {
+            var busPhotoAlbumTableList = new List<Maticsoft.Model.BusPhotoAlbum>();
             var typeList = GetTypeList();
             for (int i = 0; i < typeList.Count; i++)
             {
                 var busphotoAlbumTable = BuildBusPhotoAlbumTable(storeInfo, i);
                 busphotoAlbumTable.StorePicturesList.AddRange(CollectionPicture(storeInfo, busphotoAlbumTable, typeList[i]));
+                busPhotoAlbumTableList.Add(busphotoAlbumTable);
             }
+            return busPhotoAlbumTableList;
+        }
+
+        protected virtual string GetPageUrl(Maticsoft.Model.StoreInfo storeInfo, string albumType, int pageNum)
+        {
+            return string.Format(PageUrl, storeInfo.Fid);
         }
 
         protected abstract List<string> GetTypeList();
-        protected virtual List<Maticsoft.Model.StorePicture> CollectionPicture(Maticsoft.Model.StoreInfo storeInfo, Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable, string albumType)
+        protected virtual List<Maticsoft.Model.StorePicture> CollectionPicture(Maticsoft.Model.StoreInfo storeInfo, Maticsoft.Model.BusPhotoAlbum busphotoAlbumTable, string albumType)
         {
-            var baseCollectionSite = new BaseCollectionSite(string.Format(PageUrl, storeInfo.Fid));
-            var pictureHtmlNode = baseCollectionSite.BaseHtmlNode;
-            var pictureNodeList = pictureHtmlNode.SelectNodes(PicturePath);
-            return SavePicture(storeInfo, pictureNodeList, busphotoAlbumTable);
+            var picturesList = new List<Maticsoft.Model.StorePicture>();
+            for (int i = 1; i < 500; i++)
+            {
+                //var baseCollectionSite = new BaseCollectionSite(GetPageUrl(storeInfo, albumType, i));
+                //var pictureHtmlNode = baseCollectionSite.BaseHtmlNode;
+                //var pictureNodeList = pictureHtmlNode.SelectNodes(PicturePath());
+                var storePic = PicturesBody(storeInfo, busphotoAlbumTable, albumType, ref i);
+                picturesList.AddRange(storePic);
+            }
+            return picturesList;
         }
-        protected virtual List<Maticsoft.Model.StorePicture> SavePicture(Maticsoft.Model.StoreInfo storeInfo, IEnumerable<HtmlNode> pictureNodeList, Maticsoft.Model.BusPhotoAlbumTable busphotoAlbumTable)
+
+
+        protected virtual List<Maticsoft.Model.StorePicture> SavePicture(Maticsoft.Model.StoreInfo storeInfo, IEnumerable<HtmlNode> pictureNodeList, Maticsoft.Model.BusPhotoAlbum busphotoAlbumTable)
         {
             var storePicturesList = new List<Maticsoft.Model.StorePicture>();
             foreach (var pictureNode in pictureNodeList)
             {
                 var picturePathName = StorePictureUrl + pictureNode.Attributes["src"].Value;
-                storePicturesList.Add(BuildStorePicture(storeInfo, picturePathName));
+                if (FilterPicturePathName(picturePathName))
+                {
+                    storePicturesList.Add(BuildStorePicture(storeInfo, picturePathName));
+                }
             }
             return storePicturesList;
         }
 
-        protected virtual Maticsoft.Model.BusPhotoAlbumTable BuildBusPhotoAlbumTable(Maticsoft.Model.StoreInfo storeInfo, int albumType)
+        protected virtual bool FilterPicturePathName(string picturePathName)
         {
-            var busphotoAlbumTable = new Maticsoft.Model.BusPhotoAlbumTable();
+            return !string.IsNullOrEmpty(picturePathName);
+        }
+
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
+        }
+        protected virtual Maticsoft.Model.BusPhotoAlbum BuildBusPhotoAlbumTable(Maticsoft.Model.StoreInfo storeInfo, int albumType)
+        {
+            var busphotoAlbumTable = new Maticsoft.Model.BusPhotoAlbum();
             busphotoAlbumTable.BusinessID = storeInfo.storeId;
             busphotoAlbumTable.BusPhotoAlbumID = Guid.NewGuid().ToString();
             busphotoAlbumTable.IsDefault = true;
@@ -65,7 +94,7 @@ namespace AbstractSite
             {
                 busphotoAlbumTable.AlbumName = @"菜品图片";
             }
-            BusPhotoAlbumTableBll.Add(busphotoAlbumTable);
+            //BusPhotoAlbumTableBll.Add(busphotoAlbumTable);
             return busphotoAlbumTable;
         }
         protected virtual Maticsoft.Model.StorePicture BuildStorePicture(Maticsoft.Model.StoreInfo storeInfo, string picturePathName)
@@ -80,5 +109,27 @@ namespace AbstractSite
             storePicture.PictureName = string.Format("{0}.jpg", storePicture.PID);
             return storePicture;
         }
+        protected virtual List<Maticsoft.Model.StorePicture> PicturesBody(Maticsoft.Model.StoreInfo storeInfo,
+            Maticsoft.Model.BusPhotoAlbum busphotoAlbumTable, string albumType, ref int pageNum)
+        {
+            var baseCollectionSite = new BaseCollectionSite(GetPageUrl(storeInfo, albumType, pageNum));
+            var pictureHtmlNode = baseCollectionSite.BaseHtmlNode;
+            var pictureNodeList = pictureHtmlNode.SelectNodes(PicturePath());
+            if (FilterPage(pictureNodeList, ref pageNum))
+            {
+                return new List<Maticsoft.Model.StorePicture>();
+            }
+            return SavePicture(storeInfo, pictureNodeList, busphotoAlbumTable);
+        }
+        protected virtual bool FilterPage(IEnumerable<HtmlNode> pictureHtmlNode, ref int pageNum)
+        {
+            if (pictureHtmlNode == null)
+            {
+                pageNum = 500;
+                return true;
+            }
+            return false;
+        }
+
     }
 }
