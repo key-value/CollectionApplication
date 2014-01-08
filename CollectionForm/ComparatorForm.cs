@@ -588,12 +588,12 @@ namespace CollectionForm
             if (storeBll.Exists(storeInfoEntity.BizID))
             {
                 storeBll.Update(storeInfoEntity);
-                storeInfoBll.Update(storeInfo);
+                storeInfoBll.Update(siteStoreInfo);
             }
             else
             {
                 storeInfoEntity.ShortID = storeBll.GetMaxShortID();
-                storeInfoBll.Add(storeInfo);
+                storeInfoBll.Add(siteStoreInfo);
                 storeBll.Add(storeInfoEntity);
             }
             var storeSpecialBll = new Maticsoft.BLL.StoreSpecialTag();
@@ -693,58 +693,56 @@ namespace CollectionForm
 
         private StoreInfoEntity GetStoreInfoEntity(Catalogue catalogueInfo, StoreInfoEntity oldStoreInfo, StoreInfo siteStoreInfo)
         {
-            var storeInfoEntity = new Maticsoft.Model.StoreInfoEntity();
-            storeInfoEntity.BizID = catalogueInfo.StoreId;
+            if (oldStoreInfo == null)
+            {
+                oldStoreInfo = new Maticsoft.Model.StoreInfoEntity();
+                oldStoreInfo.BizID = catalogueInfo.StoreId;
+            }
             if (siteStoreInfo == null)
             {
-                return storeInfoEntity;
+                return null;
             }
-            if (oldStoreInfo != null)
-            {
-                storeInfoEntity.BizID = oldStoreInfo.BizID;
-                storeInfoEntity.SortID = oldStoreInfo.SortID;
-            }
-            storeInfoEntity.Box = chbbox.Checked;
-            storeInfoEntity.BranchName = txtStoreNameSite.Text.Trim();
-            storeInfoEntity.Bus = txtBusSite.Text.Trim();
-            storeInfoEntity.BusinessAddTime = DateTime.Now;
-            storeInfoEntity.BasicIntroduction = txtBasicSite.Text.Trim();
-            storeInfoEntity.BusinessState = 40;
-            storeInfoEntity.BusinessTypeID = "2";
-            storeInfoEntity.CarPark = chbCarPark.Checked;
-            storeInfoEntity.ChildrenChair = chbChildrenChair.Checked;
-            storeInfoEntity.CityID = ((Maticsoft.Model.City)cbBoxCity.SelectedItem).CityID;
-            storeInfoEntity.Cod = chbCod.Checked;
-            storeInfoEntity.DistrictID = ((Maticsoft.Model.District)cbbDistrict.SelectedItem).DistrictID;
-            storeInfoEntity.IsCitySend = chbIsCitySend.Checked;
-            storeInfoEntity.IsCoupon = chbIsCoupon.Checked;
-            storeInfoEntity.IsSend = chbIsSend.Checked ? 1 : 0;
-            storeInfoEntity.KCVIP = chbKCVIP.Checked;
-            storeInfoEntity.NoSmoke = chbNoSmoke.Checked;
-            storeInfoEntity.OnlinePay = chbOnlinePay.Checked;
-            storeInfoEntity.Onlineorder = chbOnlineorder.Checked ? 1 : 0;
-            storeInfoEntity.PayCar = chbPayCar.Checked;
-            storeInfoEntity.PayCar = chbPayCar.Checked;
-            storeInfoEntity.StoreAddress = txtStoreAddressSite.Text.Trim();
-            storeInfoEntity.StoreHours = txtStoreHoursSite.Text.Trim();
-            storeInfoEntity.StoreName = txtStoreNameSite.Text.Trim();
-            storeInfoEntity.StorePhone = txtStorePhoneSite.Text.Trim();
-            storeInfoEntity.WIFI = chbWIFI.Checked;
+            oldStoreInfo.Box = chbbox.Checked;
+            oldStoreInfo.BranchName = txtStoreNameSite.Text.Trim();
+            oldStoreInfo.Bus = txtBusSite.Text.Trim();
+            oldStoreInfo.BusinessAddTime = DateTime.Now;
+            oldStoreInfo.BasicIntroduction = txtBasicSite.Text.Trim();
+            oldStoreInfo.BusinessState = 40;
+            oldStoreInfo.BusinessTypeID = "2";
+            oldStoreInfo.CarPark = chbCarPark.Checked;
+            oldStoreInfo.ChildrenChair = chbChildrenChair.Checked;
+            oldStoreInfo.CityID = ((Maticsoft.Model.City)cbBoxCity.SelectedItem).CityID;
+            oldStoreInfo.Cod = chbCod.Checked;
+            oldStoreInfo.DistrictID = ((Maticsoft.Model.District)cbbDistrict.SelectedItem).DistrictID;
+            oldStoreInfo.IsCitySend = chbIsCitySend.Checked;
+            oldStoreInfo.IsCoupon = chbIsCoupon.Checked;
+            oldStoreInfo.IsSend = chbIsSend.Checked ? 1 : 0;
+            oldStoreInfo.KCVIP = chbKCVIP.Checked;
+            oldStoreInfo.NoSmoke = chbNoSmoke.Checked;
+            oldStoreInfo.OnlinePay = chbOnlinePay.Checked;
+            oldStoreInfo.Onlineorder = chbOnlineorder.Checked ? 1 : 0;
+            oldStoreInfo.PayCar = chbPayCar.Checked;
+            oldStoreInfo.PayCar = chbPayCar.Checked;
+            oldStoreInfo.StoreAddress = txtStoreAddressSite.Text.Trim();
+            oldStoreInfo.StoreHours = txtStoreHoursSite.Text.Trim();
+            oldStoreInfo.StoreName = txtStoreNameSite.Text.Trim();
+            oldStoreInfo.StorePhone = txtStorePhoneSite.Text.Trim();
+            oldStoreInfo.WIFI = chbWIFI.Checked;
             decimal maxPrice = 0;
             if (decimal.TryParse(txtMaxPrice.Text, out maxPrice))
             {
-                storeInfoEntity.MaxPrice = maxPrice;
+                oldStoreInfo.MaxPrice = maxPrice;
             }
             decimal minPrice = 0;
             if (decimal.TryParse(txtMinPrice.Text, out minPrice))
             {
-                storeInfoEntity.MinPrice = minPrice;
+                oldStoreInfo.MinPrice = minPrice;
             }
             if (!string.IsNullOrEmpty(txtDoubleName.Text))
             {
-                storeInfoEntity.BranchName = txtDoubleName.Text.Trim();
+                oldStoreInfo.BranchName = txtDoubleName.Text.Trim();
             }
-            return storeInfoEntity;
+            return oldStoreInfo;
         }
 
         private void cbBoxProvinces_SelectedIndexChanged(object sender, EventArgs e)

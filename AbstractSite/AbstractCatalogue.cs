@@ -222,7 +222,7 @@ namespace AbstractSite
         {
             if (!string.IsNullOrWhiteSpace(StoreUrl))
             {
-                return StoreUrl;
+                return StoreUrl; 
             }
             var regex = @"(http|ftp|https):\/\/([\w\-_]+\.[\w\-_]+\.[\w\-_]+)";
             if (!Regex.IsMatch(PageUrl, regex))
