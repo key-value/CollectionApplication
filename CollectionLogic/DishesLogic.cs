@@ -1,4 +1,5 @@
 ﻿using ISite;
+using Maticsoft.Model;
 using SiteFactory;
 using System.Collections.Generic;
 
@@ -34,5 +35,9 @@ namespace CollectionLogic
             return _dishesSite.Conversion();
         }
 
+        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
+        {
+            return _dishesSite.GetDish(dishesTyepList);
+        }
     }
 }

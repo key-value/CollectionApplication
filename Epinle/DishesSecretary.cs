@@ -50,7 +50,11 @@ namespace Epinle
         public List<IDishSiteModel> DishList { get; set; }
         bool IDishes.Conversion()
         {
-            return true;
+            return false;
+        }
+        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
+        {
+            return dishesTyepList;
         }
     }
 }

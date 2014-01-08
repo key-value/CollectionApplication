@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ApplicationUtility;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
@@ -13,9 +14,11 @@ namespace AbstractSite
     public abstract class AbstractDishes
     {
         protected StorePicture StorePictureBll = new StorePicture();
-        public AbstractDishes()
+
+        protected AbstractDishes()
         {
             DishList = new List<IDishSiteModel>();
+            NextPageTextName = "下一页";
         }
         public string PageUrl { get; set; }
 
@@ -26,29 +29,65 @@ namespace AbstractSite
             return false;
         }
 
+        public virtual string GetDishUrl(DishesTyep dishType)
+        {
+            return dishType.DishHref;
+        }
+
         public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
         {
             foreach (var dishType in dishesTyepList)
             {
-                var baseCollectionSite = new BaseCollectionSite(PageUrl);
-                var dishTypeHtmlNode = baseCollectionSite.BaseHtmlNode;
-                var dishesNodeList = dishTypeHtmlNode.SelectNodes(dishType.DishHref);
-                if (dishesNodeList == null)
+                var nextPageUrl = GetDishUrl(dishType);
+                while (!string.IsNullOrEmpty(nextPageUrl))
                 {
-                    continue;
-                }
-
-                foreach (var dishesNode in dishesNodeList)
-                {
-                    var dishes = GetDishes(dishType, dishesNode);
-                    if (dishes.IsNull)
+                    var baseCollectionSite = new BaseCollectionSite(nextPageUrl);
+                    var dishTypeHtmlNode = baseCollectionSite.BaseHtmlNode;
+                    var dishesNodeList = dishTypeHtmlNode.SelectNodes(DishPath());
+                    if (dishesNodeList == null)
                     {
                         continue;
                     }
-                    dishType.DishesList.Add(dishes);
+
+                    foreach (var dishesNode in dishesNodeList)
+                    {
+                        var dishes = GetDishes(dishType, dishesNode);
+                        if (dishes.IsNull)
+                        {
+                            continue;
+                        }
+                        dishType.DishesList.Add(dishes);
+                    }
+                    nextPageUrl = GetNextPageUrl(dishTypeHtmlNode);
                 }
             }
             return dishesTyepList;
+        }
+
+        protected virtual string GetNextPageUrl(HtmlNode dishTypeHtmlNode)
+        {
+            var nextPageUrlPath = NextPageUrlPath();
+            if (string.IsNullOrWhiteSpace(nextPageUrlPath))
+            {
+                return string.Empty;
+            }
+            var pageUrlNode = CollectionNodeText.GetNodeContainsInnerText(dishTypeHtmlNode, nextPageUrlPath, NextPageTextName);
+            if (pageUrlNode == null)
+            {
+                return string.Empty;
+            }
+            return NextPageUrl(pageUrlNode);
+        }
+        protected virtual string NextPageUrl(HtmlNode pageUrlNode)
+        {
+            return pageUrlNode.GetPicturePath();
+        }
+
+        protected string NextPageTextName { get; set; }
+
+        protected virtual string NextPageUrlPath()
+        {
+            return string.Empty;
         }
 
         public Maticsoft.Model.DishesEntity GetDishes(DishesTyep dishesTyep, HtmlNode dishesNode)

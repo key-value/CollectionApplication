@@ -1,5 +1,6 @@
 ﻿using AbstractSite;
 using ApplicationUtility;
+using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
 
@@ -54,6 +55,21 @@ namespace XiaoMiShuSite
 
         public void GetDish(IDishSiteModel dishSiteModel, string storeID)
         {
+        }
+
+        public override bool Conversion()
+        {
+            return true;
+        }
+
+        protected override string NextPageUrlPath()
+        {
+            return @".//div[@class='constr']/div[@class='constr_in']/div[@class='cell pl10']/div[@class='mt20 p5 tr']/a[@class='page_able']";
+        }
+
+        protected override string NextPageUrl(HtmlNode pageUrlNode)
+        {
+            return @"http://www.xiaomishu.com" + pageUrlNode.GetPicturePath();
         }
     }
 }

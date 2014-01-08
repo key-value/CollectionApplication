@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ApplicationUtility;
 using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
@@ -53,6 +54,7 @@ namespace AbstractSite
                         DishesTypeName = dishTypeName,
                         BusinessID = StoreInfo.storeId,
                         CreateDate = DateTime.Now,
+                        DishHref = GetDishesHref(dishTypeNode),
                     };
                     dishTypeList.Add(dishesTypeInfo);
                 }
@@ -87,6 +89,11 @@ namespace AbstractSite
             return dishTypeList;
         }
 
+        protected virtual string GetDishesHref(HtmlAgilityPack.HtmlNode dishTypeNode)
+        {
+            return dishTypeNode.GetPicturePath();
+        }
+
         protected virtual string GetDishTypeName(HtmlAgilityPack.HtmlNode dishTypeNode)
         {
             if (dishTypeNode == null)
@@ -106,7 +113,7 @@ namespace AbstractSite
 
         protected virtual List<Maticsoft.Model.DishesTyep> GetOlddDishType()
         {
-            var dishesTyepList = DishTypeBll.GetModelList(string.Format("StoreId = '{0}'", StoreInfo.storeId)) ?? new List<Maticsoft.Model.DishesTyep>();
+            var dishesTyepList = DishTypeBll.GetModelList(string.Format("BusinessID = '{0}'", StoreInfo.storeId)) ?? new List<Maticsoft.Model.DishesTyep>();
             foreach (var dishesTyep in dishesTyepList)
             {
                 var dishesList = DishesBll.GetModelList(string.Format(@"DishesTypeID = '{0}'", dishesTyep.DishesTypeID));
@@ -117,7 +124,12 @@ namespace AbstractSite
 
         protected virtual HtmlAgilityPack.HtmlNodeCollection GetDishInfoList(HtmlAgilityPack.HtmlNode dishTypeNode)
         {
-            return dishTypeNode.SelectNodes(DishesPath());
+            var dishesPath = DishesPath();
+            if (string.IsNullOrEmpty(dishesPath))
+            {
+                return null;
+            }
+            return dishTypeNode.SelectNodes(dishesPath);
         }
 
         protected abstract string GetDishName(HtmlAgilityPack.HtmlNode dishNode);

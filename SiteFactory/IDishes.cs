@@ -18,5 +18,7 @@ namespace ISite
 
         void GetDish(IDishSiteModel dishSiteModel, string storeID);
         List<IDishSiteModel> DishList { get; set; }
+
+        List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList);
     }
 }

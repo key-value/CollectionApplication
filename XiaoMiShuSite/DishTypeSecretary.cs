@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AbstractSite;
+using ApplicationUtility;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.Model;
@@ -14,7 +15,7 @@ namespace XiaoMiShuSite
     {
         public DishTypeSecretary()
         {
-            _pageUrl = @"http://www.xiaomishu.com/shop/{0}";
+            _pageUrl = @"http://www.xiaomishu.com/shop/{0}/dish/";
         }
         private string _pageUrl;
         public override string PageUrl
@@ -63,6 +64,11 @@ namespace XiaoMiShuSite
         public List<IDishSiteModel> GetDishesList()
         {
             return new List<IDishSiteModel>();
+        }
+
+        protected override string GetDishesHref(HtmlNode dishTypeNode)
+        {
+            return "http://www.xiaomishu.com" + dishTypeNode.GetPicturePath();
         }
     }
 }

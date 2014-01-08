@@ -94,7 +94,11 @@ namespace CollectionLogic
             var dishTypeLogic = new DishTypeLogic(AssemblyName);
             dishTypeLogic.SetRestaurant(storeInfo);
             var dishTypeList = dishTypeLogic.UpdateDishType();
-            //var dishesLogic = new DishesLogic(AssemblyName);
+            var dishesLogic = new DishesLogic(AssemblyName);
+            if (dishesLogic.Conversion())
+            {
+                dishTypeList = dishesLogic.GetDish(dishTypeList);
+            }
             return dishTypeList;
         }
     }

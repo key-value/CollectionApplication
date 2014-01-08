@@ -34,19 +34,28 @@ namespace Maticsoft.BLL
         }
         public static string GetNodeListContainsInnerText(HtmlNode htmlNode, string xpath, string nodeName)
         {
+            var containNode = GetNodeContainsInnerText(htmlNode, xpath, nodeName);
+            if (containNode == null)
+            {
+                return string.Empty;
+            }
+            return containNode.InnerText.Replace(nodeName, string.Empty);
+        }
+        public static HtmlNode GetNodeContainsInnerText(HtmlNode htmlNode, string xpath, string nodeName)
+        {
             var tagNodeList = htmlNode.SelectNodes(xpath);
             if (tagNodeList == null)
             {
-                return string.Empty;
+                return null;
             }
             foreach (var tagNode in tagNodeList)
             {
                 if (tagNode.InnerText.Contains(nodeName))
                 {
-                    return tagNode.InnerText.Replace(nodeName, string.Empty);
+                    return tagNode;
                 }
             }
-            return string.Empty;
+            return null;
         }
     }
 }
