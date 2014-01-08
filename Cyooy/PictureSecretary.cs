@@ -106,5 +106,11 @@ namespace Cyooy
             BusPhotoAlbumTableBll.Add(busphotoAlbumTable);
             return busphotoAlbumTable;
         }
+
+
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
+        }
     }
 }

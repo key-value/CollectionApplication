@@ -10,6 +10,11 @@ namespace Echiele
 {
     public class PictureSecretary : IPicture
     {
+
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
+        }
         private StorePicture storePictureBll = new StorePicture();
         private StorePicturesTable StorePicturesTableBll = new StorePicturesTable();
         private BusPhotoAlbumTable BusPhotoAlbumTableBll = new BusPhotoAlbumTable();
@@ -100,5 +105,7 @@ namespace Echiele
             BusPhotoAlbumTableBll.Add(busphotoAlbumTable);
             return busphotoAlbumTable;
         }
+
+
     }
 }

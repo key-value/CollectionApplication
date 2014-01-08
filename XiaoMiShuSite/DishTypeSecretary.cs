@@ -70,5 +70,16 @@ namespace XiaoMiShuSite
         {
             return "http://www.xiaomishu.com" + dishTypeNode.GetPicturePath();
         }
+
+        protected override string GetDishTypeName(HtmlNode dishTypeNode)
+        {
+            var dishName = base.GetDishTypeName(dishTypeNode);
+            var dishlength = dishName.IndexOf('(');
+            if (dishlength > 0)
+            {
+                dishName = dishName.Substring(0, dishlength);
+            }
+            return dishName;
+        }
     }
 }

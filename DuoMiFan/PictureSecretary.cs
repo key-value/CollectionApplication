@@ -13,6 +13,11 @@ namespace DuoMiFan
 {
     public class PictureSecretary : AbstractPicture, IPicture
     {
+
+        public List<BusPhotoAlbumTable> SaveAlbumTables(StoreInfo storeInfo)
+        {
+            return new List<BusPhotoAlbumTable>();
+        }
         public PictureSecretary()
         {
             PageUrl = @"http://www.134.cn/Hall/huanjing/id/{0}/type/{1}";

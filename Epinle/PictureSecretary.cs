@@ -10,6 +10,7 @@ namespace Epinle
 {
     public class PictureSecretary : IPicture
     {
+
         private StorePicture storePictureBll = new StorePicture();
         public string _pageUrl { get; set; }
 
@@ -61,6 +62,12 @@ namespace Epinle
             busphotoAlbumTable.AlbumName = @"餐厅环境";
             busPhotoAlbumTableBll.Add(busphotoAlbumTable);
             return busphotoAlbumTable;
+        }
+
+
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
         }
     }
 }

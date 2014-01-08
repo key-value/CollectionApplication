@@ -17,7 +17,7 @@ namespace CollectionLogic
             _pictureSite = _collectionFactory.CreatePictureSecretary();
         }
 
-        private readonly IPicture _pictureSite ;
+        private readonly IPicture _pictureSite;
         public void GetPicture(StoreInfo storeInfo)
         {
             try
@@ -33,6 +33,17 @@ namespace CollectionLogic
         public void SetPath(string pageUrl)
         {
             _pictureSite.PageUrl = pageUrl;
+        }
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(StoreInfo storeInfo)
+        {
+            try
+            {
+                return _pictureSite.SaveAlbumTables(storeInfo);
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

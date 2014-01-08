@@ -53,7 +53,12 @@ namespace Maticsoft.BLL
 		{
 			return dal.Update(model);
 		}
+        
+        public bool Remove(string strWhere)
+        {
 
+            return dal.Remove(strWhere);
+        }
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>

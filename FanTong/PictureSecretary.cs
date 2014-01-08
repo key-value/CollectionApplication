@@ -13,6 +13,11 @@ namespace FanTong
 {
     public class PictureSecretary : AbstractPicture, IPicture
     {
+
+        public List<BusPhotoAlbumTable> SaveAlbumTables(StoreInfo storeInfo)
+        {
+            return new List<BusPhotoAlbumTable>();
+        }
         public PictureSecretary()
         {
             PageUrl = @"http://www.fantong.com/biz-{0}/pic/?page={1}";

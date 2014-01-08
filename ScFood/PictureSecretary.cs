@@ -6,6 +6,7 @@ using AbstractSite;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
+using BusPhotoAlbum = Maticsoft.Model.BusPhotoAlbum;
 using BusPhotoAlbumTable = Maticsoft.Model.BusPhotoAlbumTable;
 using StoreInfo = Maticsoft.Model.StoreInfo;
 
@@ -13,6 +14,11 @@ namespace ScFood
 {
     public class PictureSecretary : AbstractPicture, IPicture
     {
+
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
+        }
         public PictureSecretary()
         {
             PageUrl = @"http://www.scfood.net/item/shops-ac-{1}pic-id-{0}-page-{2}.html";

@@ -30,6 +30,7 @@ namespace Maticsoft.Model
         {
             storeTagList = new List<string>();
             DishTypeList = new List<DishesTyep>();
+            BusPhotoAlbumTableList = new List<BusPhotoAlbum>();
         }
         #region Model
         private string _storeid;
@@ -218,6 +219,7 @@ namespace Maticsoft.Model
         private bool _isNull;
 
         public List<DishesTyep> DishTypeList { get; set; }
+        public List<Maticsoft.Model.BusPhotoAlbum> BusPhotoAlbumTableList { get; set; }
         public string StorePictureHref { get; set; }
 
         #endregion

@@ -13,6 +13,7 @@ namespace DianPing
 {
     public class PictureSecretary : AbstractPicture, IPicture
     {
+
         public PictureSecretary()
         {
             PageUrl = @"http://www.dianping.com/shop/{0}/photos/tag-{2}?pg={1}";

@@ -102,6 +102,8 @@
             this.btnpic = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.button2 = new System.Windows.Forms.Button();
+            this.SaveBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -216,6 +218,7 @@
             this.cbbDistrict.Name = "cbbDistrict";
             this.cbbDistrict.Size = new System.Drawing.Size(223, 23);
             this.cbbDistrict.TabIndex = 50;
+            this.cbbDistrict.SelectedIndexChanged += new System.EventHandler(this.cbbDistrict_SelectedIndexChanged);
             // 
             // clbStoreTag
             // 
@@ -252,6 +255,7 @@
             this.cbBoxProvinces.Name = "cbBoxProvinces";
             this.cbBoxProvinces.Size = new System.Drawing.Size(223, 23);
             this.cbBoxProvinces.TabIndex = 48;
+            this.cbBoxProvinces.SelectedIndexChanged += new System.EventHandler(this.cbBoxProvinces_SelectedIndexChanged);
             // 
             // chlBoxSpecialTag
             // 
@@ -269,6 +273,7 @@
             this.cbBoxCity.Name = "cbBoxCity";
             this.cbBoxCity.Size = new System.Drawing.Size(223, 23);
             this.cbBoxCity.TabIndex = 49;
+            this.cbBoxCity.SelectedIndexChanged += new System.EventHandler(this.cbBoxCity_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -789,7 +794,7 @@
             // 
             this.chbDish.AutoSize = true;
             this.chbDish.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chbDish.Location = new System.Drawing.Point(782, 672);
+            this.chbDish.Location = new System.Drawing.Point(739, 681);
             this.chbDish.Name = "chbDish";
             this.chbDish.Size = new System.Drawing.Size(72, 16);
             this.chbDish.TabIndex = 71;
@@ -799,7 +804,7 @@
             // btnDish
             // 
             this.btnDish.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDish.Location = new System.Drawing.Point(665, 661);
+            this.btnDish.Location = new System.Drawing.Point(622, 670);
             this.btnDish.Name = "btnDish";
             this.btnDish.Size = new System.Drawing.Size(98, 36);
             this.btnDish.TabIndex = 70;
@@ -811,7 +816,7 @@
             // 
             this.chbPic.AutoSize = true;
             this.chbPic.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chbPic.Location = new System.Drawing.Point(1000, 671);
+            this.chbPic.Location = new System.Drawing.Point(957, 680);
             this.chbPic.Name = "chbPic";
             this.chbPic.Size = new System.Drawing.Size(72, 16);
             this.chbPic.TabIndex = 73;
@@ -821,7 +826,7 @@
             // btnpic
             // 
             this.btnpic.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnpic.Location = new System.Drawing.Point(885, 661);
+            this.btnpic.Location = new System.Drawing.Point(842, 670);
             this.btnpic.Name = "btnpic";
             this.btnpic.Size = new System.Drawing.Size(98, 36);
             this.btnpic.TabIndex = 72;
@@ -845,11 +850,35 @@
             this.progressBar1.Size = new System.Drawing.Size(189, 23);
             this.progressBar1.TabIndex = 75;
             // 
+            // button2
+            // 
+            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button2.Location = new System.Drawing.Point(1224, 670);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(98, 36);
+            this.button2.TabIndex = 76;
+            this.button2.Text = "取消";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // SaveBtn
+            // 
+            this.SaveBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.SaveBtn.Location = new System.Drawing.Point(1110, 670);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(98, 36);
+            this.SaveBtn.TabIndex = 77;
+            this.SaveBtn.Text = "保存";
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
             // ComparatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1736, 749);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.chbPic);
@@ -963,5 +992,7 @@
         private System.Windows.Forms.Button btnpic;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SaveBtn;
     }
 }

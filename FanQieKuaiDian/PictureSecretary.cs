@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ISite;
+using Maticsoft.Model;
 
 namespace FanQieKuaiDianSite
 {
     public class PictureSecretary : IPicture
     {
+
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
+        }
         public string _pageUrl { get; set; }
 
         public string PageUrl { get; set; }

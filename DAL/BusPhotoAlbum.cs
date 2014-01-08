@@ -113,6 +113,27 @@ namespace Maticsoft.DAL
 			}
 		}
 
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Remove(string strWhere)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from BusPhotoAlbum ");
+            strSql.Append(" where 1=1 and ");
+            strSql.Append(strWhere);
+
+            int rows = ServerDbHelperSQL.ExecuteSql(strSql.ToString(), new SqlParameter[0]);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>

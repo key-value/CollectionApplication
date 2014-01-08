@@ -37,5 +37,11 @@ namespace YuKuai
             }
 
         }
+
+
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
+        }
     }
 }

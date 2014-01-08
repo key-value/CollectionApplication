@@ -109,5 +109,9 @@ namespace AbstractSite
             storePicture.PictureName = string.Format("{0}.jpg", storePicture.PID);
             return storePicture;
         }
+        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
+        {
+            return new List<Maticsoft.Model.BusPhotoAlbum>();
+        }
     }
 }
