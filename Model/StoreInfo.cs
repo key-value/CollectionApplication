@@ -222,6 +222,18 @@ namespace Maticsoft.Model
         public List<Maticsoft.Model.BusPhotoAlbum> BusPhotoAlbumTableList { get; set; }
         public string StorePictureHref { get; set; }
 
+
+        public string OldStoreId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool ChildrenChair { get; set; }
+        public bool WIFI { get; set; }
+
+        public bool CarParks { get; set; }
+        public bool NoSmoke { get; set; }
+
         #endregion
 
     }

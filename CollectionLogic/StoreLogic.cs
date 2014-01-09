@@ -36,6 +36,10 @@ namespace CollectionLogic
             set { _storeSite.PageUrl = value; }
         }
 
+        public void CataloEventHandler(IDelegate.CatalogueEventHandler cataloEventHandler)
+        {
+            _storeSite.CataloEventHandler += cataloEventHandler;
+        }
 
     }
 }

@@ -99,13 +99,22 @@ namespace AbstractSite
             dishes.PictureHref = GetPictureHref(dishesNode);
             dishes.DishesBrief = GetDishesBrief(dishesNode);
             dishes.DishesMoney = GetDishesMoney(dishesNode);
+            dishes.DishesUnit = GetDishesUnit(dishesNode);
             if (string.IsNullOrWhiteSpace(dishes.DishesName))
             {
                 dishes.IsNull = true;
             }
+            if (dishes.DishesMoney == 0)
+            {
+                dishes.IsCurrentPrice = true;
+            }
             return dishes;
         }
 
+        protected virtual string GetDishesUnit(HtmlNode dishesNode)
+        {
+            return "份";
+        }
         protected abstract string GetDishesName(HtmlNode dishesNode);
         protected abstract decimal GetDishesMoney(HtmlNode dishesNode);
         protected abstract string GetDishesBrief(HtmlNode dishesNode);

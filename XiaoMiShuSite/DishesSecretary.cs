@@ -35,7 +35,7 @@ namespace XiaoMiShuSite
             return string.Empty;
         }
 
-        protected override string GetPictureHref(HtmlAgilityPack.HtmlNode dishesNode)
+        protected override string GetPictureHref(HtmlNode dishesNode)
         {
             var dishesPictureNode = dishesNode.SelectSingleNode(
                                   ".//div[@class='abs_out pt10']/div[@class='fix rel']/div[@class='pct50 l']/a[@class='g3']/img");

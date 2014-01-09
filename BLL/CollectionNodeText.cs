@@ -8,7 +8,7 @@ namespace Maticsoft.BLL
 {
     public class CollectionNodeText
     {
-        public static string GetNodeListInnerText(HtmlNode htmlNode, string xpath)
+        public static string GetNodeListInnerText(HtmlNode htmlNode, string xpath, char intervalStr = ' ')
         {
             var nodeList = htmlNode.SelectNodes(xpath);
             if (nodeList == null)
@@ -18,9 +18,13 @@ namespace Maticsoft.BLL
             var stringBuilder = new StringBuilder();
             foreach (var node in nodeList)
             {
-                stringBuilder.Append(node.InnerText);
+                if (string.IsNullOrWhiteSpace(node.InnerText))
+                {
+                    continue;
+                }
+                stringBuilder.Append(node.InnerText).Append(intervalStr);
             }
-            return stringBuilder.ToString();
+            return stringBuilder.ToString().Trim(intervalStr);
         }
 
         public static string GetNodeInnerText(HtmlNode htmlNode, string xpath)

@@ -104,6 +104,8 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button2 = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
+            this.lblDish = new System.Windows.Forms.Label();
+            this.lblPic = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -794,7 +796,7 @@
             // 
             this.chbDish.AutoSize = true;
             this.chbDish.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chbDish.Location = new System.Drawing.Point(739, 681);
+            this.chbDish.Location = new System.Drawing.Point(770, 680);
             this.chbDish.Name = "chbDish";
             this.chbDish.Size = new System.Drawing.Size(72, 16);
             this.chbDish.TabIndex = 71;
@@ -804,7 +806,7 @@
             // btnDish
             // 
             this.btnDish.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnDish.Location = new System.Drawing.Point(622, 670);
+            this.btnDish.Location = new System.Drawing.Point(649, 670);
             this.btnDish.Name = "btnDish";
             this.btnDish.Size = new System.Drawing.Size(98, 36);
             this.btnDish.TabIndex = 70;
@@ -816,7 +818,7 @@
             // 
             this.chbPic.AutoSize = true;
             this.chbPic.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.chbPic.Location = new System.Drawing.Point(957, 680);
+            this.chbPic.Location = new System.Drawing.Point(986, 680);
             this.chbPic.Name = "chbPic";
             this.chbPic.Size = new System.Drawing.Size(72, 16);
             this.chbPic.TabIndex = 73;
@@ -826,7 +828,7 @@
             // btnpic
             // 
             this.btnpic.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnpic.Location = new System.Drawing.Point(842, 670);
+            this.btnpic.Location = new System.Drawing.Point(865, 670);
             this.btnpic.Name = "btnpic";
             this.btnpic.Size = new System.Drawing.Size(98, 36);
             this.btnpic.TabIndex = 72;
@@ -845,7 +847,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(206, 683);
+            this.progressBar1.Location = new System.Drawing.Point(206, 651);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(368, 23);
             this.progressBar1.TabIndex = 75;
@@ -872,11 +874,29 @@
             this.SaveBtn.UseVisualStyleBackColor = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
+            // lblDish
+            // 
+            this.lblDish.AutoSize = true;
+            this.lblDish.Location = new System.Drawing.Point(210, 680);
+            this.lblDish.Name = "lblDish";
+            this.lblDish.Size = new System.Drawing.Size(0, 12);
+            this.lblDish.TabIndex = 78;
+            // 
+            // lblPic
+            // 
+            this.lblPic.AutoSize = true;
+            this.lblPic.Location = new System.Drawing.Point(210, 701);
+            this.lblPic.Name = "lblPic";
+            this.lblPic.Size = new System.Drawing.Size(0, 12);
+            this.lblPic.TabIndex = 79;
+            // 
             // ComparatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1527, 720);
+            this.Controls.Add(this.lblPic);
+            this.Controls.Add(this.lblDish);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.progressBar1);
@@ -994,5 +1014,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.Label lblDish;
+        private System.Windows.Forms.Label lblPic;
     }
 }

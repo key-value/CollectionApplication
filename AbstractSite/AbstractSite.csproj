@@ -48,7 +48,7 @@
     <Compile Include="AbstractDishes.cs" />
     <Compile Include="AbstractDishType.cs" />
     <Compile Include="AbstractPicture.cs" />
-    <Compile Include="AbstractSite.cs" />
+    <Compile Include="AbstractMainSite.cs" />
     <Compile Include="AbstractStore.cs" />
     <Compile Include="AbstractStorePicture.cs" />
     <Compile Include="AbstractPhotoAlbum.cs" />

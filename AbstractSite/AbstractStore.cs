@@ -25,8 +25,11 @@ namespace AbstractSite
 
         public Maticsoft.Model.StoreInfo GetStoreInfo(Maticsoft.Model.Catalogue catalogue)
         {
+            InitProgress();
+            DoProgress(50);
             var baseCollectionSite = new BaseCollectionSite(PageUrl);
             StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNode;
+            DoProgress(50);
             StoreInfoHtmlNode = StoreInfoHtmlNode.SelectSingleNode(StorePath);
             if (StoreInfoHtmlNode == null)
             {
@@ -37,21 +40,26 @@ namespace AbstractSite
             PeoplePrice(out minPrice, out maxPrice);
             var storeInfo = new StoreInfo();
             storeInfo.storeId = catalogue.StoreId;
+            DoProgress(20);
             storeInfo.Fid = catalogue.FId;
             storeInfo.Facilities = GetFacilities().ClearSiteCode().Trim();
             storeInfo.payCar = GetPayCar();
             storeInfo.BasicIntroduction = GetBasicIntroduction().ClearSiteCode().Trim();
+            DoProgress(30);
             storeInfo.subway = Subway().ClearSiteCode().Trim();
             storeInfo.bus = GetBus().ClearSiteCode().Trim();
+            DoProgress(20);
             storeInfo.box = Getbox();
             storeInfo.StoreHours = GetWorkTime().ClearSiteCode().Trim();
             storeInfo.StoreTag = StoreTagText().ClearSiteCode().Trim();
             storeInfo.carPark = GetCarPark().ClearSiteCode().Trim();
             storeInfo.StoreAddress = GetAddress().ClearSiteCode().Trim();
             storeInfo.StorePhone = GetPhoneNum().ClearSiteCode().Trim();
+            DoProgress(20);
             storeInfo.MinPrice = minPrice;
             storeInfo.MaxPrice = maxPrice;
             storeInfo = ChangeStoreInfo(catalogue, storeInfo);
+            DoProgress();
             return storeInfo;
         }
 

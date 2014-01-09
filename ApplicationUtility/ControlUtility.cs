@@ -86,5 +86,21 @@ namespace ApplicationUtility
                 progressBar.Value = resualt;
             }
         }
+
+        public static void ClearTag(this Control control)
+        {
+            if (control == null)
+            {
+                return;
+            }
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new Action(control.ClearTag));
+            }
+            else
+            {
+                control.Tag = null;
+            }
+        }
     }
 }

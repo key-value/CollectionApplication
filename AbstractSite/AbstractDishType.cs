@@ -52,7 +52,7 @@ namespace AbstractSite
                     {
                         DishesTypeID = Guid.NewGuid().ToString(),
                         DishesTypeName = dishTypeName,
-                        BusinessID = StoreInfo.storeId,
+                        BusinessID = StoreInfo.OldStoreId,
                         CreateDate = DateTime.Now,
                         DishHref = GetDishesHref(dishTypeNode),
                     };
@@ -113,7 +113,7 @@ namespace AbstractSite
 
         protected virtual List<Maticsoft.Model.DishesTyep> GetOlddDishType()
         {
-            var dishesTyepList = DishTypeBll.GetModelList(string.Format("BusinessID = '{0}'", StoreInfo.storeId)) ?? new List<Maticsoft.Model.DishesTyep>();
+            var dishesTyepList = DishTypeBll.GetModelList(string.Format("BusinessID = '{0}'", StoreInfo.OldStoreId)) ?? new List<Maticsoft.Model.DishesTyep>();
             foreach (var dishesTyep in dishesTyepList)
             {
                 var dishesList = DishesBll.GetModelList(string.Format(@"DishesTypeID = '{0}'", dishesTyep.DishesTypeID));
