@@ -111,7 +111,7 @@
             // button5
             // 
             this.button5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button5.Location = new System.Drawing.Point(1668, 172);
+            this.button5.Location = new System.Drawing.Point(1454, 166);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(63, 27);
             this.button5.TabIndex = 66;
@@ -122,9 +122,9 @@
             // button4
             // 
             this.button4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button4.Location = new System.Drawing.Point(1663, 469);
+            this.button4.Location = new System.Drawing.Point(1449, 447);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(68, 34);
+            this.button4.Size = new System.Drawing.Size(68, 28);
             this.button4.TabIndex = 64;
             this.button4.Text = "so";
             this.button4.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("宋体", 12F);
-            this.textBox3.Location = new System.Drawing.Point(1550, 474);
+            this.textBox3.Location = new System.Drawing.Point(1336, 448);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(111, 26);
             this.textBox3.TabIndex = 63;
@@ -141,7 +141,7 @@
             // button6
             // 
             this.button6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button6.Location = new System.Drawing.Point(1550, 437);
+            this.button6.Location = new System.Drawing.Point(1336, 415);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(181, 29);
             this.button6.TabIndex = 61;
@@ -152,7 +152,7 @@
             // button3
             // 
             this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(1550, 142);
+            this.button3.Location = new System.Drawing.Point(1336, 138);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(181, 27);
             this.button3.TabIndex = 62;
@@ -163,7 +163,7 @@
             // webBtn
             // 
             this.webBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.webBtn.Location = new System.Drawing.Point(1349, 5);
+            this.webBtn.Location = new System.Drawing.Point(1202, 6);
             this.webBtn.Name = "webBtn";
             this.webBtn.Size = new System.Drawing.Size(99, 67);
             this.webBtn.TabIndex = 53;
@@ -176,14 +176,14 @@
             this.textBox1.Font = new System.Drawing.Font("宋体", 15F);
             this.textBox1.Location = new System.Drawing.Point(6, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1337, 30);
+            this.textBox1.Size = new System.Drawing.Size(1186, 30);
             this.textBox1.TabIndex = 51;
             this.textBox1.Text = "http://www.xiaomishu.com/shop/search-s261/";
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("宋体", 12F);
-            this.textBox2.Location = new System.Drawing.Point(1550, 173);
+            this.textBox2.Location = new System.Drawing.Point(1336, 167);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(111, 26);
             this.textBox2.TabIndex = 60;
@@ -214,7 +214,7 @@
             // 
             this.cbbDistrict.Font = new System.Drawing.Font("宋体", 11F);
             this.cbbDistrict.FormattingEnabled = true;
-            this.cbbDistrict.Location = new System.Drawing.Point(753, 49);
+            this.cbbDistrict.Location = new System.Drawing.Point(723, 49);
             this.cbbDistrict.Name = "cbbDistrict";
             this.cbbDistrict.Size = new System.Drawing.Size(223, 23);
             this.cbbDistrict.TabIndex = 50;
@@ -223,7 +223,7 @@
             // clbStoreTag
             // 
             this.clbStoreTag.FormattingEnabled = true;
-            this.clbStoreTag.Location = new System.Drawing.Point(1550, 505);
+            this.clbStoreTag.Location = new System.Drawing.Point(1336, 477);
             this.clbStoreTag.Name = "clbStoreTag";
             this.clbStoreTag.Size = new System.Drawing.Size(181, 244);
             this.clbStoreTag.TabIndex = 59;
@@ -242,16 +242,16 @@
             // chbCookingStyles
             // 
             this.chbCookingStyles.FormattingEnabled = true;
-            this.chbCookingStyles.Location = new System.Drawing.Point(1550, 206);
+            this.chbCookingStyles.Location = new System.Drawing.Point(1336, 199);
             this.chbCookingStyles.Name = "chbCookingStyles";
-            this.chbCookingStyles.Size = new System.Drawing.Size(181, 228);
+            this.chbCookingStyles.Size = new System.Drawing.Size(181, 212);
             this.chbCookingStyles.TabIndex = 55;
             // 
             // cbBoxProvinces
             // 
             this.cbBoxProvinces.Font = new System.Drawing.Font("宋体", 11F);
             this.cbBoxProvinces.FormattingEnabled = true;
-            this.cbBoxProvinces.Location = new System.Drawing.Point(211, 49);
+            this.cbBoxProvinces.Location = new System.Drawing.Point(213, 49);
             this.cbBoxProvinces.Name = "cbBoxProvinces";
             this.cbBoxProvinces.Size = new System.Drawing.Size(223, 23);
             this.cbBoxProvinces.TabIndex = 48;
@@ -260,7 +260,7 @@
             // chlBoxSpecialTag
             // 
             this.chlBoxSpecialTag.FormattingEnabled = true;
-            this.chlBoxSpecialTag.Location = new System.Drawing.Point(1550, 3);
+            this.chlBoxSpecialTag.Location = new System.Drawing.Point(1336, 3);
             this.chlBoxSpecialTag.Name = "chlBoxSpecialTag";
             this.chlBoxSpecialTag.Size = new System.Drawing.Size(181, 132);
             this.chlBoxSpecialTag.TabIndex = 54;
@@ -269,7 +269,7 @@
             // 
             this.cbBoxCity.Font = new System.Drawing.Font("宋体", 11F);
             this.cbBoxCity.FormattingEnabled = true;
-            this.cbBoxCity.Location = new System.Drawing.Point(482, 49);
+            this.cbBoxCity.Location = new System.Drawing.Point(468, 49);
             this.cbBoxCity.Name = "cbBoxCity";
             this.cbBoxCity.Size = new System.Drawing.Size(223, 23);
             this.cbBoxCity.TabIndex = 49;
@@ -837,7 +837,7 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox4.Location = new System.Drawing.Point(1018, 48);
+            this.textBox4.Location = new System.Drawing.Point(972, 48);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(220, 24);
             this.textBox4.TabIndex = 74;
@@ -845,9 +845,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(7, 716);
+            this.progressBar1.Location = new System.Drawing.Point(206, 683);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(189, 23);
+            this.progressBar1.Size = new System.Drawing.Size(368, 23);
             this.progressBar1.TabIndex = 75;
             // 
             // button2
@@ -876,7 +876,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1736, 749);
+            this.ClientSize = new System.Drawing.Size(1527, 720);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.progressBar1);

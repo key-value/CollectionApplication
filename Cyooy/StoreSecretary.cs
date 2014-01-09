@@ -200,5 +200,7 @@ namespace Cyooy
         {
             return false;
         }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
     }
 }

@@ -167,5 +167,7 @@ namespace Epinle
         {
             return false;
         }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
     }
 }

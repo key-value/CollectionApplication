@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Threading.Tasks;
+using AbstractSite;
 using ApplicationUtility;
+using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
 using System;
@@ -203,6 +205,8 @@ namespace CollectionForm
                 var catalogueLogic = new CollectionLogic.CatalogueLogic(sitePath.SelectedSite);
                 catalogueLogic.SetPath(sitePath.Path);
                 catalogueLogic.PageNum = sitePath.PageIndex;
+                progressBar1.SetValue(0);
+                catalogueLogic.CataloEventHandler(UpdateIncrement);
                 var catalogueList = catalogueLogic.GetCataloguePage(sitePath.PageIndex);
                 BeginInvoke(goPathDelegate, catalogueLogic.NextPage, catalogueLogic.BeforePage, catalogueLogic.PageNum, catalogueList);
             }
@@ -250,7 +254,7 @@ namespace CollectionForm
                 }
                 else
                 {
-                    Invoke(new Action(() => MessageBox.Show(@"网络异常")));
+                    Invoke(_showMessageBox, @"网络异常");
                 }
             });
 
@@ -258,55 +262,67 @@ namespace CollectionForm
         }
         private void ClearStoreText(StoreInfo storeInfo)
         {
-            txtStoreAddress.Text = storeInfo.StoreAddress;
-            txtStoreHours.Text = string.IsNullOrWhiteSpace(storeInfo.StoreHours) ? "10:00-22:00" : storeInfo.StoreHours;
-            txtBasic.Text = storeInfo.BasicIntroduction;
-            txtFacilities.Text = storeInfo.Facilities;
-            txtStoreName.Text = storeInfo.StoreName;
-            txtStorePhone.Text = storeInfo.StorePhone;
-            chbbox.Checked = storeInfo.box;
-            txtBus.Text = storeInfo.bus;
-            chbPayCar.Checked = storeInfo.payCar;
-            txtStoreTag.Text = storeInfo.StoreTag;
-            txtMaxPrice.Text = storeInfo.MaxPrice.ToString();
-            txtMinPrice.Text = storeInfo.MinPrice.ToString();
-            chbbox.Checked = false;
-            chbPayCar.Checked = false;
-            chbChildrenChair.Checked = false;
-            chbCarPark.Checked = false;
-            chbWIFI.Checked = false;
-            chbNoSmoke.Checked = false;
-            chbKCVIP.Checked = false;
-            chbIsCoupon.Checked = false;
-            chbIsSend.Checked = false;
-            chbOnlineorder.Checked = false;
-            chbIsCitySend.Checked = false;
-            chbCod.Checked = false;
-            chbOnlinePay.Checked = false;
+            chbCarPark.UpdateCheckedState(false);
+            chbChildrenChair.UpdateCheckedState(false);
+            chbCod.UpdateCheckedState(false);
+            chbIsCitySend.UpdateCheckedState(false);
+            chbIsCoupon.UpdateCheckedState(false);
+            chbIsSend.UpdateCheckedState(false);
+            chbKCVIP.UpdateCheckedState(false);
+            chbNoSmoke.UpdateCheckedState(false);
+            chbOnlinePay.UpdateCheckedState(false);
+            chbOnlineorder.UpdateCheckedState(false);
+            chbPayCar.UpdateCheckedState(false);
+            chbPayCar.UpdateCheckedState(storeInfo.payCar);
+            chbWIFI.UpdateCheckedState(false);
+            chbbox.UpdateCheckedState(false);
+            chbDish.UpdateCheckedState(false);
+            chbPic.UpdateCheckedState(false);
+            chbbox.UpdateCheckedState(storeInfo.box);
+            txtBasic.SetTextBoxText(storeInfo.BasicIntroduction);
+            txtBus.SetTextBoxText(storeInfo.bus);
+            txtFacilities.SetTextBoxText(storeInfo.Facilities);
+            txtMaxPrice.SetTextBoxText(storeInfo.MaxPrice.ToString());
+            txtMinPrice.SetTextBoxText(storeInfo.MinPrice.ToString());
+            txtStoreAddress.SetTextBoxText(storeInfo.StoreAddress);
+            txtStoreHours.SetTextBoxText(string.IsNullOrWhiteSpace(storeInfo.StoreHours) ? "10:00-22:00" : storeInfo.StoreHours);
+            txtStoreName.SetTextBoxText(storeInfo.StoreName);
+            txtStorePhone.SetTextBoxText(storeInfo.StorePhone);
+            txtStoreTag.SetTextBoxText(storeInfo.StoreTag);
+            txtDoubleName.SetTextBoxText(string.Empty);
+
+            txtBasicSite.SetTextBoxText(storeInfo.BasicIntroduction);
+            txtBusSite.SetTextBoxText(storeInfo.bus);
+            txtMaxPriceSite.SetTextBoxText(storeInfo.MaxPrice.ToString());
+            txtMinPriceSite.SetTextBoxText(storeInfo.MinPrice.ToString());
+            txtStoreAddressSite.SetTextBoxText(storeInfo.StoreAddress);
+            txtStoreHoursSite.SetTextBoxText(string.IsNullOrWhiteSpace(storeInfo.StoreHours) ? "10:00-22:00" : storeInfo.StoreHours);
+            txtStoreNameSite.SetTextBoxText(storeInfo.StoreName);
+            txtStorePhoneSite.SetTextBoxText(storeInfo.StorePhone);
         }
         private void ClearStoreEntityText(StoreInfoEntity storeInfoEntity)
         {
-            txtStoreAddressSite.SetTextBoxText(storeInfoEntity.StoreAddress);
-            txtStoreHoursSite.SetTextBoxText(string.IsNullOrWhiteSpace(storeInfoEntity.StoreHours) ? "10:00-22:00" : storeInfoEntity.StoreHours);
+            chbCarPark.UpdateCheckedState(storeInfoEntity.CarPark);
+            chbChildrenChair.UpdateCheckedState(storeInfoEntity.ChildrenChair);
+            chbCod.UpdateCheckedState(storeInfoEntity.Cod);
+            chbIsCitySend.UpdateCheckedState(storeInfoEntity.IsCitySend);
+            chbIsCoupon.UpdateCheckedState(storeInfoEntity.IsCoupon);
+            chbIsSend.UpdateCheckedState(storeInfoEntity.IsSend != 0);
+            chbKCVIP.UpdateCheckedState(storeInfoEntity.KCVIP);
+            chbNoSmoke.UpdateCheckedState(storeInfoEntity.NoSmoke);
+            chbOnlinePay.UpdateCheckedState(storeInfoEntity.OnlinePay);
+            chbOnlineorder.UpdateCheckedState(storeInfoEntity.Onlineorder != 0);
+            chbPayCar.UpdateCheckedState(storeInfoEntity.PayCar);
+            chbPayCar.UpdateCheckedState(storeInfoEntity.PayCar);
+            chbWIFI.UpdateCheckedState(storeInfoEntity.WIFI);
+            chbbox.UpdateCheckedState(storeInfoEntity.Box);
             txtBasicSite.SetTextBoxText(storeInfoEntity.BasicIntroduction);
-            txtStoreNameSite.SetTextBoxText(storeInfoEntity.StoreName);
-            txtStorePhoneSite.SetTextBoxText(storeInfoEntity.StorePhone);
             txtMaxPriceSite.SetTextBoxText(storeInfoEntity.MaxPrice.ToString());
             txtMinPriceSite.SetTextBoxText(storeInfoEntity.MinPrice.ToString());
-            chbPayCar.UpdateCheckedState(storeInfoEntity.PayCar);
-            chbbox.UpdateCheckedState(false);
-            chbPayCar.UpdateCheckedState(false);
-            chbChildrenChair.UpdateCheckedState(false);
-            chbCarPark.UpdateCheckedState(false);
-            chbWIFI.UpdateCheckedState(false);
-            chbNoSmoke.UpdateCheckedState(false);
-            chbKCVIP.UpdateCheckedState(false);
-            chbIsCoupon.UpdateCheckedState(false);
-            chbIsSend.UpdateCheckedState(false);
-            chbOnlineorder.UpdateCheckedState(false);
-            chbIsCitySend.UpdateCheckedState(false);
-            chbCod.UpdateCheckedState(false);
-            chbOnlinePay.UpdateCheckedState(false);
+            txtStoreAddressSite.SetTextBoxText(storeInfoEntity.StoreAddress);
+            txtStoreHoursSite.SetTextBoxText(string.IsNullOrWhiteSpace(storeInfoEntity.StoreHours) ? "10:00-22:00" : storeInfoEntity.StoreHours);
+            txtStoreNameSite.SetTextBoxText(storeInfoEntity.StoreName);
+            txtStorePhoneSite.SetTextBoxText(storeInfoEntity.StorePhone);
         }
         private void btnDish_Click(object sender, EventArgs e)
         {
@@ -325,7 +341,7 @@ namespace CollectionForm
                 storeInfo.ChangeDishes = true;
                 var siteTypeStr = _selectedItem;
                 var foodAction = new Action<StoreInfo, string>(GetFoodAction);
-                foodAction.Invoke(storeInfo, siteTypeStr);
+                foodAction.BeginInvoke(storeInfo, siteTypeStr, null, null);
                 chbDish.Checked = true;
             }
             catch (Exception ex)
@@ -354,8 +370,6 @@ namespace CollectionForm
             }
             Invoke(_showMessageBox, (string.Format("{0}菜品{1}种菜系{2}道菜品下载完成", store.StoreName, dishTypeListCount, dishCount)));
         }
-
-        readonly Action<string> _showMessageBox = messageText => MessageBox.Show(messageText);
         private void GetPicAction(StoreInfo store, string siteType)
         {
             var pictureLogic = new CollectionLogic.PictureLogic(siteType);
@@ -392,7 +406,7 @@ namespace CollectionForm
                 storeInfo.ChangePic = true;
                 var siteTypeStr = _selectedItem;
                 var picAction = new Action<StoreInfo, string>(GetPicAction);
-                picAction.Invoke(storeInfo, siteTypeStr);
+                picAction.BeginInvoke(storeInfo, siteTypeStr, null, null);
                 chbPic.Checked = true;
             }
             catch (Exception ex)
@@ -596,79 +610,27 @@ namespace CollectionForm
                 storeInfoBll.Add(siteStoreInfo);
                 storeBll.Add(storeInfoEntity);
             }
-            var storeSpecialBll = new Maticsoft.BLL.StoreSpecialTag();
-            storeSpecialBll.Remove(string.Format("bizid = '{0}'", storeInfoEntity.BizID));
-            foreach (var checkedItem in chlBoxSpecialTag.CheckedItems)
-            {
-                var specialTag = checkedItem as SpecialTag;
-                if (specialTag != null)
-                {
-                    var storeSpecial = new Maticsoft.Model.StoreSpecialTag();
-                    storeSpecial.BizID = storeInfoEntity.BizID;
-                    storeSpecial.SpecialTagID = specialTag.SpecialTagID;
-                    storeSpecial.TagName = specialTag.TagName;
-                    storeSpecial.StoreSpecialTagID = Guid.NewGuid().ToString();
-                    storeSpecialBll.Add(storeSpecial);
-                }
-            }
-            var storeCookingStylesBll = new Maticsoft.BLL.StoreCookingStyles();
-            storeCookingStylesBll.Remove(string.Format("bizid = '{0}'", storeInfoEntity.BizID));
-            foreach (var checkedItem in chbCookingStyles.CheckedItems)
-            {
-                var specialTag = checkedItem as Maticsoft.Model.CookingStyles;
-                if (specialTag != null)
-                {
-                    var storeCookingStyles = new Maticsoft.Model.StoreCookingStyles();
-                    storeCookingStyles.BizID = storeInfoEntity.BizID;
-                    storeCookingStyles.CookingStyleID = specialTag.CookingStyleID;
-                    storeCookingStyles.CookingStyleName = specialTag.CookingStyleName;
-                    storeCookingStyles.KeyID = Guid.NewGuid().ToString();
-                    storeCookingStylesBll.Add(storeCookingStyles);
-                }
-            }
+            var specialTagList = chlBoxSpecialTag.CheckedItems.Cast<SpecialTag>().ToList();
+            Action<StoreInfoEntity, List<SpecialTag>> storeSpecialTagDelegate = SaveStoreSpecialTag;
+            storeSpecialTagDelegate.BeginInvoke(storeInfoEntity, specialTagList, null, null);
+
+            var cookingStylesList = chbCookingStyles.CheckedItems.Cast<CookingStyles>();
+            Action<StoreInfoEntity, IEnumerable<CookingStyles>> cookingStylesDelegate = SaveCookingStyles;
+            cookingStylesDelegate.BeginInvoke(storeInfoEntity, cookingStylesList, null, null);
+
+            var cityLocalTagEntityList = clbStoreTag.CheckedItems.Cast<CityLocalTagEntity>();
+            Action<StoreInfoEntity, IEnumerable<CityLocalTagEntity>> cityLocalTagEntityDelegate = SaveCityLocalTagEntity;
+            cityLocalTagEntityDelegate.BeginInvoke(storeInfoEntity, cityLocalTagEntityList, null, null);
+
             if (chbDish.Checked)
             {
-                var dishTypeBll = new Maticsoft.BLL.DishesTyep();
-                var dishesEntityBll = new Maticsoft.BLL.DishesBll();
-                dishesEntityBll.Remove(string.Format("BusinessID = '{0}'", storeInfoEntity.BizID));
-                dishTypeBll.Remove(string.Format("BusinessID = '{0}'", storeInfoEntity.BizID));
-                foreach (var dishType in siteStoreInfo.DishTypeList)
-                {
-                    dishTypeBll.Add(dishType);
-                    foreach (var dishesEntity in dishType.DishesList)
-                    {
-                        dishesEntityBll.Add(dishesEntity);
-                    }
-                }
+                Action<StoreInfoEntity, StoreInfo> dishesDelegate = SaveDishes;
+                dishesDelegate.BeginInvoke(storeInfoEntity, siteStoreInfo, null, null);
             }
             if (chbPic.Checked)
             {
-                var storePicturesBll = new StorePictures();
-                storePicturesBll.Remove(string.Format("BusinessID ='{0}'", storeInfoEntity.BizID));
-
-
-                var busPhotoAlbumBll = new Maticsoft.BLL.BusPhotoAlbum();
-                busPhotoAlbumBll.Remove(string.Format("BusinessID = '{0}'", storeInfoEntity.BizID));
-                foreach (var busPhotoAlbum in siteStoreInfo.BusPhotoAlbumTableList)
-                {
-                    busPhotoAlbumBll.Add(busPhotoAlbum);
-                    var pcituresList = busPhotoAlbum.StorePicturesList;
-                }
-
-            }
-            var storeLocalTagBll = new Maticsoft.BLL.StoreLocalTag();
-            storeLocalTagBll.Remove(string.Format("bizid = '{0}'", storeInfoEntity.BizID));
-            foreach (var selectedItem in clbStoreTag.CheckedItems)
-            {
-                var cityLocalTag = ((Maticsoft.Model.CityLocalTagEntity)selectedItem);
-                var storeLocalTag = new Maticsoft.Model.StoreLocalTag();
-                storeLocalTag.BizID = storeInfoEntity.BizID;
-                storeLocalTag.BizType = 10;
-                storeLocalTag.DistrictID = storeInfoEntity.DistrictID;
-                storeLocalTag.KeyID = Guid.NewGuid().ToString();
-                storeLocalTag.LocalTagID = cityLocalTag.LocalTagID;
-                storeLocalTag.LocalTagName = cityLocalTag.TagName;
-                storeLocalTagBll.Add(storeLocalTag);
+                Action<StoreInfoEntity, StoreInfo> storePicturesDelegate = SaveStorePictures;
+                storePicturesDelegate.BeginInvoke(storeInfoEntity, siteStoreInfo, null, null);
             }
             foreach (var selectedIndex in clbStoreTag.CheckedIndices)
             {
@@ -683,12 +645,125 @@ namespace CollectionForm
                 chbCookingStyles.SetItemCheckState((int)selectedIndex, CheckState.Unchecked);
             }
             stopwatch.Stop();
+            Invoke(_showMessageBox, string.Format(@"{0}保存成功,耗时{1}", storeInfoEntity.StoreName, stopwatch.ElapsedMilliseconds));
             catalogueListBox.SetItemCheckState(catalogueListBox.SelectedIndex, CheckState.Checked);
             if (catalogueListBox.SelectedIndex < catalogueListBox.Items.Count - 1)
             {
                 catalogueListBox.SelectedIndex += 1;
             }
             SetCatalogueListBox();
+        }
+
+        private static void SaveStorePictures(StoreInfoEntity storeInfoEntity, StoreInfo siteStoreInfo)
+        {
+            var storePicturesBll = new StorePictures();
+            storePicturesBll.Remove(string.Format("BusinessID ='{0}'", storeInfoEntity.BizID));
+            var busPhotoAlbumBll = new Maticsoft.BLL.BusPhotoAlbum();
+            busPhotoAlbumBll.Remove(string.Format("BusinessID = '{0}'", storeInfoEntity.BizID));
+            var storePictureBll = new Maticsoft.BLL.StorePicture();
+            foreach (var busPhotoAlbum in siteStoreInfo.BusPhotoAlbumTableList)
+            {
+                busPhotoAlbum.BusinessID = storeInfoEntity.BizID;
+                busPhotoAlbumBll.Add(busPhotoAlbum);
+                var pcituresList = busPhotoAlbum.StorePicturesList;
+                foreach (var storePicture in pcituresList)
+                {
+                    storePicture.StoreId = storeInfoEntity.BizID;
+                    storePictureBll.Add(storePicture);
+                    var storePictures = new Maticsoft.Model.StorePictures
+                    {
+                        StorePicturesID = Guid.NewGuid().ToString(),
+                        BusPhotoAlbumID = busPhotoAlbum.BusPhotoAlbumID,
+                        BusinessID = busPhotoAlbum.BusinessID,
+                        PictureAddress = storePicture.PictureName,
+                        PicState = 2,
+                        UploadTime = DateTime.Now
+                    };
+                    storePicturesBll.Add(storePictures);
+                }
+            }
+        }
+
+        private static void SaveCityLocalTagEntity(StoreInfoEntity storeInfoEntity, IEnumerable<CityLocalTagEntity> cityLocalTagEntityList)
+        {
+            var storeLocalTagBll = new Maticsoft.BLL.StoreLocalTag();
+            storeLocalTagBll.Remove(string.Format("bizid = '{0}'", storeInfoEntity.BizID));
+            foreach (var cityLocalTag in cityLocalTagEntityList)
+            {
+                var storeLocalTag = new Maticsoft.Model.StoreLocalTag();
+                storeLocalTag.BizID = storeInfoEntity.BizID;
+                storeLocalTag.BizType = 10;
+                storeLocalTag.DistrictID = storeInfoEntity.DistrictID;
+                storeLocalTag.KeyID = Guid.NewGuid().ToString();
+                storeLocalTag.LocalTagID = cityLocalTag.LocalTagID;
+                storeLocalTag.LocalTagName = cityLocalTag.TagName;
+                storeLocalTagBll.Add(storeLocalTag);
+            }
+        }
+
+        private static void SaveDishes(StoreInfoEntity storeInfoEntity, StoreInfo siteStoreInfo)
+        {
+            var dishTypeBll = new Maticsoft.BLL.DishesTyep();
+            var dishesEntityBll = new Maticsoft.BLL.DishesBll();
+            var storePictureBll = new Maticsoft.BLL.StorePicture();
+            dishesEntityBll.Remove(string.Format("BusinessID = '{0}'", storeInfoEntity.BizID));
+            dishTypeBll.Remove(string.Format("BusinessID = '{0}'", storeInfoEntity.BizID));
+            foreach (var dishType in siteStoreInfo.DishTypeList)
+            {
+                dishType.BusinessID = storeInfoEntity.BizID;
+                dishTypeBll.Add(dishType);
+                foreach (var dishesEntity in dishType.DishesList)
+                {
+                    dishesEntity.BusinessID = storeInfoEntity.BizID;
+                    dishesEntityBll.Add(dishesEntity);
+                    if (!string.IsNullOrEmpty(dishesEntity.PictureHref) && !string.IsNullOrWhiteSpace(dishesEntity.PictureHref))
+                    {
+                        var storePicture = new Maticsoft.Model.StorePicture();
+                        storePicture.PID = Guid.NewGuid().ToString();
+                        storePicture.PictureName = string.Format("{0}.jpg", storePicture.PID);
+                        storePicture.PicType = "Food";
+                        storePicture.PicturePath = dishesEntity.PictureHref;
+                        storePicture.StoreId = storeInfoEntity.BizID;
+                        storePictureBll.Add(storePicture);
+                    }
+                }
+            }
+        }
+
+        private static void SaveCookingStyles(StoreInfoEntity storeInfoEntity, IEnumerable<CookingStyles> cookingStylesList)
+        {
+            var storeCookingStylesBll = new Maticsoft.BLL.StoreCookingStyles();
+            storeCookingStylesBll.Remove(string.Format("bizid = '{0}'", storeInfoEntity.BizID));
+            foreach (var specialTag in cookingStylesList)
+            {
+                if (specialTag != null)
+                {
+                    var storeCookingStyles = new Maticsoft.Model.StoreCookingStyles();
+                    storeCookingStyles.BizID = storeInfoEntity.BizID;
+                    storeCookingStyles.CookingStyleID = specialTag.CookingStyleID;
+                    storeCookingStyles.CookingStyleName = specialTag.CookingStyleName;
+                    storeCookingStyles.KeyID = Guid.NewGuid().ToString();
+                    storeCookingStylesBll.Add(storeCookingStyles);
+                }
+            }
+        }
+
+        private void SaveStoreSpecialTag(StoreInfoEntity storeInfoEntity, List<SpecialTag> specialTagList)
+        {
+            var storeSpecialBll = new Maticsoft.BLL.StoreSpecialTag();
+            storeSpecialBll.Remove(string.Format("bizid = '{0}'", storeInfoEntity.BizID));
+            foreach (var specialTag in specialTagList)
+            {
+                if (specialTag != null)
+                {
+                    var storeSpecial = new Maticsoft.Model.StoreSpecialTag();
+                    storeSpecial.BizID = storeInfoEntity.BizID;
+                    storeSpecial.SpecialTagID = specialTag.SpecialTagID;
+                    storeSpecial.TagName = specialTag.TagName;
+                    storeSpecial.StoreSpecialTagID = Guid.NewGuid().ToString();
+                    storeSpecialBll.Add(storeSpecial);
+                }
+            }
         }
 
         private StoreInfoEntity GetStoreInfoEntity(Catalogue catalogueInfo, StoreInfoEntity oldStoreInfo, StoreInfo siteStoreInfo)
@@ -856,9 +931,9 @@ namespace CollectionForm
                 txtFacilities.Text = string.Empty;
                 txtStoreName.Text = string.Empty;
                 txtStorePhone.Text = string.Empty;
-                chbbox.Checked = false;
+                chbbox.UpdateCheckedState(false);
                 txtBus.Text = string.Empty;
-                chbPayCar.Checked = false;
+                chbPayCar.UpdateCheckedState(false);
                 txtStoreTag.Text = string.Empty;
                 txtMaxPrice.Text = string.Empty;
                 txtMinPrice.Text = string.Empty;
@@ -866,8 +941,18 @@ namespace CollectionForm
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
+        }
+
+        readonly Action<string> _showMessageBox = messageText => MessageBox.Show(messageText);
+
+        public void UpdateIncrement(object sender, CatalogueEventArgs catalogueEventArgs)
+        {
+            if (catalogueEventArgs.MaxPorgress > 0)
+            {
+                progressBar1.SetMaximum(catalogueEventArgs.MaxPorgress);
+            }
+            progressBar1.UpdateIncrement(catalogueEventArgs.ProgressNum);
         }
     }
 }

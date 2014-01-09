@@ -47,11 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CatalogueEventArgs.cs" />
     <Compile Include="ICatalogue.cs" />
+    <Compile Include="IDelegate.cs" />
     <Compile Include="IDishes.cs" />
     <Compile Include="IDishType.cs" />
     <Compile Include="IDishTypeSiteModel.cs" />
     <Compile Include="IPicture.cs" />
+    <Compile Include="IProgress.cs" />
     <Compile Include="IStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

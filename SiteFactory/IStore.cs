@@ -11,7 +11,7 @@ using Maticsoft.Model;
 
 namespace ISite
 {
-    public interface IStore
+    public interface IStore : IProgress
     {
         string PageUrl
         {

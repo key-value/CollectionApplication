@@ -246,5 +246,8 @@ namespace Cyooy
         {
             throw new NotImplementedException();
         }
+
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
     }
 }

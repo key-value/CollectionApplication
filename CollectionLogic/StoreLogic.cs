@@ -35,5 +35,7 @@ namespace CollectionLogic
             get { return _storeSite.PageUrl; }
             set { _storeSite.PageUrl = value; }
         }
+
+
     }
 }

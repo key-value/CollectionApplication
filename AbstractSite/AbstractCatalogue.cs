@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
 using System;
@@ -120,6 +121,11 @@ namespace AbstractSite
                     NextPage = string.Empty;
                 }
             }
+            else
+            {
+                NextPage = string.Empty;
+                BeforePage = string.Empty;
+            }
         }
 
         protected abstract void GetPage(HtmlNode pageNode);
@@ -167,7 +173,10 @@ namespace AbstractSite
         public virtual List<Catalogue> GetCataloguePage(int poIndex)
         {
             var catalogueList = new List<Catalogue>();
+            InitProgress();
+            DoProgress(50);
             var restaurantList = GetCatalogueList();
+            DoProgress(50);
             foreach (var restaurant in restaurantList)
             {
                 InitRestaurant(restaurant);
@@ -186,6 +195,7 @@ namespace AbstractSite
                     catalogue.StoreInfo = storeInfo;
                 }
                 catalogueList.Add(catalogue);
+                DoProgress();
             }
             return catalogueList;
         }
@@ -222,7 +232,7 @@ namespace AbstractSite
         {
             if (!string.IsNullOrWhiteSpace(StoreUrl))
             {
-                return StoreUrl; 
+                return StoreUrl;
             }
             var regex = @"(http|ftp|https):\/\/([\w\-_]+\.[\w\-_]+\.[\w\-_]+)";
             if (!Regex.IsMatch(PageUrl, regex))
@@ -239,5 +249,8 @@ namespace AbstractSite
             StoreUrl = string.Format("{0}://{1}", httpTop, urlMain);
             return StoreUrl;
         }
+
+
+
     }
 }

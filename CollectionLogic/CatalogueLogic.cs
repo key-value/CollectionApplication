@@ -64,5 +64,9 @@ namespace CollectionLogic
             set { _catalogueSite.BeforePage = value; }
         }
 
+        public void CataloEventHandler(IDelegate.CatalogueEventHandler CataloEventHandler)
+        {
+            _catalogueSite.CataloEventHandler += CataloEventHandler;
+        }
     }
 }

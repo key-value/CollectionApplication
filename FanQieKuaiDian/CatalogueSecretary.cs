@@ -117,5 +117,8 @@ namespace FanQieKuaiDianSite
         public string NextPage { get; set; }
 
         public string BeforePage { get; set; }
+
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
     }
 }

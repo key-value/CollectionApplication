@@ -6,7 +6,7 @@ using HtmlAgilityPack;
 
 namespace AbstractSite
 {
-    public abstract class AbstractStorePicture
+    public abstract class AbstractStorePicture : AbstractSite
     {
         protected AbstractStorePicture()
         {

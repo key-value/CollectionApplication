@@ -35,5 +35,56 @@ namespace ApplicationUtility
                 checkBox.Checked = resualt;
             }
         }
+        public static void UpdateIncrement(this ProgressBar progressBar, int resualt)
+        {
+            if (progressBar == null)
+            {
+                return;
+            }
+            if (progressBar.InvokeRequired)
+            {
+                progressBar.Invoke(new Action<int>(progressBar.UpdateIncrement), resualt);
+            }
+            else
+            {
+                if (resualt < 0)
+                {
+                    resualt = progressBar.Step;
+                }
+                progressBar.Increment(resualt);
+            }
+        }
+
+        public static void SetMaximum(this ProgressBar progressBar, int resualt)
+        {
+            if (progressBar == null)
+            {
+                return;
+            }
+            if (progressBar.InvokeRequired)
+            {
+                progressBar.Invoke(new Action<int>(progressBar.SetMaximum), resualt);
+            }
+            else
+            {
+                progressBar.Maximum = resualt;
+            }
+        }
+
+        public static void SetValue(this ProgressBar progressBar, int resualt)
+        {
+            if (progressBar == null)
+            {
+                return;
+            }
+            if (progressBar.InvokeRequired)
+            {
+                progressBar.Invoke(new Action<int>(progressBar.SetValue), resualt);
+            }
+            else
+            {
+                progressBar.Value = resualt;
+            }
+        }
     }
 }

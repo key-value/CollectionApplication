@@ -84,5 +84,7 @@ namespace FanQieKuaiDianSite
             get;
             set;
         }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
     }
 }
