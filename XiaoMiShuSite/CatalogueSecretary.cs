@@ -18,8 +18,8 @@ namespace XiaoMiShuSite
         {
             //.//div[7]/div/div[2]/div[3]/div[2]/div/div/h4/a
             PageUrl = @"http://www.xiaomishu.com/";
-            CataloguePath = @".//div[@class='constr']/div/div[@class='res_hm_c']/div[@class='res_sch_res schResList']/div[@class='cell pl20']/div/div/h4[@class='f14 di mr5']/a";
-            ImgNodePath = @"./../../../../../div[@class='l']/a/img";
+            CataloguePath = @".//div[@class='constr']/div/div[@class='res_hm_c']/div[@class='res_sch_res schResList']";
+            ImgNodePath = @".//div[@class='l']/a[@target='_blank']/img";
             PageNodePath =
                @".//div[@class='constr']/div[@class='constr_in pt15 pb30']/div[@class='res_hm_c']/div[@class='tr pt30 pb2 btc mt-1 fix']/div[@class='r pt5 pb1']/a";
             NextPage = @"http://www.xiaomishu.com/";
@@ -47,7 +47,7 @@ namespace XiaoMiShuSite
 
         public void GetFid(HtmlNode htmlNode)
         {
-            var fidNode = htmlNode.SelectSingleNode(@".");
+            var fidNode = htmlNode.SelectSingleNode(@".//div[@class='cell pl20']/div/div/h4[@class='f14 di mr5']/a");
             if (fidNode == null)
             {
                 return;
@@ -73,7 +73,7 @@ namespace XiaoMiShuSite
         public int IflastPage { get; set; }
         protected override string GetshopPicturePath(HtmlNode htmlNode)
         {
-            return htmlNode.Attributes["src"].Value;
+            return htmlNode.Attributes["data-url"].Value;
         }
     }
 }

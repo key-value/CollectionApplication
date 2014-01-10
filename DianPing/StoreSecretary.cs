@@ -24,6 +24,8 @@ namespace DianPing
             storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
             storeInfo.StoreTag += catalogue.StoreInfo.StoreTag;
             storeInfo.picName = SaveImageNode(StoreInfoHtmlNode, storeInfo.storeId);
+            storeInfo.WIFI = storeInfo.Facilities.Contains(@"无线上网");
+            storeInfo.payCar = storeInfo.Facilities.Contains(@"可以刷卡");
             return storeInfo;
         }
 

@@ -642,10 +642,6 @@ namespace CollectionForm
             {
                 storeBll.Update(storeInfoEntity);
                 storeInfoBll.Update(siteStoreInfo);
-                if (!string.IsNullOrEmpty(storePicture.PicturePath))
-                {
-                    storePictureBll.Add(storePicture);
-                }
             }
             else
             {
@@ -655,6 +651,7 @@ namespace CollectionForm
             }
             if (!string.IsNullOrEmpty(storePicture.PicturePath))
             {
+                storePictureBll.Remove(string.Format("PicType = 'Shop' and StoreId = '{0}'", storeInfoEntity.BizID));
                 storePictureBll.Add(storePicture);
             }
             var saveStoreEntity = new SaveStoreEntity();

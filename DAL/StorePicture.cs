@@ -112,6 +112,27 @@ namespace Maticsoft.DAL
 				return false;
 			}
 		}
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Remove(string strWhere)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from StorePicture");
+            strSql.Append(" where 1=1 and ");
+            strSql.Append(strWhere);
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), new SqlParameter[0]);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 		/// <summary>
 		/// 删除一条数据
