@@ -4,13 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using AbstractSite;
 using ISite;
 using Maticsoft.Model;
 using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace DianPing
 {
-    public class DishesSecretary : IDishes
+    public class DishesSecretary : AbstractDishes, IDishes
     {
         private StorePicture storePictureBll = new StorePicture();
         Maticsoft.BLL.Dishes dishesBll = new Maticsoft.BLL.Dishes();
@@ -19,9 +20,6 @@ namespace DianPing
             DishList = new List<IDishSiteModel>();
             PageUrl = @"http://sz.echiele.com";
         }
-        public string PageUrl { get; set; }
-
-        public string PicType { get; set; }
 
         public void GetDish(IDishSiteModel dishSiteModel, string storeID)
         {
@@ -52,14 +50,34 @@ namespace DianPing
             dishesBll.Add(dishes);
         }
 
-        public List<IDishSiteModel> DishList { get; set; }
-        bool IDishes.Conversion()
-        {
-            return false;
-        }
-        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
+        public override List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
         {
             return dishesTyepList;
+        }
+
+        protected override string GetDishesName(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            return string.Empty;
+        }
+
+        protected override decimal GetDishesMoney(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            return 0;
+        }
+
+        protected override string GetDishesBrief(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            return string.Empty;
+        }
+
+        protected override string GetPictureHref(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            return string.Empty;
+        }
+
+        public override string DishPath()
+        {
+            return string.Empty;
         }
     }
 }

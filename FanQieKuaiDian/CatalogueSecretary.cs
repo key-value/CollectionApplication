@@ -120,5 +120,8 @@ namespace FanQieKuaiDianSite
 
 
         public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

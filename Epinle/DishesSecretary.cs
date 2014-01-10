@@ -56,5 +56,9 @@ namespace Epinle
         {
             return dishesTyepList;
         }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

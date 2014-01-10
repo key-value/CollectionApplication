@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AbstractSite;
 using ISite;
 using Maticsoft.Model;
 
 namespace FanQieKuaiDianSite
 {
-    public class PictureSecretary : IPicture
+    public class PictureSecretary : AbstractMainSite, IPicture
     {
 
         public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)

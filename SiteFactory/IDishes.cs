@@ -8,7 +8,7 @@ using Maticsoft.Model;
 
 namespace ISite
 {
-    public interface IDishes
+    public interface IDishes : IProgress
     {
         string PageUrl { get; set; }
         //Food

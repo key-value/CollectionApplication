@@ -61,5 +61,9 @@ namespace XmFish
         {
             return dishesTyepList;
         }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

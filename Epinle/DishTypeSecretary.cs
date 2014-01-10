@@ -94,5 +94,9 @@ namespace Epinle
 
 
         public Maticsoft.Model.StoreInfo StoreInfo { get; set; }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

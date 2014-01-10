@@ -56,5 +56,73 @@ namespace XmFish
         {
             throw new NotImplementedException();
         }
+
+        string IDishType.PageUrl
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        List<DishType> IDishType.GetDishType()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<IDishSiteModel> IDishType.GetDishesList()
+        {
+            throw new NotImplementedException();
+        }
+
+        string IDishType.RestaurantId
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        string IDishType.PictureUrl
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        Maticsoft.Model.StoreInfo IDishType.StoreInfo
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        List<Maticsoft.Model.DishesTyep> IDishType.UpdateDishType()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

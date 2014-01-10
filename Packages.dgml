@@ -1,7 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
-  <Nodes />
-  <Links />
+  <Nodes>
+    <Node Id="ApplicationUtility" Label="ApplicationUtility" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="DianPing" Label="DianPing" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="DuoMiFan" Label="DuoMiFan" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="YuKuai" Label="YuKuai" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="FanTong" Label="FanTong" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="AbstractSite" Label="AbstractSite" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="Echiele" Label="Echiele" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="XmFish" Label="XmFish" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="CollectionLogic" Label="CollectionLogic" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="ScFood" Label="ScFood" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="Epinle" Label="Epinle" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="Cyooy" Label="Cyooy" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="FanQieKuaiDianSite" Label="FanQieKuaiDianSite" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="SiteLogic" Label="SiteLogic" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="XiaoMiShuSite" Label="XiaoMiShuSite" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="SiteFactory" Label="SiteFactory" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="ISite" Label="ISite" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="CollectionForm" Label="CollectionForm" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="DBUtility" Label="DBUtility" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+    <Node Id="BLL" Label="BLL" Category="项目" />
+    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
+  </Nodes>
+  <Links>
+    <Link Source="ApplicationUtility" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="DianPing" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="DuoMiFan" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="YuKuai" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="FanTong" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="AbstractSite" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="Echiele" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="XmFish" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="CollectionLogic" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="ScFood" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="Epinle" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="Cyooy" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="FanQieKuaiDianSite" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="SiteLogic" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="XiaoMiShuSite" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="SiteFactory" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="ISite" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="CollectionForm" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="DBUtility" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+    <Link Source="BLL" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
+  </Links>
   <Categories>
     <Category Id="项目" />
     <Category Id="包" />

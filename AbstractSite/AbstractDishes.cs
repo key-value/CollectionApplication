@@ -11,7 +11,7 @@ using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace AbstractSite
 {
-    public abstract class AbstractDishes
+    public abstract class AbstractDishes : AbstractMainSite
     {
         protected StorePicture StorePictureBll = new StorePicture();
 
@@ -34,7 +34,7 @@ namespace AbstractSite
             return dishType.DishHref;
         }
 
-        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
+        public virtual List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
         {
             foreach (var dishType in dishesTyepList)
             {
@@ -48,7 +48,7 @@ namespace AbstractSite
                     {
                         continue;
                     }
-
+                    SaveIngDish(dishType.DishesTypeName, string.Empty);
                     foreach (var dishesNode in dishesNodeList)
                     {
                         var dishes = GetDishes(dishType, dishesNode);
@@ -57,10 +57,12 @@ namespace AbstractSite
                             continue;
                         }
                         dishType.DishesList.Add(dishes);
+                        SaveIngDish(dishType.DishesTypeName, dishes.DishesName);
                     }
                     nextPageUrl = GetNextPageUrl(dishTypeHtmlNode);
                 }
             }
+            FinishSaveDish();
             return dishesTyepList;
         }
 

@@ -11,7 +11,7 @@ using StoreInfo = Maticsoft.Model.StoreInfo;
 
 namespace ISite
 {
-    public interface IPicture
+    public interface IPicture : IProgress
     {
         string PageUrl { get; set; }
         //PhotoAlbum

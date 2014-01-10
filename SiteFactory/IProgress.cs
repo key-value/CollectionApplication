@@ -8,5 +8,6 @@ namespace ISite
     public interface IProgress
     {
         event IDelegate.CatalogueEventHandler CataloEventHandler;
+        event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

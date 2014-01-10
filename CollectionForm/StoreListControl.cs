@@ -23,6 +23,7 @@ namespace CollectionForm
             InitializeComponent();
             _txtBox = txtBox;
             _storeList = GetDataList(cityID);
+            
         }
         /// <summary>
         /// 构造数据源

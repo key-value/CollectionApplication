@@ -45,5 +45,9 @@ namespace CollectionLogic
                 throw;
             }
         }
+        public void SetLabelEventHandler(IDelegate.LabelEventHandler labelEventHandler)
+        {
+            _pictureSite.LabelEventHandler += labelEventHandler;
+        }
     }
 }

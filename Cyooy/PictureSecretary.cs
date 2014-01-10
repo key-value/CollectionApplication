@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AbstractSite;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
 
 namespace Cyooy
 {
-    public class PictureSecretary : IPicture
+    public class PictureSecretary : AbstractMainSite, IPicture
     {
         private StorePicture storePictureBll = new StorePicture();
         private StorePicturesTable StorePicturesTableBll = new StorePicturesTable();

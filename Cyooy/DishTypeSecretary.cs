@@ -137,5 +137,9 @@ namespace Cyooy
         public string RestaurantId { get; set; }
 
         public Maticsoft.Model.StoreInfo StoreInfo { get; set; }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

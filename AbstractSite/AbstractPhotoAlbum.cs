@@ -7,7 +7,7 @@ using Maticsoft.BLL;
 
 namespace AbstractSite
 {
-    public abstract class AbstractPhotoAlbum
+    public abstract class AbstractPhotoAlbum : AbstractMainSite
     {
         protected AbstractPhotoAlbum()
         {
@@ -33,9 +33,11 @@ namespace AbstractSite
             for (int i = 0; i < typeList.Count; i++)
             {
                 var busphotoAlbumTable = BuildBusPhotoAlbumTable(storeInfo, i);
+                SaveIngPic(busphotoAlbumTable.AlbumName, string.Empty);
                 busphotoAlbumTable.StorePicturesList.AddRange(CollectionPicture(storeInfo, busphotoAlbumTable, typeList[i]));
                 busPhotoAlbumTableList.Add(busphotoAlbumTable);
             }
+            FinishSaveDish();
             return busPhotoAlbumTableList;
         }
 
@@ -50,9 +52,6 @@ namespace AbstractSite
             var picturesList = new List<Maticsoft.Model.StorePicture>();
             for (int i = 1; i < 500; i++)
             {
-                //var baseCollectionSite = new BaseCollectionSite(GetPageUrl(storeInfo, albumType, i));
-                //var pictureHtmlNode = baseCollectionSite.BaseHtmlNode;
-                //var pictureNodeList = pictureHtmlNode.SelectNodes(PicturePath());
                 var storePic = PicturesBody(storeInfo, busphotoAlbumTable, albumType, ref i);
                 picturesList.AddRange(storePic);
             }
@@ -68,6 +67,7 @@ namespace AbstractSite
                 var picturePathName = StorePictureUrl + pictureNode.Attributes["src"].Value;
                 if (FilterPicturePathName(picturePathName))
                 {
+                    SaveIngPic(busphotoAlbumTable.AlbumName, picturePathName);
                     storePicturesList.Add(BuildStorePicture(storeInfo, picturePathName));
                 }
             }

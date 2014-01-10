@@ -101,5 +101,9 @@ namespace Echiele
         {
             throw new NotImplementedException();
         }
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

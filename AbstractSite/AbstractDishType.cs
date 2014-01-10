@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ApplicationUtility;
-using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
 using DishesTyep = Maticsoft.BLL.DishesTyep;
-using DishesTyepTable = Maticsoft.BLL.DishesTyepTable;
 using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace AbstractSite
 {
-    public abstract class AbstractDishType
+    public abstract class AbstractDishType : AbstractMainSite
     {
+
         protected DishesBll DishesBll = new DishesBll();
         protected DishesTyep DishTypeBll = new DishesTyep();
         protected StorePicture StorePictureBll = new StorePicture();
@@ -58,6 +55,7 @@ namespace AbstractSite
                     };
                     dishTypeList.Add(dishesTypeInfo);
                 }
+                SaveIngDish(dishTypeName, string.Empty);
                 var dishNodeList = GetDishInfoList(dishTypeNode);
                 if (dishNodeList == null)
                 {
@@ -65,11 +63,12 @@ namespace AbstractSite
                 }
                 foreach (var dishNode in dishNodeList)
                 {
-                    var dishName = GetDishName(dishNode);
+                    var dishName = GetDishName(dishNode).ClearSiteCode();
                     if (string.IsNullOrWhiteSpace(dishName))
                     {
                         continue;
                     }
+
                     var dishInfo = dishesTypeInfo.DishesList.Find(x => x.DishesName == dishName);
                     if (dishInfo == null)
                     {
@@ -84,8 +83,11 @@ namespace AbstractSite
                     dishInfo.DishesUnit = GetDishUnit(dishNode);
                     dishInfo.DishesMoney = GetDishPrice(dishNode);
                     dishInfo.PictureHref = GetDishImg(dishNode);
+                    dishInfo.DishesName = dishName;
+                    SaveIngDish(dishTypeName, dishName);
                 }
             }
+            FinishSaveDish();
             return dishTypeList;
         }
 
@@ -100,7 +102,7 @@ namespace AbstractSite
             {
                 return string.Empty;
             }
-            return dishTypeNode.InnerText;
+            return dishTypeNode.InnerText.ClearSiteCode();
         }
 
         protected virtual HtmlAgilityPack.HtmlNodeCollection GetSiteDishTypeList()

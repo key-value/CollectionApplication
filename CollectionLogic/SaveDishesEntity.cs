@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cyooy.Model;
+using ISite;
 using Maticsoft.Model;
 using Dishes = Maticsoft.BLL.Dishes;
 using DishesTyepTable = Maticsoft.BLL.DishesTyepTable;
@@ -89,14 +90,16 @@ namespace CollectionLogic
                 _storePictureBll.Delete(storePicture.PID);
             }
         }
-        public List<DishesTyep> UpdateDish(StoreInfo storeInfo)
+        public List<DishesTyep> UpdateDish(StoreInfo storeInfo, IDelegate.LabelEventHandler labelEventHandler)
         {
             var dishTypeLogic = new DishTypeLogic(AssemblyName);
             dishTypeLogic.SetRestaurant(storeInfo);
+            dishTypeLogic.SetLabelEventHandler(labelEventHandler);
             var dishTypeList = dishTypeLogic.UpdateDishType();
             var dishesLogic = new DishesLogic(AssemblyName);
             if (dishesLogic.Conversion())
             {
+                dishesLogic.SetLabelEventHandler(labelEventHandler);
                 dishTypeList = dishesLogic.GetDish(dishTypeList);
             }
             return dishTypeList;

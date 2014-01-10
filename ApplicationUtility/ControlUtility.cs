@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace ApplicationUtility
@@ -100,6 +101,38 @@ namespace ApplicationUtility
             else
             {
                 control.Tag = null;
+            }
+        }
+
+        public static void AddText(this ListBox listBox, string resualt)
+        {
+            if (listBox == null)
+            {
+                return;
+            }
+            if (listBox.InvokeRequired)
+            {
+                listBox.Invoke(new Action<string>(listBox.AddText), resualt);
+            }
+            else
+            {
+                listBox.Items.Add(resualt);
+                listBox.SelectedIndex = listBox.Items.Count-1;
+            }
+        }
+        public static void ClearText(this ListBox listBox)
+        {
+            if (listBox == null)
+            {
+                return;
+            }
+            if (listBox.InvokeRequired)
+            {
+                listBox.Invoke(new Action(listBox.ClearText));
+            }
+            else
+            {
+                listBox.Items.Clear();
             }
         }
     }

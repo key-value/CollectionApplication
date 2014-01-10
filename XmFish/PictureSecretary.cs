@@ -13,11 +13,6 @@ namespace XmFish
 {
     public class PictureSecretary : AbstractPicture, IPicture
     {
-
-        public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(StoreInfo storeInfo)
-        {
-            return new List<Maticsoft.Model.BusPhotoAlbum>();
-        }
         public PictureSecretary()
         {
             PageUrl = @"http://www.yukuai.com/official/dishPicture?o.picType={2}&o.merchantId={0}&page.pageSize=20&page.currentPage={1}";

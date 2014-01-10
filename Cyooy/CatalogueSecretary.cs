@@ -13,6 +13,10 @@ namespace Cyooy
 {
     public class CatalogueSecretary : ICatalogue
     {
+
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+
+        public event IDelegate.LabelEventHandler LabelEventHandler;
         private StoreInfo _storeInfoBll = new StoreInfo();
         private StorePicture _storePictureBll = new StorePicture();
 
@@ -248,6 +252,5 @@ namespace Cyooy
         }
 
 
-        public event IDelegate.CatalogueEventHandler CataloEventHandler;
     }
 }

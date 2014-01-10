@@ -8,7 +8,7 @@ using Maticsoft.BLL;
 
 namespace AbstractSite
 {
-    public abstract class AbstractPicture
+    public abstract class AbstractPicture : AbstractMainSite
     {
         protected AbstractPicture()
         {

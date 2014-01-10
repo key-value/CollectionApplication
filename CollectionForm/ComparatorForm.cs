@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using PopupTool;
+using BusPhotoAlbum = Maticsoft.Model.BusPhotoAlbum;
 using Catalogue = Maticsoft.Model.Catalogue;
 using City = Maticsoft.Model.City;
 using CookingStyles = Maticsoft.Model.CookingStyles;
@@ -341,6 +342,8 @@ namespace CollectionForm
         {
             try
             {
+                lblDish.SetTextBoxText(string.Empty);
+                lboxDish.ClearText();
                 var catalogueInfo = catalogueListBox.SelectedItem as Catalogue;
                 if (catalogueInfo == null)
                 {
@@ -375,7 +378,8 @@ namespace CollectionForm
         private void GetFoodAction(StoreInfo store, string siteType)
         {
             var saveDishesEntity = new SaveDishesEntity(siteType);
-            var dishTypeList = saveDishesEntity.UpdateDish(store);
+
+            var dishTypeList = saveDishesEntity.UpdateDish(store, UpdateLabelText);
             var dishTypeListCount = 0;
             var dishCount = 0;
             if (dishTypeList != null)
@@ -393,9 +397,25 @@ namespace CollectionForm
             lblDish.SetTextBoxText(string.Format("{0}菜品{1}种菜系{2}道菜品下载完成", store.StoreName, dishTypeListCount, dishCount));
             //Invoke(_showMessageBox, (string.Format("{0}菜品{1}种菜系{2}道菜品下载完成", store.StoreName, dishTypeListCount, dishCount)));
         }
+
+        private void UpdateLabelText(object sender, LabelEventArgs labelEventArgs)
+        {
+            if (labelEventArgs.UpdateType == 1)
+            {
+                //labelDishText.SetTextBoxText(labelEventArgs.LabelText);
+                lboxDish.AddText(labelEventArgs.LabelText);
+            }
+            else
+            {
+                //labelPicText.SetTextBoxText(labelEventArgs.LabelText);
+                lboxPic.AddText(labelEventArgs.LabelText);
+            }
+        }
+
         private void GetPicAction(StoreInfo store, string siteType)
         {
-            var pictureLogic = new CollectionLogic.PictureLogic(siteType);
+            var pictureLogic = new PictureLogic(siteType);
+            pictureLogic.SetLabelEventHandler(UpdateLabelText);
             var albumTablesList = pictureLogic.SaveAlbumTables(store);
             var albumCount = 0;
             var picturesCount = 0;
@@ -416,6 +436,8 @@ namespace CollectionForm
         {
             try
             {
+                lblPic.SetTextBoxText(string.Empty);
+                lboxPic.ClearText();
                 var catalogueInfo = catalogueListBox.SelectedItem as Catalogue;
                 if (catalogueInfo == null)
                 {
@@ -900,6 +922,59 @@ namespace CollectionForm
             {
                 progressBar1.UpdateIncrement(catalogueEventArgs.ProgressNum);
             }
+        }
+
+        private void ComparatorForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnShowMessage_Click(object sender, EventArgs e)
+        {
+            if (catalogueListBox.SelectedIndex < 0)
+            {
+                return;
+            }
+            var catalogueInfo = catalogueListBox.SelectedItem as Catalogue;
+            if (catalogueInfo == null)
+            {
+                return;
+            }
+            var siteStoreInfo = _storeInfoList.Find(x => x.storeId == catalogueInfo.StoreId);
+            if (siteStoreInfo == null)
+            {
+                return;
+            }
+            chbShowDishType.DataSource = siteStoreInfo.DishTypeList;
+            chbShowDishType.DisplayMember = "DishesTypeName";
+            chbShowPicBox.DataSource = siteStoreInfo.BusPhotoAlbumTableList;
+            chbShowPicBox.DisplayMember = "AlbumName";
+        }
+
+        private void btnShowDish_Click(object sender, EventArgs e)
+        {
+            var dishesTyep = chbShowDishType.SelectedItem as DishesTyep;
+            if (dishesTyep == null)
+            {
+                return;
+            }
+
+            var showDishListControl = new ShowDishListControl(dishesTyep.DishesList);
+            var pop = new Popup(showDishListControl);
+            pop.Show(btnShowDish, false);
+        }
+
+        private void btnShow_Click(object sender, EventArgs e)
+        {
+            var busPhotoAlbum = chbShowPicBox.SelectedItem as BusPhotoAlbum;
+            if (busPhotoAlbum == null)
+            {
+                return;
+            }
+
+            var showDishListControl = new ShowDishListControl(busPhotoAlbum.StorePicturesList);
+            var pop = new Popup(showDishListControl);
+            pop.Show(btnShowDish, false);
         }
     }
 }

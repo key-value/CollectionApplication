@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AbstractSite;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
 
 namespace Echiele
 {
-    public class PictureSecretary : IPicture
+    public class PictureSecretary : AbstractMainSite, IPicture
     {
 
         public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)

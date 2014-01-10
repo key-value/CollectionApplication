@@ -52,6 +52,10 @@ namespace CollectionLogic
         {
             _dishTypeSite.StoreInfo = storeInfo;
         }
+        public void SetLabelEventHandler(IDelegate.LabelEventHandler labelEventHandler)
+        {
+            _dishTypeSite.LabelEventHandler += labelEventHandler;
+        }
         public List<Maticsoft.Model.DishesTyep> UpdateDishType()
         {
             try

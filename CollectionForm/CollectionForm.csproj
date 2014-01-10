@@ -152,6 +152,12 @@
     <Compile Include="River.Designer.cs">
       <DependentUpon>River.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowDishListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ShowDishListControl.Designer.cs">
+      <DependentUpon>ShowDishListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="StoreListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     </Compile>
     <EmbeddedResource Include="River.resx">
       <DependentUpon>River.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowDishListControl.resx">
+      <DependentUpon>ShowDishListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StoreListControl.resx">
       <DependentUpon>StoreListControl.cs</DependentUpon>

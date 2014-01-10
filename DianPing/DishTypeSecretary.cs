@@ -1,11 +1,11 @@
 ﻿using AbstractSite;
 using DianPing.Model;
+using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
 using System;
 using System.Collections.Generic;
-using DishesTyepTable = Maticsoft.Model.DishesTyepTable;
 
 namespace DianPing
 {
@@ -33,8 +33,7 @@ namespace DianPing
         public List<DishType> GetDishType()
         {
             var dishTypeList = new List<DishType>();
-            var dishesTypePath =
-                @".//div[@class='shop-wrap']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']/div[@class='rec-dishes tab-item active']/div/ul/li";
+            const string dishesTypePath = @".//div[@class='shop-wrap']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']/div[@class='rec-dishes tab-item active']/div/ul/li";
             var baseCollectionSite = new BaseCollectionSite(PageUrl);
             var dishTypeHtmlNode = baseCollectionSite.BaseHtmlNode;
             var dishNodeList = dishTypeHtmlNode.SelectNodes(dishesTypePath);
@@ -118,17 +117,17 @@ namespace DianPing
         {
             return _generalEntityList;
         }
-        protected override string GetDishName(HtmlAgilityPack.HtmlNode dishNode)
+        protected override string GetDishName(HtmlNode dishNode)
         {
             var dishNameNode = dishNode.SelectSingleNode("./div[@class='pic-name']/a");
             if (dishNameNode == null)
             {
                 return string.Empty;
             }
-            return dishNameNode.InnerText;
+            return dishNameNode.InnerText.Trim();
         }
 
-        protected override decimal GetDishPrice(HtmlAgilityPack.HtmlNode dishNode)
+        protected override decimal GetDishPrice(HtmlNode dishNode)
         {
             var dishPriceNode = dishNode.SelectSingleNode("./div[@class='pic-name']/span");
             var dishPrice = dishPriceNode == null ? "0" : dishPriceNode.InnerText.Replace("￥", string.Empty);
@@ -137,7 +136,7 @@ namespace DianPing
             return priceDecimal;
         }
 
-        protected override string GetDishImg(HtmlAgilityPack.HtmlNode dishNode)
+        protected override string GetDishImg(HtmlNode dishNode)
         {
             var pictureHref = string.Empty;
             var dishImg = dishNode.SelectSingleNode(".//a/img");
@@ -155,12 +154,14 @@ namespace DianPing
 
         protected override string DishesTypePath()
         {
-            return @".//div[@class='shop-wrap']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']/div[@class='rec-dishes tab-item active']/div/ul/li";
+            return @".//div[@class='shop-wrap']/div[@class='main']/div/div[@class='tabs']/ul/li/span[@class='active']/a[@class='ga-menu']";
         }
 
         protected override string DishesPath()
         {
-            return ".//li";
+            // return ".//li";/div[@class='shop-wrap']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']
+            return @"./../../../../..//div[@class='rec-dishes tab-item active']/div[@class='pic-list J_toggle']/ul/li";
         }
+
     }
 }

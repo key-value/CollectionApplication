@@ -9,7 +9,7 @@ using Maticsoft.Model;
 
 namespace ISite
 {
-    public interface IDishType
+    public interface IDishType: IProgress
     {
         string PageUrl { get; set; }
         //DishType GetDishTypeEntity();

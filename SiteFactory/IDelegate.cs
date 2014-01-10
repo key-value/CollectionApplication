@@ -9,5 +9,6 @@ namespace ISite
     public class IDelegate
     {
         public delegate void CatalogueEventHandler(object sender, CatalogueEventArgs e);
+        public delegate void LabelEventHandler(object sender, LabelEventArgs e);
     }
 }

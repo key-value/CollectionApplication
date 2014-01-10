@@ -39,5 +39,9 @@ namespace CollectionLogic
         {
             return _dishesSite.GetDish(dishesTyepList);
         }
+        public void SetLabelEventHandler(IDelegate.LabelEventHandler labelEventHandler)
+        {
+            _dishesSite.LabelEventHandler += labelEventHandler;
+        }
     }
 }
