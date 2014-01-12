@@ -117,6 +117,7 @@ namespace DianPing
         {
             return _generalEntityList;
         }
+
         protected override string GetDishName(HtmlNode dishNode)
         {
             var dishNameNode = dishNode.SelectSingleNode("./div[@class='pic-name']/a");
@@ -163,5 +164,31 @@ namespace DianPing
             return @"./../../../../..//div[@class='rec-dishes tab-item active']/div[@class='pic-list J_toggle']/ul/li";
         }
 
+        protected override HtmlNodeCollection GetDishInfoList(HtmlNode dishTypeNode)
+        {
+            var baseCollectionSite = new BaseCollectionSite(PageUrl);
+            var dishNodeList = dishTypeNode.SelectNodes(DishesPath());
+            if (dishNodeList == null || dishNodeList.Count <= 0)
+            {
+                return new HtmlNodeCollection(null);
+            }
+            var scripNode = dishTypeNode.SelectSingleNode(@"./../../../../..//div[@class='rec-dishes tab-item active']/div[@class='pic-list J_toggle']/ul/script");
+            if (scripNode != null && !string.IsNullOrWhiteSpace(scripNode.InnerText))
+            {
+                var liNodeList = baseCollectionSite.BaseHtmlNodeCollection(scripNode.InnerText);
+                if (liNodeList != null)
+                {
+                    var dishLiList = liNodeList.SelectNodes(".//li");
+                    if (dishLiList != null)
+                    {
+                        foreach (var dishLi in dishLiList)
+                        {
+                            dishNodeList.Add(dishLi);
+                        }
+                    }
+                }
+            }
+            return dishNodeList;
+        }
     }
 }

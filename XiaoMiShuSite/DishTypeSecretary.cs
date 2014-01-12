@@ -40,6 +40,7 @@ namespace XiaoMiShuSite
             return string.Empty;
         }
 
+
         protected override string GetDishName(HtmlNode dishNode)
         {
             return string.Empty;

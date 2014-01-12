@@ -8,7 +8,7 @@ using Catalogue = Maticsoft.Model.Catalogue;
 using StoreInfo = Maticsoft.Model.StoreInfo;
 
 
-namespace DianPing
+namespace TaoBao
 {
     public class StoreSecretary : AbstractStore, IStore
     {
