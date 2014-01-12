@@ -12,8 +12,8 @@ namespace TaoBao
     {
         public DishTypeSecretary()
         {
-            _pageUrl = @"http://www.dianping.com/shop/{0}";
-            _generalEntityList = new List<IDishSiteModel>();
+            _pageUrl = @"http://dd.taobao.com/consumer/asynItemList.do?callback=jsonp78&localstoreId='{0}'&sellerId64=MzU5MzEzMDQxMg%3D%3D";
+
         }
         private string _pageUrl;
 
@@ -29,27 +29,13 @@ namespace TaoBao
             }
         }
 
-        protected override string DishesTypePath()
+
+        public List<DishType> GetDishType()
         {
             throw new NotImplementedException();
         }
 
-        protected override string DishesPath()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override string GetDishName(HtmlNode dishNode)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override decimal GetDishPrice(HtmlNode dishNode)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override string GetDishImg(HtmlNode dishNode)
+        public List<IDishSiteModel> GetDishesList()
         {
             throw new NotImplementedException();
         }

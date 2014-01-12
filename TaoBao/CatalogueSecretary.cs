@@ -46,7 +46,6 @@ namespace TaoBao
             var storeInfo = new Maticsoft.Model.StoreInfo();
             storeInfo.StoreName = storeName;
             storeInfo.StoreTag = GetStoreTag(restaurant);
-            //storeInfo.StorePhone = GetStorePhone(restaurant);
             storeInfo.MaxPrice = GetMaxPrice(restaurant);
             return storeInfo;
         }

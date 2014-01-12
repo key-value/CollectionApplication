@@ -14,48 +14,20 @@ namespace TaoBao
     {
         public StoreSecretary()
         {
-            StorePath = @".//div[@class='shop-wrap']/div[@class='main']/div[@class='shop-info shakeable']/div[@class='shop-info-con']/div[@class='pic-txt']/div[@class='txt']/div[@class='shop-info-location']";
-            ImgNodePath = @"./../../div[@class='pic']/div[@class='thumb-switch']/ul/li/a/img";
+            StorePath = @".//div[@class='page']/div[@class='content']/div[@class='shop-intro']/div[@class='shop-other']/span[@class='shop-tel']";
         }
 
         protected override StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
         {
             storeInfo.StoreName = catalogue.title;
-            storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
-            storeInfo.StoreTag += catalogue.StoreInfo.StoreTag;
-            storeInfo.picName = GetImageHref(StoreInfoHtmlNode, storeInfo.storeId);
-            storeInfo.WIFI = storeInfo.Facilities.Contains(@"无线上网");
-            storeInfo.payCar = storeInfo.Facilities.Contains(@"可以刷卡");
             return storeInfo;
         }
 
-        public override string GetWorkTime()
-        {
-            const string xpath = @"./div[@class='desc-info']/div[@class='desc-list Hide']/ul/li/span[@class='J_full-cont']";
-            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Trim();
-        }
-
-        protected override string GetshopPicturePath(HtmlNode htmlNode)
-        {
-            return htmlNode.Attributes["src"].Value;
-        }
-
-        public override string GetAddress()
-        {
-            const string xpath = @"./div[@class='shop-location']/ul/li";
-            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Replace(@"地址：", string.Empty).Trim();
-        }
 
         public override string GetPhoneNum()
         {
-            const string xpath = @".//div[@class='shop-location']//ul/li/span[@class='call']";
+            const string xpath = @".";
             return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Trim();
-        }
-
-        public override string StoreTagText()
-        {
-            const string xpath = @".//div[@class='desc-info']/div[@class='desc-list Hide']/ul/li[@class='J_tags-fold-wrap J_toggle J_tags-biaoqian']/div/span/a";
-            return CollectionNodeText.GetNodeListInnerText(StoreInfoHtmlNode, xpath).Trim();
         }
     }
 }
