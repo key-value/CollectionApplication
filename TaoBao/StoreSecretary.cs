@@ -14,20 +14,27 @@ namespace TaoBao
     {
         public StoreSecretary()
         {
-            StorePath = @".//div[@class='page']/div[@class='content']/div[@class='shop-intro']/div[@class='shop-other']/span[@class='shop-tel']";
+            StorePath = @".//div[@class='page']/div[@class='content']/div[@class='shop-intro']";
         }
 
         protected override StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
         {
             storeInfo.StoreName = catalogue.title;
+            storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
             return storeInfo;
         }
 
 
         public override string GetPhoneNum()
         {
-            const string xpath = @".";
+            const string xpath = @"./div[@class='shop-other']/span[@class='shop-tel']";
             return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Trim();
+        }
+
+        protected override void BuildBaseStore()
+        {
+            var baseCollectionSite = new BaseCollectionSite(PageUrl);
+            StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNodeByGBK.SelectSingleNode(StorePath);
         }
     }
 }

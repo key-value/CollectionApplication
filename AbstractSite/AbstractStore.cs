@@ -27,10 +27,8 @@ namespace AbstractSite
         {
             InitProgress();
             DoProgress(50);
-            var baseCollectionSite = new BaseCollectionSite(PageUrl);
-            StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNode;
+            BuildBaseStore();
             DoProgress(50);
-            StoreInfoHtmlNode = StoreInfoHtmlNode.SelectSingleNode(StorePath);
             if (StoreInfoHtmlNode == null)
             {
                 return new NullStoreInfo();
@@ -61,6 +59,12 @@ namespace AbstractSite
             storeInfo = ChangeStoreInfo(catalogue, storeInfo);
             DoProgress();
             return storeInfo;
+        }
+
+        protected virtual void BuildBaseStore()
+        {
+            var baseCollectionSite = new BaseCollectionSite(PageUrl);
+            StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNode.SelectSingleNode(StorePath);
         }
 
         protected virtual StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
