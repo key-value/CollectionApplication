@@ -29,6 +29,7 @@ namespace AbstractSite
         public List<Maticsoft.Model.DishesTyep> UpdateDishType()
         {
             var dishTypeList = new List<Maticsoft.Model.DishesTyep>();
+            BeginSaveDish();
             var dishTypeNodeList = GetSiteDishTypeList();
             dishTypeList.AddRange(GetOlddDishType());
             if (dishTypeNodeList == null || dishTypeNodeList.Count <= 0)
@@ -84,6 +85,10 @@ namespace AbstractSite
                     dishInfo.DishesMoney = GetDishPrice(dishNode);
                     dishInfo.PictureHref = GetDishImg(dishNode);
                     dishInfo.DishesName = dishName;
+                    if (dishInfo.DishesMoney == 0)
+                    {
+                        dishInfo.IsCurrentPrice = true;
+                    }
                     SaveIngDish(dishTypeName, dishName);
                 }
             }

@@ -26,7 +26,14 @@ namespace DianPing
             storeInfo.picName = GetImageHref(StoreInfoHtmlNode, storeInfo.storeId);
             storeInfo.WIFI = storeInfo.Facilities.Contains(@"无线上网");
             storeInfo.payCar = storeInfo.Facilities.Contains(@"可以刷卡");
+            storeInfo.DishTypeSite = GetDishTypeSite();
             return storeInfo;
+        }
+
+        public bool GetDishTypeSite()
+        {
+            const string xpath = @"./../../../../../../../div[@class='shop-wrap']/div[@class='main']/div/div[@class='tabs']/ul/li/a[@class='ga-menu J_menu_tag']";
+            return CollectionNodeText.GetNodeContainsInnerText(StoreInfoHtmlNode, xpath, @"菜单") != null;
         }
 
         public override string GetWorkTime()

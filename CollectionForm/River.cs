@@ -25,10 +25,8 @@ namespace CollectionForm
         private void button1_Click(object sender, EventArgs e)
         {
             var baseCollectionSite = new BaseCollectionSite(textBox4.Text);
-            BaseHtmlNode = baseCollectionSite.BaseHtmlNode;
+            BaseHtmlNode = baseCollectionSite.BaseHtmlNodeByGBK;
             textBox1.Text = BaseHtmlNode.InnerHtml;
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)

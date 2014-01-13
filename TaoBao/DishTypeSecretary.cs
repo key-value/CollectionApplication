@@ -39,5 +39,30 @@ namespace TaoBao
         {
             throw new NotImplementedException();
         }
+
+        protected override string DishesTypePath()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string DishesPath()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetDishName(HtmlNode dishNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override decimal GetDishPrice(HtmlNode dishNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetDishImg(HtmlNode dishNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

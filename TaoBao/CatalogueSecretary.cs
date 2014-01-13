@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using AbstractSite;
+using ApplicationUtility;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
@@ -17,7 +18,7 @@ namespace TaoBao
         public CatalogueSecretary()
         {
             PageUrl = @"http://list.bendi.taobao.com/chengdu";
-            CataloguePath = @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='items']/div[@class='list']/ul/li[@class='clearfix place-item']/div[@class='item-inner clearfix']/div[@class='info']";
+            CataloguePath = @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='items']/div[@class='list']/ul/li[@class='clearfix place-item']";
             PageNodePath =
                @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='k2-pagination clearfix']/div[@class='option']/a";
             NextPage = PageUrl;
@@ -52,7 +53,7 @@ namespace TaoBao
 
         private int GetMaxPrice(HtmlNode htmlNode)
         {
-            var maxPriceText = CollectionNodeText.GetNodeListInnerText(htmlNode, @".//div[@class='more-info clearfix']/div[@class='price']/span[@class='g_price g_price-highlight']/strong").Trim().Replace("¥", string.Empty).Replace("-", string.Empty);
+            var maxPriceText = CollectionNodeText.GetNodeListInnerText(htmlNode, @".//div[@class='item-inner clearfix']/div[@class='info']/div[@class='more-info clearfix']/div[@class='price']/span[@class='g_price g_price-highlight']/strong").Trim().Replace("¥", string.Empty).Replace("-", string.Empty);
             if (string.IsNullOrWhiteSpace(maxPriceText))
             {
                 return 0;
@@ -67,19 +68,19 @@ namespace TaoBao
 
         private string GetStoreTag(HtmlNode htmlNode)
         {
-            return CollectionNodeText.GetNodeListInnerText(htmlNode, @".//div[@class='more-info clearfix']/div[@class='place-tag']/div[@class='tags']/p/a").Replace(@"&nbsp;", string.Empty).Replace(@" ", string.Empty);
+            return CollectionNodeText.GetNodeListInnerText(htmlNode, @".//div[@class='item-inner clearfix']/div[@class='info']/div[@class='more-info clearfix']/div[@class='place-tag']/div[@class='tags']/p/a").Replace(@"&nbsp;", string.Empty).Replace(@" ", string.Empty);
         }
 
         public void GetFid(HtmlNode htmlNode)
         {
-            var fidNode = htmlNode.SelectSingleNode(@".//div[@class='clearfix']/a[@class='name']");
+            var fidNode = htmlNode.SelectSingleNode(@".//div[@class='item-inner clearfix']/div[@class='info']/div[@class='clearfix']/a[@class='name']");
             if (fidNode == null)
             {
                 return;
             }
             var hrefString = fidNode.Attributes["href"].Value;//shop/5630147
             Href = hrefString;
-            const string regex = @"\/shop\/(\d*)";
+            const string regex = @"http:\/\/dd.taobao.com\/detail.htm\?localstoreId=(\w*)";
             if (!Regex.IsMatch(hrefString, regex))
             {
                 return;
@@ -88,7 +89,7 @@ namespace TaoBao
             Fid = string.IsNullOrEmpty(matchCollection.Groups[1].Value.Trim())
                    ? string.Empty
                    : matchCollection.Groups[1].Value;
-            Title = fidNode.InnerText;
+            Title = fidNode.InnerText.ClearSiteCode();
         }
 
         protected override void GetPage(HtmlNode pageNode)
@@ -102,6 +103,19 @@ namespace TaoBao
                     PageNum = intpageNum;
                 }
             }
+        }
+        //<textarea class='ks-datalazyload hidden'>
+        protected override IEnumerable<HtmlNode> GetCatalogueList()
+        {
+            var baseCollectionSite = new BaseCollectionSite(PageUrl);
+            var catalogueHtmlNode = baseCollectionSite.BaseHtmlNodeByGBK;
+            if (catalogueHtmlNode == null)
+            {
+                return null;
+            }
+            GetPageNum(catalogueHtmlNode);
+            var restaurantList = catalogueHtmlNode.SelectNodes(CataloguePath);
+            return restaurantList;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AbstractSite;
+using DianPing.DishTypeSite;
 using DianPing.Model;
 using HtmlAgilityPack;
 using ISite;
@@ -11,9 +12,9 @@ namespace DianPing
 {
     public class DishTypeSecretary : AbstractDishType, IDishType
     {
+        public IDishTypeChange DishTypeChange = null;
         public DishTypeSecretary()
         {
-            _pageUrl = @"http://www.dianping.com/shop/{0}";
             _generalEntityList = new List<IDishSiteModel>();
         }
         private string _pageUrl;
@@ -120,75 +121,55 @@ namespace DianPing
 
         protected override string GetDishName(HtmlNode dishNode)
         {
-            var dishNameNode = dishNode.SelectSingleNode("./div[@class='pic-name']/a");
-            if (dishNameNode == null)
-            {
-                return string.Empty;
-            }
-            return dishNameNode.InnerText.Trim();
+            return DishTypeChange.GetDishName(dishNode);
         }
 
         protected override decimal GetDishPrice(HtmlNode dishNode)
         {
-            var dishPriceNode = dishNode.SelectSingleNode("./div[@class='pic-name']/span");
-            var dishPrice = dishPriceNode == null ? "0" : dishPriceNode.InnerText.Replace("￥", string.Empty);
-            decimal priceDecimal = 0;
-            decimal.TryParse(dishPrice, out priceDecimal);
-            return priceDecimal;
+            return DishTypeChange.GetDishPrice(dishNode);
         }
 
         protected override string GetDishImg(HtmlNode dishNode)
         {
-            var pictureHref = string.Empty;
-            var dishImg = dishNode.SelectSingleNode(".//a/img");
-            if (dishImg.Attributes.Contains("src"))
-            {
-                pictureHref = dishImg.Attributes["src"].Value;
-            }
-            else if (dishImg.Attributes.Contains("data-src"))
-            {
-                pictureHref = dishImg.Attributes["data-src"].Value;
-            }
-            return pictureHref;
+            return DishTypeChange.GetDishImg(dishNode);
         }
 
 
         protected override string DishesTypePath()
         {
-            return @".//div[@class='shop-wrap']/div[@class='main']/div/div[@class='tabs']/ul/li/span[@class='active']/a[@class='ga-menu']";
+            return DishTypeChange.DishesTypePath();
         }
 
         protected override string DishesPath()
         {
-            // return ".//li";/div[@class='shop-wrap']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']
-            return @"./../../../../..//div[@class='rec-dishes tab-item active']/div[@class='pic-list J_toggle']/ul/li";
+            return DishTypeChange.DishesPath();
         }
 
         protected override HtmlNodeCollection GetDishInfoList(HtmlNode dishTypeNode)
         {
-            var baseCollectionSite = new BaseCollectionSite(PageUrl);
-            var dishNodeList = dishTypeNode.SelectNodes(DishesPath());
-            if (dishNodeList == null || dishNodeList.Count <= 0)
+            if (StoreInfo.DishTypeSite)
             {
-                return new HtmlNodeCollection(null);
+                return base.GetDishInfoList(dishTypeNode);
             }
-            var scripNode = dishTypeNode.SelectSingleNode(@"./../../../../..//div[@class='rec-dishes tab-item active']/div[@class='pic-list J_toggle']/ul/script");
-            if (scripNode != null && !string.IsNullOrWhiteSpace(scripNode.InnerText))
+            else
             {
-                var liNodeList = baseCollectionSite.BaseHtmlNodeCollection(scripNode.InnerText);
-                if (liNodeList != null)
-                {
-                    var dishLiList = liNodeList.SelectNodes(".//li");
-                    if (dishLiList != null)
-                    {
-                        foreach (var dishLi in dishLiList)
-                        {
-                            dishNodeList.Add(dishLi);
-                        }
-                    }
-                }
+                return DishTypeChange.GetDishInfoList(dishTypeNode);
             }
-            return dishNodeList;
+        }
+
+        protected override HtmlNodeCollection GetSiteDishTypeList()
+        {
+            if (StoreInfo.DishTypeSite)
+            {
+                DishTypeChange = new DifPageDishType();
+                _pageUrl = DishTypeChange.PageUrl;
+            }
+            else
+            {
+                DishTypeChange = new SamePageDishType();
+                _pageUrl = DishTypeChange.PageUrl;
+            }
+            return base.GetSiteDishTypeList();
         }
     }
 }

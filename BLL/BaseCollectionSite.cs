@@ -33,6 +33,8 @@ namespace Maticsoft.BLL
                 if (_catalogueHtmlNode == null)
                 {
                     var htmlWeb = new HtmlWeb();
+                    Encoding encoding = Encoding.GetEncoding("GBK");
+                    htmlWeb.OverrideEncoding = encoding;
                     htmlWeb.UserAgent = @"Mozilla/5.0 (Windows NT 6.3; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0";
                     var htmlDoc = htmlWeb.Load(PageUrl);
                     _catalogueHtmlNode = htmlDoc.DocumentNode;
@@ -47,5 +49,22 @@ namespace Maticsoft.BLL
             htmlDocument.LoadHtml(htmlText);
             return htmlDocument.DocumentNode;
         }
+        public HtmlNode BaseHtmlNodeByGBK
+        {
+            get
+            {
+                if (_catalogueHtmlNode == null)
+                {
+                    var htmlWeb = new HtmlWeb();
+                    Encoding encoding = Encoding.GetEncoding("GBK");
+                    htmlWeb.OverrideEncoding = encoding;
+                    htmlWeb.UserAgent = @"Mozilla/5.0 (Windows NT 6.3; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0";
+                    var htmlDoc = htmlWeb.Load(PageUrl);
+                    _catalogueHtmlNode = htmlDoc.DocumentNode;
+                }
+                return _catalogueHtmlNode;
+            }
+        }
+
     }
 }

@@ -25,7 +25,15 @@ namespace CollectionLogic
 
         public List<Catalogue> GetCataloguePage(int pageIndex)
         {
-            return _catalogueSite.GetCataloguePage(pageIndex);
+            try
+            {
+                return _catalogueSite.GetCataloguePage(pageIndex);
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+            return new List<Catalogue>();
         }
 
         public void SetPath(string pageUrl)

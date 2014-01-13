@@ -48,6 +48,9 @@
     <Compile Include="CatalogueSecretary.cs" />
     <Compile Include="DishesSecretary.cs" />
     <Compile Include="DishTypeSecretary.cs" />
+    <Compile Include="DishTypeSite\DifPageDishType.cs" />
+    <Compile Include="DishTypeSite\IDishTypeChange.cs" />
+    <Compile Include="DishTypeSite\SamePageDishType.cs" />
     <Compile Include="Model\DianPingDishes.cs" />
     <Compile Include="PictureSecretary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,6 +60,10 @@
     <ProjectReference Include="..\AbstractSite\AbstractSite.csproj">
       <Project>{29f6c4a5-f9b7-48d0-9b57-f73a909d98ed}</Project>
       <Name>AbstractSite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationUtility\ApplicationUtility.csproj">
+      <Project>{9e63c6e7-af70-41b9-a5ec-01d5aa7d3034}</Project>
+      <Name>ApplicationUtility</Name>
     </ProjectReference>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>

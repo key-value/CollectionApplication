@@ -26,61 +26,61 @@ namespace AbstractSite
         public List<Maticsoft.Model.DishesTyep> UpdateDishType()
         {
             var dishTypeList = new List<Maticsoft.Model.DishesTyep>();
-            //var dishTypeNodeList = GetSiteDishTypeList();
-            //dishTypeList.AddRange(GetOlddDishType());
-            //if (dishTypeNodeList == null || dishTypeNodeList.Count <= 0)
-            //{
-            //    return dishTypeList;
-            //}
-            //foreach (var dishTypeNode in dishTypeNodeList)
-            //{
-            //    var dishTypeName = GetDishTypeName(dishTypeNode);
-            //    if (string.IsNullOrWhiteSpace(dishTypeName))
-            //    {
-            //        continue;
-            //    }
-            //    var dishesTypeInfo = dishTypeList.Find(x => x.DishesTypeName == dishTypeName);
-            //    if (dishesTypeInfo == null)
-            //    {
-            //        dishesTypeInfo = new Maticsoft.Model.DishesTyep
-            //        {
-            //            DishesTypeID = Guid.NewGuid().ToString(),
-            //            DishesTypeName = dishTypeName,
-            //            BusinessID = StoreInfo.OldStoreId,
-            //            CreateDate = DateTime.Now,
-            //            //DishHref = GetDishesHref(dishTypeNode),
-            //        };
-            //        dishTypeList.Add(dishesTypeInfo);
-            //    }
-            //    SaveIngDish(dishTypeName, string.Empty);
-            //    var dishNodeList ;//= GetDishInfoList(dishTypeNode);
-            //    if (dishNodeList == null)
-            //    {
-            //        continue;
-            //    }
-            //    foreach (var dishNode in dishNodeList)
-            //    {
-            //        var dishName;// = GetDishName(dishNode).ClearSiteCode();
-            //        if (string.IsNullOrWhiteSpace(dishName))
-            //        {
-            //            continue;
-            //        }
+            var dishTypeNodeList = GetSiteDishTypeList();
+            dishTypeList.AddRange(GetOlddDishType());
+            if (dishTypeNodeList == null || dishTypeNodeList.Count <= 0)
+            {
+                return dishTypeList;
+            }
+            foreach (var dishTypeNode in dishTypeNodeList)
+            {
+                var dishTypeName = dishTypeNode.DishesTypeName;
+                if (string.IsNullOrWhiteSpace(dishTypeName))
+                {
+                    continue;
+                }
+                var dishesTypeInfo = dishTypeList.Find(x => x.DishesTypeName == dishTypeName);
+                if (dishesTypeInfo == null)
+                {
+                    dishesTypeInfo = new Maticsoft.Model.DishesTyep
+                    {
+                        DishesTypeID = Guid.NewGuid().ToString(),
+                        DishesTypeName = dishTypeName,
+                        BusinessID = StoreInfo.OldStoreId,
+                        CreateDate = DateTime.Now,
+                        //DishHref = GetDishesHref(dishTypeNode),
+                    };
+                    dishTypeList.Add(dishesTypeInfo);
+                }
+                SaveIngDish(dishTypeName, string.Empty);
+                var dishNodeList = dishTypeNode.DishesList;
+                if (dishNodeList == null)
+                {
+                    continue;
+                }
+                foreach (var dishNode in dishNodeList)
+                {
+                    var dishName = dishNode.DishesName.ClearSiteCode();
+                    if (string.IsNullOrWhiteSpace(dishName))
+                    {
+                        continue;
+                    }
 
-            //        var dishInfo = dishesTypeInfo.DishesList.Find(x => x.DishesName == dishName);
-            //        if (dishInfo == null)
-            //        {
-            //            dishInfo = new DishesEntity
-            //            {
-            //                BusinessID = StoreInfo.storeId,
-            //                DishesID = Guid.NewGuid().ToString(),
-            //                DishesTypeID = dishesTypeInfo.DishesTypeID
-            //            };
-            //            dishesTypeInfo.DishesList.Add(dishInfo);
-            //        }
-            //        SaveIngDish(dishTypeName, dishName);
-            //    }
-            //}
-            //FinishSaveDish();
+                    var dishInfo = dishesTypeInfo.DishesList.Find(x => x.DishesName == dishName);
+                    if (dishInfo == null)
+                    {
+                        dishInfo = new DishesEntity
+                        {
+                            BusinessID = StoreInfo.storeId,
+                            DishesID = Guid.NewGuid().ToString(),
+                            DishesTypeID = dishesTypeInfo.DishesTypeID
+                        };
+                        dishesTypeInfo.DishesList.Add(dishInfo);
+                    }
+                    SaveIngDish(dishTypeName, dishName);
+                }
+            }
+            FinishSaveDish();
             return dishTypeList;
         }
 
@@ -93,6 +93,16 @@ namespace AbstractSite
                 dishesTyep.DishesList.AddRange(dishesList);
             }
             return dishesTyepList;
+        }
+
+        protected virtual List<Maticsoft.Model.DishesTyep> GetSiteDishTypeList()
+        {
+            return new List<Maticsoft.Model.DishesTyep>();
+        }
+
+        public virtual bool Conversion()
+        {
+            return false;
         }
 
     }

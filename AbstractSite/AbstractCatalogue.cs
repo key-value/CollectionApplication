@@ -157,7 +157,7 @@ namespace AbstractSite
             return catalogueList;
         }
 
-        private IEnumerable<HtmlNode> GetCatalogueList()
+        protected virtual IEnumerable<HtmlNode> GetCatalogueList()
         {
             var baseCollectionSite = new BaseCollectionSite(PageUrl);
             var catalogueHtmlNode = baseCollectionSite.BaseHtmlNode;

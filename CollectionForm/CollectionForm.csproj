@@ -261,6 +261,10 @@
       <Project>{5976e58a-7cae-4b9c-9892-bc3957601f9e}</Project>
       <Name>Echiele</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Epinle\Epinle.csproj">
+      <Project>{114cc6f2-4edf-41f7-bfac-fb27d367af3f}</Project>
+      <Name>Epinle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FanQieKuaiDian\FanQieKuaiDianSite.csproj">
       <Project>{89d670d4-ef5f-43db-add0-e9bf5f040ff9}</Project>
       <Name>FanQieKuaiDianSite</Name>
@@ -288,6 +292,10 @@
     <ProjectReference Include="..\SiteFactory\ISite.csproj">
       <Project>{1d8a0ecc-80dc-4247-8e44-3749dffb8230}</Project>
       <Name>ISite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaoBao\TaoBao.csproj">
+      <Project>{068c42ce-43d3-4da0-b3d5-339648907100}</Project>
+      <Name>TaoBao</Name>
     </ProjectReference>
     <ProjectReference Include="..\XiaoMiShuSite\XiaoMiShuSite.csproj">
       <Project>{3744c321-ce86-4449-9fa3-278fe2de6595}</Project>

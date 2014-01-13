@@ -234,6 +234,8 @@ namespace Maticsoft.Model
         public bool CarParks { get; set; }
         public bool NoSmoke { get; set; }
 
+        public bool DishTypeSite { get; set; }
+
         #endregion
 
     }

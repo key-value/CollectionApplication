@@ -49,6 +49,10 @@ namespace AbstractSite
         {
             OnLabelEventHandler(new LabelEventArgs() { LabelText = string.Format("完成菜系下载"), UpdateType = 1 });
         }
+        public void BeginSaveDish()
+        {
+            OnLabelEventHandler(new LabelEventArgs() { LabelText = string.Format("菜系开始下载"), UpdateType = 1 });
+        }
 
         public void FinishSavePic()
         {

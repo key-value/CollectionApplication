@@ -62,9 +62,9 @@ namespace CollectionLogic
             {
                 return _dishTypeSite.UpdateDishType();
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
     }

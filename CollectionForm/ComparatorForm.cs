@@ -83,7 +83,7 @@ namespace CollectionForm
         private string InitializeRegex(string path)
         {
             //var regex = @"(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
-            var regex = @"(http|ftp|https)?[:\/\/]?[\w\-_]+(\.[\w\-_]+)(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
+            var regex = @"(http|ftp|https)?[:\/\/]?[\w\-_]+(\.[\w\-_]+)+(\.[\w\-_]+)([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?";
             if (!Regex.IsMatch(path, regex))
             {
                 return string.Empty;
@@ -131,6 +131,11 @@ namespace CollectionForm
                     regex =
                        string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
+                case "taobao":
+                    _selectedItem = "TaoBao";
+                    regex =
+                       string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+(\.[\w\-_]+)+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                    break;
                 default:
                     regex = string.Empty;
                     break;
@@ -158,11 +163,12 @@ namespace CollectionForm
                     MessageBox.Show(@"请输入正确的网址");
                     return;
                 }
-                Match matchCollection = Regex.Match(path, regex);
-                pageIndex =
-                    int.Parse(string.IsNullOrEmpty(matchCollection.Groups[3].Value.Trim())
-                        ? "1"
-                        : matchCollection.Groups[3].Value);
+                //Match matchCollection = Regex.Match(path, regex);
+                //pageIndex =
+                //    int.Parse(string.IsNullOrEmpty(matchCollection.Groups[3].Value.Trim())
+                //        ? "1"
+                //        : matchCollection.Groups[3].Value);
+                pageIndex = 0;
                 var sitePath = new SitePath(path, pageIndex) { SelectedSite = _selectedItem };
                 Action<SitePath> goPathDelegate = GoPath;
                 goPathDelegate.BeginInvoke(sitePath, null, null);
