@@ -29,5 +29,19 @@ namespace Maticsoft.BLL
             return JsonHelper.JsonToObj<T>(jsonStr);
         }
 
+        public T GetEpinLeResualt<T>()
+        {
+            var jsonStr = PostHttpResponse.PostData(PageUrl, dictionary, headDictionary);
+            var jsonNum = jsonStr.IndexOf(']');
+            if (jsonNum > 0)
+            {
+                jsonStr = jsonStr.Substring(0, jsonNum + 1).Replace(@"[[", @"[");
+            }
+            if (string.IsNullOrEmpty(jsonStr))
+            {
+                return default(T);
+            }
+            return JsonHelper.JsonToObj<T>(jsonStr);
+        }
     }
 }

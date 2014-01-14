@@ -8,7 +8,7 @@ using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
 
-namespace Epinle
+namespace GaFan
 {
     public class DishTypeSecretary : AbstractDishType, IDishType
     {

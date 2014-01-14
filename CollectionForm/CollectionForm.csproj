@@ -273,6 +273,10 @@
       <Project>{0a279dbe-c583-4e6d-aa63-7204622fe9e3}</Project>
       <Name>FanTong</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GaFan\GaFan.csproj">
+      <Project>{fd082dd4-fdfe-405f-8ea8-29497d903c08}</Project>
+      <Name>GaFan</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ISite\SiteFactory.csproj">
       <Project>{fb71ef67-2765-4cea-b360-b2b0ce8d42d7}</Project>
       <Name>SiteFactory</Name>

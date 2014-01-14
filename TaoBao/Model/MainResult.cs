@@ -11,7 +11,7 @@ namespace TaoBao.Model
         public MainResult()
         {
             category = new List<cat>();
-            item = new List<DishItem>();
+            List = new List<DishItem>();
         }
         public List<cat> category;
         public int code;
@@ -19,6 +19,6 @@ namespace TaoBao.Model
         public string freshen;
         public int view;
 
-        public List<DishItem> item;
+        public List<DishItem> List;
     }
 }

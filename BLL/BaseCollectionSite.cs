@@ -66,5 +66,12 @@ namespace Maticsoft.BLL
             }
         }
 
+        public HtmlNode BaseHtmlNodeMethod(string method = "post")
+        {
+            var htmlWeb = new HtmlWeb();
+            htmlWeb.UserAgent = @"Mozilla/5.0 (Windows NT 6.3; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0";
+            var htmlDoc = htmlWeb.Load(PageUrl, method);
+            return htmlDoc.DocumentNode;
+        }
     }
 }

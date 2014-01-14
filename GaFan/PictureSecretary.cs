@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using AbstractSite;
-using Epinle.Model;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
@@ -12,7 +11,7 @@ using BusPhotoAlbum = Maticsoft.Model.BusPhotoAlbum;
 using StoreInfo = Maticsoft.Model.StoreInfo;
 using StorePicture = Maticsoft.Model.StorePicture;
 
-namespace Epinle
+namespace GaFan
 {
     public class PictureSecretary : AbstractPhotoAlbum, IPicture
     {
@@ -89,41 +88,19 @@ namespace Epinle
 
             try
             {
-                var location = collectionPhone.GetEpinLeResualt<List<PictureModel>>();
-                if (location == null || location.Count <= 0)
-                {
-                    pageNum = 500;
-                    return new List<StorePicture>();
-                }
-                return SavePicture(storeInfo, location, busphotoAlbumTable);
+                //var location = collectionPhone.GetEpinLeResualt<List<PictureModel>>();
+                //if (location == null || location.Count <= 0)
+                //{
+                //    pageNum = 500;
+                return new List<StorePicture>();
+                //}
+                //return SavePicture(storeInfo, location, busphotoAlbumTable);
             }
             catch
             {
                 pageNum = 500;
                 return new List<StorePicture>();
             }
-        }
-        protected List<StorePicture> SavePicture(StoreInfo storeInfo, List<PictureModel> pictureNodeList, BusPhotoAlbum busphotoAlbumTable)
-        {
-            var storePicturesList = new List<StorePicture>();
-            foreach (var pictureNode in pictureNodeList)
-            {
-                var picturePathName = string.Empty;
-                if (!string.IsNullOrEmpty(pictureNode.image_url))
-                {
-                    picturePathName = StorePictureUrl + pictureNode.image_url;
-                }
-                else if (!string.IsNullOrEmpty(pictureNode.default_image))
-                {
-                    picturePathName = StorePictureUrl + pictureNode.default_image;
-                }
-                if (FilterPicturePathName(picturePathName))
-                {
-                    SaveIngPic(busphotoAlbumTable.AlbumName, picturePathName);
-                    storePicturesList.Add(BuildStorePicture(storeInfo, picturePathName));
-                }
-            }
-            return storePicturesList;
         }
 
         private string GetStoreSid(string storePictureHref)

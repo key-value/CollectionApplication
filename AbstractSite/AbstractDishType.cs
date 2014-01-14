@@ -26,7 +26,7 @@ namespace AbstractSite
 
         protected abstract string DishesPath();
 
-        public List<Maticsoft.Model.DishesTyep> UpdateDishType()
+        public virtual List<Maticsoft.Model.DishesTyep> UpdateDishType()
         {
             var dishTypeList = new List<Maticsoft.Model.DishesTyep>();
             BeginSaveDish();

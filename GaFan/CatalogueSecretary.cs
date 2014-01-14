@@ -11,19 +11,19 @@ using Maticsoft.BLL;
 using Catalogue = Maticsoft.Model.Catalogue;
 using StoreInfo = Maticsoft.Model.StoreInfo;
 
-namespace Epinle
+namespace GaFan
 {
     public class CatalogueSecretary : AbstractCatalogue, ICatalogue
     {
 
         public CatalogueSecretary()
         {
-            PageUrl = @"http://www.Epinle.com";
+            PageUrl = @"http://www.gafan.cn";
             CataloguePath =
-                @".//div[@class='search_store_main']/div[@class='liebiaocont']/div[@class='liebiaocontl']/div[@class='liebiaolb']/div[@class='so_sp']/ul/li";
-            ImgNodePath = @".//div[@class='so_spshang']/div/a/img";
+                @".//div[@class='main']/div[@class='list_left']/div[@class='list_picList']/div[@id='tab_div_0']/div[@class='list_box']/ul/li";
+            ImgNodePath = @".//div[@class='img']/a/img";
             PageNodePath =
-               @".//div[@class='search_store_main']/div[@class='liebiaocont']/div[@class='liebiaocontl']/div[@class='liebiaolb']/div[@class='so_sp']/div[@class='dp_tab01']/div[@id='pagelist']/ul/li/a";
+               @".//div[@class='main']/div[@class='list_left']/div[@class='list_picList']/div[@id='tab_div_0']/div[@class='list_box']/div[@class='flickr']/a";
             NextPage = PageUrl;
             BeforePage = PageUrl;
         }
@@ -120,14 +120,14 @@ namespace Epinle
 
         public void GetFid(HtmlNode htmlNode)
         {
-            var fidNode = htmlNode.SelectSingleNode(@".//div[@class='so_spshang']/div[@class='so_sp_name']/table/tr/td/div[@class='yh_icon_n ']/div/a");
+            var fidNode = htmlNode.SelectSingleNode(@".//div[@class='f_left']/div[@class='tit']/a");
             if (fidNode == null)
             {
                 return;
             }
             var hrefString = fidNode.Attributes["href"].Value;
-            Href = string.Format(@"http://www.epinle.com{0}", hrefString);
-            const string regex = @"\/store\/(\d*)\.html";
+            Href = hrefString;
+            const string regex = @"\/restaurant\/(\d*)\.html";//http://www.gafan.cn:80/restaurant/25943.html
             if (!Regex.IsMatch(hrefString, regex))
             {
                 return;
@@ -137,21 +137,10 @@ namespace Epinle
             Fid = matchCollection.Groups[1].Value;
         }
 
-        //public string GetHref(HtmlNode htmlNode)
-        //{
-        //    var xpath = @".//li/div[@class='so_spshang']/div[@class='so_sp_icon']/a";
-        //    var hrefNode = htmlNode.SelectSingleNode(xpath);
-        //    if (hrefNode != null)
-        //    {
-        //        return hrefNode.Attributes["href"].Value;
-        //    }
-        //    return string.Empty;
-        //}
-
 
         protected override void GetPage(HtmlNode pageNode)
         {
-            var spanNode = pageNode.SelectSingleNode(@"../../li[@class='current']");
+            var spanNode = pageNode.SelectSingleNode(@"../span[@class='current']");
             if (spanNode != null)
             {
                 var intpageNum = 1;
@@ -174,24 +163,35 @@ namespace Epinle
                 return new Maticsoft.Model.NullStoreInfo();
             }
             var storeInfo = new Maticsoft.Model.StoreInfo();
-            storeInfo.StoreAddress = GetAddress(restaurant);
+            //storeInfo.StoreAddress = GetAddress(restaurant);
             storeInfo.StoreName = storeName;
-            //storeInfo.MaxPrice = MaxPrice(restaurant);
-            storeInfo.StoreTag = GetStoreTag(restaurant).Replace("&nbsp;&nbsp;", " ");
-            //storeInfo.StorePhone = GetStorePhone(restaurant);
-            //storeInfo.Facilities = GetFacilities(restaurant);
+            //storeInfo.StoreTag = GetStoreTag(restaurant);
+            storeInfo.MaxPrice = GetMaxPrice(restaurant);
             return storeInfo;
+        }
+
+        private int GetMaxPrice(HtmlNode restaurant)
+        {
+            var xpath = @".//div[@class='f_left']/div[@style='clear:both']/div[@class='dc']/b";
+            var priceText = CollectionNodeText.GetNodeInnerText(restaurant, xpath);
+            if (string.IsNullOrEmpty(priceText))
+            {
+                return 0;
+            }
+            int priceNum = 0;
+            int.TryParse(priceText.Replace(@"人均：", string.Empty).Replace(@"元", string.Empty), out priceNum);
+            return priceNum;
         }
 
         private string GetStoreTag(HtmlNode restaurant)
         {
-            var xpath = @".//div[@class='so_spshang']/div[@class='so_sp_name']/table/tr/td";
+            var xpath = @".//div[@class='f_left']/div[@style='clear:both']/div[@class='txt']/span";
             return CollectionNodeText.GetNodeListContainsInnerText(restaurant, xpath, @"菜系：");
         }
 
         public string GetAddress(HtmlNode htmlNode)
         {
-            var xpath = @".//div[@class='so_spshang']/div[@class='so_sp_name']/table/tr/td";
+            var xpath = @".//div[@class='f_left']/div[@style='clear:both']/div[@class='txt']/span";
             return CollectionNodeText.GetNodeListContainsInnerText(htmlNode, xpath, @"地址：");
         }
 

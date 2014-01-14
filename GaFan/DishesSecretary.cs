@@ -3,30 +3,27 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using AbstractSite;
 using ISite;
 using Maticsoft.Model;
 using StorePicture = Maticsoft.BLL.StorePicture;
 
-namespace DianPing
+namespace GaFan
 {
-    public class DishesSecretary : AbstractDishes, IDishes
+    public class DishesSecretary : IDishes
     {
         private StorePicture storePictureBll = new StorePicture();
         Maticsoft.BLL.Dishes dishesBll = new Maticsoft.BLL.Dishes();
         public DishesSecretary()
         {
             DishList = new List<IDishSiteModel>();
-            PageUrl = @"http://wwww.Dingping.com";
+            PageUrl = @"www.cyooy.com";
         }
+        public string PageUrl { get; set; }
+
+        public string PicType { get; set; }
 
         public void GetDish(IDishSiteModel dishSiteModel, string storeID)
         {
-            if (string.IsNullOrEmpty(dishSiteModel.DishName))
-            {
-                return;
-            }
             var dishes = new Maticsoft.Model.Dishes
             {
                 DishesID = Guid.NewGuid().ToString(),
@@ -42,7 +39,7 @@ namespace DianPing
                 storePicture.PID = Guid.NewGuid().ToString();
                 storePicture.PictureName = string.Format("{0}.jpg", storePicture.PID);
                 storePicture.PicType = "Food";
-                storePicture.PicturePath = dishSiteModel.PictureName;
+                storePicture.PicturePath = PageUrl + dishSiteModel.PictureName;
                 storePicture.StoreId = storeID;
                 storePictureBll.Add(storePicture);
                 dishes.PictureName = storePicture.PictureName;
@@ -50,34 +47,18 @@ namespace DianPing
             dishesBll.Add(dishes);
         }
 
-        public override List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
+        public List<IDishSiteModel> DishList { get; set; }
+        bool IDishes.Conversion()
+        {
+            return false;
+        }
+        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
         {
             return dishesTyepList;
         }
 
-        protected override string GetDishesName(HtmlAgilityPack.HtmlNode dishesNode)
-        {
-            return string.Empty;
-        }
+        public event IDelegate.CatalogueEventHandler CataloEventHandler;
 
-        protected override decimal GetDishesMoney(HtmlAgilityPack.HtmlNode dishesNode)
-        {
-            return 0;
-        }
-
-        protected override string GetDishesBrief(HtmlAgilityPack.HtmlNode dishesNode)
-        {
-            return string.Empty;
-        }
-
-        protected override string GetPictureHref(HtmlAgilityPack.HtmlNode dishesNode)
-        {
-            return string.Empty;
-        }
-
-        public override string DishPath()
-        {
-            return string.Empty;
-        }
+        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

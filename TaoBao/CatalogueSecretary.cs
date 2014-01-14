@@ -21,10 +21,10 @@ namespace TaoBao
             CataloguePath = @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='items']/div[@class='list']/ul/li[@class='clearfix place-item']";
             PageNodePath =
                @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='k2-pagination clearfix']/div[@class='option']/a";
-            NextPage = PageUrl;
-            BeforePage = PageUrl;
+            //NextPage = PageUrl;
+            //BeforePage = PageUrl;
             ImgNodePath =
-                @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='items']/div[@class='list']/ul/li[@class='clearfix place-item']/div[@class='item-inner clearfix']/div[@class='photo']/a/span/img";
+                @".//div[@class='item-inner clearfix']/div[@class='photo']/a/span/img";
         }
 
         public int PageCount { get; set; }
@@ -94,7 +94,7 @@ namespace TaoBao
 
         protected override void GetPage(HtmlNode pageNode)
         {
-            var spanNode = pageNode.SelectSingleNode(@"../span[@class='current']");
+            var spanNode = pageNode.SelectSingleNode(@"../strong[@class='current']");
             if (spanNode != null)
             {
                 var intpageNum = 1;
@@ -116,6 +116,11 @@ namespace TaoBao
             GetPageNum(catalogueHtmlNode);
             var restaurantList = catalogueHtmlNode.SelectNodes(CataloguePath);
             return restaurantList;
+        }
+
+        protected override string GetshopPicturePath(HtmlNode htmlNode)
+        {
+            return htmlNode.GetPicturePath();
         }
     }
 }

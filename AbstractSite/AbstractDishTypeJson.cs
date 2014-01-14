@@ -71,12 +71,17 @@ namespace AbstractSite
                     {
                         dishInfo = new DishesEntity
                         {
-                            BusinessID = StoreInfo.storeId,
+                            BusinessID = StoreInfo.OldStoreId,
                             DishesID = Guid.NewGuid().ToString(),
                             DishesTypeID = dishesTypeInfo.DishesTypeID
+
                         };
                         dishesTypeInfo.DishesList.Add(dishInfo);
                     }
+                    dishInfo.DishesUnit = dishNode.DishesUnit;
+                    dishInfo.DishesMoney = dishNode.DishesMoney;
+                    dishInfo.PictureHref = dishNode.PictureHref;
+                    dishInfo.DishesName = dishName;
                     SaveIngDish(dishTypeName, dishName);
                 }
             }

@@ -15,8 +15,6 @@
     <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
     <Node Id="Echiele" Label="Echiele" Category="项目" />
     <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
-    <Node Id="XmFish" Label="XmFish" Category="项目" />
-    <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
     <Node Id="CollectionLogic" Label="CollectionLogic" Category="项目" />
     <Node Id="HtmlAgilityPack 1.4.6" Label="HtmlAgilityPack 1.4.6" Category="包" />
     <Node Id="ScFood" Label="ScFood" Category="项目" />
@@ -50,7 +48,6 @@
     <Link Source="FanTong" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
     <Link Source="AbstractSite" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
     <Link Source="Echiele" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
-    <Link Source="XmFish" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
     <Link Source="CollectionLogic" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
     <Link Source="ScFood" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />
     <Link Source="Epinle" Target="HtmlAgilityPack 1.4.6" Category="安装的程序包" />

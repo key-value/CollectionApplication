@@ -1,4 +1,6 @@
-﻿using HtmlAgilityPack;
+﻿using AbstractSite;
+using ApplicationUtility;
+using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
@@ -9,168 +11,176 @@ using StoreInfo = Maticsoft.Model.StoreInfo;
 
 namespace Epinle
 {
-    public class StoreSecretary : IStore
+    public class StoreSecretary : AbstractStore, IStore
     {
-        public string PageUrl { get; set; }
-        public StoreInfo GetStoreInfo(Catalogue catalogue)
+        public StoreSecretary()
         {
-            var storePath = @"//*[@id='container']";
-            var baseCollectionSite = new BaseCollectionSite(PageUrl);
-            StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNode;
-            StoreInfoHtmlNode = StoreInfoHtmlNode.SelectSingleNode(storePath);
-            if (StoreInfoHtmlNode == null)
-            {
-                return new NullStoreInfo();
-            }
-            int minPrice;
-            int maxPrice;
-            PeoplePrice(out minPrice, out maxPrice);
-            var storeInfo = new StoreInfo();
-            storeInfo.storeId = catalogue.StoreId;
-            storeInfo.Fid = catalogue.FId;
-            storeInfo.Facilities = GetFacilities();
-            storeInfo.payCar = GetPayCar();
-            storeInfo.BasicIntroduction = GetBasicIntroduction();
-            storeInfo.subway = Subway();
-            storeInfo.bus = GetBus();
-            storeInfo.box = Getbox();
-            storeInfo.MaxPrice = maxPrice;
-            storeInfo.MinPrice = minPrice;
-            storeInfo.StorePhone = GetPhoneNum();
-            storeInfo.StoreHours = GetWorkTime();
-            storeInfo.StoreTag = StoreTagText();
-            storeInfo.StoreName = catalogue.title;
-            storeInfo.picName = catalogue.picName.Trim();
-            storeInfo.carPark = GetCarPark();
-            return new NullStoreInfo();
+            StorePath = @".//div[@class='wrapper']/div[@class='part2']/div[@class='r11 box pad1']";
         }
-        public HtmlNode StoreInfoHtmlNode
-        {
-            get;
-            set;
-        }
+        #region
 
-        public string GetFacilities()
-        {
-            return string.Empty;
-        }
+        //public string PageUrl { get; set; }
+        //public StoreInfo GetStoreInfo(Catalogue catalogue)
+        //{
+        //    var storePath = @"//*[@id='container']";
+        //    var baseCollectionSite = new BaseCollectionSite(PageUrl);
+        //    StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNode;
+        //    StoreInfoHtmlNode = StoreInfoHtmlNode.SelectSingleNode(storePath);
+        //    if (StoreInfoHtmlNode == null)
+        //    {
+        //        return new NullStoreInfo();
+        //    }
+        //    int minPrice;
+        //    int maxPrice;
+        //    PeoplePrice(out minPrice, out maxPrice);
+        //    var storeInfo = new StoreInfo();
+        //    storeInfo.storeId = catalogue.StoreId;
+        //    storeInfo.Fid = catalogue.FId;
+        //    storeInfo.Facilities = GetFacilities();
+        //    storeInfo.payCar = GetPayCar();
+        //    storeInfo.BasicIntroduction = GetBasicIntroduction();
+        //    storeInfo.subway = Subway();
+        //    storeInfo.bus = GetBus();
+        //    storeInfo.box = Getbox();
+        //    storeInfo.MaxPrice = maxPrice;
+        //    storeInfo.MinPrice = minPrice;
+        //    storeInfo.StorePhone = GetPhoneNum();
+        //    storeInfo.StoreHours = GetWorkTime();
+        //    storeInfo.StoreTag = StoreTagText();
+        //    storeInfo.StoreName = catalogue.title;
+        //    storeInfo.picName = catalogue.picName.Trim();
+        //    storeInfo.carPark = GetCarPark();
+        //    return new NullStoreInfo();
+        //}
+        //public HtmlNode StoreInfoHtmlNode
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public string Subway()
-        {
-            return string.Empty;
-        }
+        //public string GetFacilities()
+        //{
+        //    return string.Empty;
+        //}
 
-        public string GetCarPark()
-        {
-            return string.Empty;
-        }
+        //public string Subway()
+        //{
+        //    return string.Empty;
+        //}
 
-        public string GetBus()
-        {
-            return string.Empty;
-        }
+        //public string GetCarPark()
+        //{
+        //    return string.Empty;
+        //}
 
-        public string StoreTagText()
-        {
-            return string.Empty;
-        }
+        //public string GetBus()
+        //{
+        //    return string.Empty;
+        //}
 
-        public void PeoplePrice(out int minPrice, out int maxPrice)
+        //public string StoreTagText()
+        //{
+        //    return string.Empty;
+        //}
+        #endregion
+
+
+        public override void PeoplePrice(out int minPrice, out int maxPrice)
         {
             minPrice = 0;
             maxPrice = 0;
-            const string pricePath = @"//*[@id='goodsOrd']";
-            var peoplePriceNode = StoreInfoHtmlNode.SelectSingleNode(pricePath);
-            var priceText = peoplePriceNode.InnerText;
-            string regex = @"(\d*)[\u4E00-\u9FA5]*";
-            bool isMax = true;
-            if (priceText.Contains('-'))
-            {
-                isMax = false;
-                regex = @"(\d*)-(\d*)";
-            }
+            const string pricePath = @".//div[@class='c4 dotline']/div[@class='c2']/ul/li";
+            //var peoplePriceNode = StoreInfoHtmlNode.SelectSingleNode(pricePath);
+            var priceText = CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, pricePath, @"人均消费：");
+            //var priceText = peoplePriceNode.InnerText;
+            string regex = @"(\d*)-(\d*)";
             if (!Regex.IsMatch(priceText, regex))
             {
                 return;
             }
             var matchCollection = Regex.Match(priceText, regex);
-            if (isMax)
-            {
-                maxPrice = int.Parse(string.IsNullOrEmpty(matchCollection.Groups[1].Value.Trim())
-                       ? string.Empty
-                       : matchCollection.Groups[1].Value);
-            }
-            else
-            {
-                minPrice = int.Parse(string.IsNullOrEmpty(matchCollection.Groups[1].Value.Trim())
-                       ? string.Empty
-                       : matchCollection.Groups[2].Value);
-                maxPrice = int.Parse(string.IsNullOrEmpty(matchCollection.Groups[1].Value.Trim())
-                       ? string.Empty
-                       : matchCollection.Groups[1].Value);
-            }
-
+            maxPrice = int.Parse(string.IsNullOrEmpty(matchCollection.Groups[1].Value.Trim())
+                   ? string.Empty
+                   : matchCollection.Groups[2].Value);
+            minPrice = int.Parse(string.IsNullOrEmpty(matchCollection.Groups[1].Value.Trim())
+                  ? string.Empty
+                  : matchCollection.Groups[1].Value);
         }
 
-        public string GetAddress()
+        public override string GetPhoneNum()
         {
-            return string.Empty;
+            var xpath = @".//div[@class='c4 dotline']/div[@class='c2']/ul/li";
+            //var phoneNumNodeList = StoreInfoHtmlNode.SelectNodes(xpath) ?? new HtmlNodeCollection(null);
+            //if (phoneNumNodeList.Count <= 0)
+            //{
+            //    return string.Empty;
+            //}
+            //foreach (var phoneNumNode in phoneNumNodeList)
+            //{
+            //    if (phoneNumNode.InnerText.Contains(@"订座电话"))
+            //    {
+            //        return phoneNumNode.InnerText.Replace("订座电话：", string.Empty);
+            //    }
+            //}
+            //return string.Empty;
+            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"电话预定：").Replace(@"(电话连接到e品乐订餐平台)", string.Empty);
         }
 
-        public string GetPhoneNum()
+        protected override StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
         {
-            var xpath = @".//div[@class='content']/div[@class='restaurantInfo']/div[@class='left']/ul/li";
-            var phoneNumNodeList = StoreInfoHtmlNode.SelectNodes(xpath) ?? new HtmlNodeCollection(null);
-            if (phoneNumNodeList.Count <= 0)
-            {
-                return string.Empty;
-            }
-            foreach (var phoneNumNode in phoneNumNodeList)
-            {
-                if (phoneNumNode.InnerText.Contains(@"订座电话"))
-                {
-                    return phoneNumNode.InnerText.Replace("订座电话：", string.Empty);
-                }
-            }
-            return string.Empty;
+            storeInfo.StoreName = catalogue.title;
+            storeInfo.StorePictureHref = catalogue.StorePictureHref;
+            storeInfo.StoreAddress = catalogue.StoreInfo.StoreAddress;
+            storeInfo.StoreTag = catalogue.StoreInfo.StoreTag;
+            storeInfo.StoreTag += CarPark().ClearSiteCode();
+            storeInfo.box = storeInfo.StoreTag.Contains(@"有包间");
+            storeInfo.ChildrenChair = storeInfo.StoreTag.Contains(@"儿童座椅");
+            storeInfo.CarParks = storeInfo.StoreTag.Contains(@"有停车位");
+            return storeInfo;
         }
 
-        public string GetWorkTime()
+        private string CarPark()
         {
-            var xpath = @".//div[@class='content']/div[@class='restaurantInfo']/div[@class='left']/ul/li";
-            var phoneNumNodeList = StoreInfoHtmlNode.SelectNodes(xpath) ?? new HtmlNodeCollection(null);
-            if (phoneNumNodeList.Count <= 0)
-            {
-                return string.Empty;
-            }
-            foreach (var phoneNumNode in phoneNumNodeList)
-            {
-                if (phoneNumNode.InnerText.Contains(@"营业时间"))
-                {
-                    return phoneNumNode.InnerText.Replace("营业时间：", string.Empty);
-                }
-            }
-            return string.Empty;
+            var xpath = @".//div[@class='dotline c4']/div/div[@class='tc_info']";
+            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath);
         }
 
-        public bool GetPayCar()
+        public override string GetWorkTime()
         {
-            return false;
+            var xpath = @".//div[@class='c4 dotline']/div[@class='c2']/ul/li";
+            return CollectionNodeText.GetNodeListContainsInnerText(StoreInfoHtmlNode, xpath, @"营业时间：");
+            //var phoneNumNodeList = StoreInfoHtmlNode.SelectNodes(xpath) ?? new HtmlNodeCollection(null);
+            //if (phoneNumNodeList.Count <= 0)
+            //{
+            //    return string.Empty;
+            //}
+            //foreach (var phoneNumNode in phoneNumNodeList)
+            //{
+            //    if (phoneNumNode.InnerText.Contains(@"营业时间"))
+            //    {
+            //        return phoneNumNode.InnerText.Replace("营业时间：", string.Empty);
+            //    }
+            //}
+            //return string.Empty;
         }
 
-        public string GetBasicIntroduction()
+        public override string GetBus()
         {
-            return string.Empty;
+            var xpath = @".//div[@class='dotline c4']/div/div[@class='gj_info']";
+            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath);
         }
 
-        public bool Getbox()
+        public override string GetFacilities()
         {
-            return false;
+            var xpath = @".//div[@class='c4 dotline']/div[@class='c3']";
+            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Replace(@"服务与设施", string.Empty).Replace(@"	", string.Empty);
         }
 
-        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+        public override string GetBasicIntroduction()
+        {
+            var xpath = @".//div[@class='c4 jianjie']/div[@id='description']/p";
+            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath);
+        }
 
-
-        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

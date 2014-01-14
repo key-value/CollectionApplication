@@ -21,6 +21,7 @@ namespace TaoBao
         {
             storeInfo.StoreName = catalogue.title;
             storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
+            storeInfo.StorePictureHref = catalogue.StorePictureHref;
             return storeInfo;
         }
 
@@ -35,6 +36,12 @@ namespace TaoBao
         {
             var baseCollectionSite = new BaseCollectionSite(PageUrl);
             StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNodeByGBK.SelectSingleNode(StorePath);
+        }
+
+        public override string GetAddress()
+        {
+            const string xpath = @"./div[@class='shop-addr']";
+            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Replace(@"地址：", string.Empty).Trim();
         }
     }
 }

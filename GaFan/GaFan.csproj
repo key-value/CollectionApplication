@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{068C42CE-43D3-4DA0-B3D5-339648907100}</ProjectGuid>
+    <ProjectGuid>{FD082DD4-FDFE-405F-8EA8-29497D903C08}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TaoBao</RootNamespace>
-    <AssemblyName>TaoBao</AssemblyName>
+    <RootNamespace>GaFan</RootNamespace>
+    <AssemblyName>GaFan</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -47,13 +45,12 @@
     <Compile Include="CatalogueSecretary.cs" />
     <Compile Include="DishesSecretary.cs" />
     <Compile Include="DishTypeSecretary.cs" />
-    <Compile Include="Model\cat.cs" />
-    <Compile Include="Model\DishesTaoBao.cs" />
-    <Compile Include="Model\DishItem.cs" />
-    <Compile Include="Model\MainResult.cs" />
     <Compile Include="PictureSecretary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreSecretary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AbstractSite\AbstractSite.csproj">
@@ -76,9 +73,6 @@
       <Project>{1d8a0ecc-80dc-4247-8e44-3749dffb8230}</Project>
       <Name>ISite</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

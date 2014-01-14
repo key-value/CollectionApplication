@@ -33,7 +33,9 @@ namespace AbstractSite
             for (int i = 0; i < typeList.Count; i++)
             {
                 var busphotoAlbumTable = BuildBusPhotoAlbumTable(storeInfo, i);
+
                 SaveIngPic(busphotoAlbumTable.AlbumName, string.Empty);
+
                 busphotoAlbumTable.StorePicturesList.AddRange(CollectionPicture(storeInfo, busphotoAlbumTable, typeList[i]));
                 busPhotoAlbumTableList.Add(busphotoAlbumTable);
             }

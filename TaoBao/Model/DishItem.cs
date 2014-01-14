@@ -9,6 +9,6 @@ namespace TaoBao.Model
     public class DishItem
     {
         public cat cat { get; set; }
-        public DishesTaoBao item { get; set; }
+        public List<DishesTaoBao> item { get; set; }
     }
 }

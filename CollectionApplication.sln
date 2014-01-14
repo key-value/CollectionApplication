@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationUtility", "Appli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaoBao", "TaoBao\TaoBao.csproj", "{068C42CE-43D3-4DA0-B3D5-339648907100}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GaFan", "GaFan\GaFan.csproj", "{FD082DD4-FDFE-405F-8EA8-29497D903C08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -333,6 +335,18 @@ Global
 		{068C42CE-43D3-4DA0-B3D5-339648907100}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{068C42CE-43D3-4DA0-B3D5-339648907100}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{068C42CE-43D3-4DA0-B3D5-339648907100}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Release|.NET.ActiveCfg = Release|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FD082DD4-FDFE-405F-8EA8-29497D903C08}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

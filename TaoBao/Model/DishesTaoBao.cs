@@ -30,10 +30,19 @@ namespace TaoBao.Model
 
         public int cid { get; set; }
         public string cname { get; set; }
-        public int itemId { get; set; }
+        public string itemId { get; set; }
         public string itemName { get; set; }
-        public int itemPrice { get; set; }
-        public int onPrice { get; set; }
+        public decimal itemPrice { get; set; }
+        public decimal oriPrice { get; set; }
+        public int soldCount { get; set; }
+        public int cateIds { get; set; }
+        public int isRecommend { get; set; }
+        public int isSetFood { get; set; }
+        public int isDiscount { get; set; }
+        public int isNew { get; set; }
+        public int isTakeout { get; set; }
+        public string useTime { get; set; }
+        public int quantity { get; set; }
 
     }
 }

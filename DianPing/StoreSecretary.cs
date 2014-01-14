@@ -23,7 +23,7 @@ namespace DianPing
             storeInfo.StoreName = catalogue.title;
             storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
             storeInfo.StoreTag += catalogue.StoreInfo.StoreTag;
-            storeInfo.picName = GetImageHref(StoreInfoHtmlNode, storeInfo.storeId);
+            storeInfo.StorePictureHref = GetImageHref(StoreInfoHtmlNode, storeInfo.storeId);
             storeInfo.WIFI = storeInfo.Facilities.Contains(@"无线上网");
             storeInfo.payCar = storeInfo.Facilities.Contains(@"可以刷卡");
             storeInfo.DishTypeSite = GetDishTypeSite();

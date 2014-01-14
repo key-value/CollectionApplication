@@ -9,10 +9,12 @@ namespace TaoBao.Model
     public class cat
     {
         public cat()
-        { DishesTaoBaos = new List<DishesTaoBao>(); }
+        {
+            //DishesTaoBaos = new List<DishesTaoBao>();
+        }
         public int id { get; set; }
         public string Name { get; set; }
 
-        public List<DishesTaoBao> DishesTaoBaos;
+        //public List<DishesTaoBao> DishesTaoBaos;
     }
 }

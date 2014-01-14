@@ -26,7 +26,7 @@ namespace TaoBao
 
         protected override List<string> GetTypeList()
         {
-            return new List<string>() { "环境", "菜" };
+            return new List<string>() { };
         }
 
 

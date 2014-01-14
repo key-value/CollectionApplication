@@ -13,7 +13,7 @@ using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace TaoBao
 {
-    public class DishesSecretary : AbstractDishTypeJson, IDishes
+    public class DishesSecretary : AbstractDishes, IDishes
     {
         public DishesSecretary()
         {
@@ -25,37 +25,46 @@ namespace TaoBao
         {
         }
 
+        //protected override List<Maticsoft.Model.DishesTyep> GetSiteDishTypeList()
+        //{
+        //    var baseCollectionSite = new BaseCollectionSite(PageUrl);
+        //    var dishTypeStr = baseCollectionSite.BaseHtmlNode.InnerText.Replace("jsonp78(", string.Empty).Trim(')');
+        //    var mainResult = JsonHelper.JsonToObj<MainResult>(dishTypeStr) ?? new MainResult();
+        //    var dishesTypeList = mainResult.category;
+        //    foreach (var dishItem in mainResult.item)
+        //    {
+        //        var cat = dishesTypeList.Find(x => x.id == dishItem.cat.id);
+        //        if (cat != null)
+        //        {
+        //            cat.DishesTaoBaos.Add(dishItem.item);
+        //        }
+        //    }
+        //    return new List<Maticsoft.Model.DishesTyep>();
+        //}
 
-        public string PicType { get; set; }
-
-
-        public List<IDishSiteModel> DishList { get; set; }
-
-        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
+        protected override string GetDishesName(HtmlAgilityPack.HtmlNode dishesNode)
         {
             throw new NotImplementedException();
         }
 
-        protected override List<Maticsoft.Model.DishesTyep> GetSiteDishTypeList()
+        protected override decimal GetDishesMoney(HtmlAgilityPack.HtmlNode dishesNode)
         {
-            var baseCollectionSite = new BaseCollectionSite(PageUrl);
-            var dishTypeStr = baseCollectionSite.BaseHtmlNode.InnerText.Replace("jsonp78(", string.Empty).Trim(')');
-            var mainResult = JsonHelper.JsonToObj<MainResult>(dishTypeStr) ?? new MainResult();
-            var dishesTypeList = mainResult.category;
-            foreach (var dishItem in mainResult.item)
-            {
-                var cat = dishesTypeList.Find(x => x.id == dishItem.cat.id);
-                if (cat != null)
-                {
-                    cat.DishesTaoBaos.Add(dishItem.item);
-                }
-            }
-            return new List<Maticsoft.Model.DishesTyep>();
+            throw new NotImplementedException();
         }
 
-        public override bool Conversion()
+        protected override string GetDishesBrief(HtmlAgilityPack.HtmlNode dishesNode)
         {
-            return true;
+            throw new NotImplementedException();
+        }
+
+        protected override string GetPictureHref(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string DishPath()
+        {
+            throw new NotImplementedException();
         }
     }
 }

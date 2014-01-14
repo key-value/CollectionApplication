@@ -136,6 +136,16 @@ namespace CollectionForm
                     regex =
                        string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+(\.[\w\-_]+)+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
                     break;
+                case "epinle":
+                    _selectedItem = "Epinle";
+                    regex =
+                       string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                    break;
+                case "gafan":
+                    _selectedItem = "GaFan";
+                    regex =
+                       string.Format(@"(http|ftp|https)?[:\/\/]?[\w\-_]+\.{0}[\w\-\.,@?^=%&amp;:/~\+#]*", siteName);
+                    break;
                 default:
                     regex = string.Empty;
                     break;
@@ -243,6 +253,7 @@ namespace CollectionForm
         }
         private void SetCatalogueListBox()
         {
+            textBox4.Tag = null;
             if (catalogueListBox.SelectedIndex < 0)
             {
                 return;
