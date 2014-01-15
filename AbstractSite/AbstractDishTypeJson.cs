@@ -104,11 +104,5 @@ namespace AbstractSite
         {
             return new List<Maticsoft.Model.DishesTyep>();
         }
-
-        public virtual bool Conversion()
-        {
-            return false;
-        }
-
     }
 }

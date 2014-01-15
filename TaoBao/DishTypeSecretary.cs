@@ -61,7 +61,7 @@ namespace TaoBao
                                      DishesName = dishesTaoBao.DishName,
                                      DishesUnit = string.IsNullOrEmpty(dishesTaoBao.DishesUnit) ? "份" : dishesTaoBao.DishesUnit,
                                      DishesMoney = dishesTaoBao.itemPrice,
-                                     BusinessID =  StoreInfo.OldStoreId,
+                                     BusinessID = StoreInfo.OldStoreId,
                                      DishesTypeID = dishesType.DishesTypeID,
                                  }).ToList();
                 dishesType.DishesList.AddRange(dishesList);

@@ -17,7 +17,7 @@ namespace YuKuai
         protected override StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
         {
             storeInfo.StoreName = catalogue.title;
-            storeInfo.picName = catalogue.picName;
+            storeInfo.StorePictureHref = catalogue.StorePictureHref;
             storeInfo.StoreAddress = catalogue.StoreInfo.StoreAddress;
             storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
             storeInfo.StoreTag += catalogue.StoreInfo.StoreTag;

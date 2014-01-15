@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using AbstractSite;
+using ApplicationUtility;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
@@ -15,54 +17,24 @@ namespace GaFan
         public DishTypeSecretary()
         {
             _generalEntityList = new List<IDishSiteModel>();
+            _pageUrl = @"http://www.gafan.cn/restaurant/{0}.html";
         }
 
+        private string _pageUrl;
+        public override string PageUrl
+        {
+            get
+            {
+                return string.Format(_pageUrl, StoreInfo.Fid);
+            }
+            set
+            {
+                _pageUrl = value;
+            }
+        }
         public List<DishType> GetDishType()
         {
-            var dishTypeList = new List<DishType>();
-            var dishesTypePath = @"//*[@id='menu']/[@class='clearboth']";
-            var baseCollectionSite = new BaseCollectionSite(PageUrl);
-            var dishTypeHtmlNode = baseCollectionSite.BaseHtmlNode;
-            var dishTypeNodeList = dishTypeHtmlNode.SelectNodes(dishesTypePath);
-            if (dishTypeNodeList == null || dishTypeNodeList.Count <= 0)
-            {
-                return dishTypeList;
-            }
-            foreach (var dishTypeNode in dishTypeNodeList)
-            {
-                var dishTypeID = Guid.NewGuid();
-                var dishTypeName = dishTypeNode.InnerText;
-                var dishTypeInfo = new DishType
-                {
-                    PkID = dishTypeID,
-                    DishName = dishTypeName
-                };
-                dishTypeList.Add(dishTypeInfo);
-                var dishNode = dishTypeNode.NextSibling;
-                int dishID = 1;
-                while (dishNode != null)
-                {
-                    var dishInfoList = dishNode.SelectNodes("//li");
-                    if (dishInfoList == null)
-                    {
-                        break;
-                    }
-                    foreach (var dishInfo in dishInfoList)
-                    {
-                        var dishNameNode = dishInfo.SelectSingleNode(".//p/strong");
-                        if (dishNameNode != null)
-                        {
-                            var dishName = dishNameNode.Attributes["title"].Value;
-                            var dishPriceNode = dishInfo.SelectSingleNode(".//p/span");
-                            var dishImg = dishInfo.SelectSingleNode(".//p/img");
-                            var dishPrice = dishPriceNode != null ? dishInfo.InnerText.Replace("￥", string.Empty).Replace("元", string.Empty).Trim() : string.Empty;
-
-                        }
-                    }
-                    dishNode = dishNode.NextSibling;
-                }
-            }
-            return dishTypeList;
+            return new List<DishType>();
         }
         private List<IDishSiteModel> _generalEntityList;
         public List<IDishSiteModel> GetDishesList()
@@ -72,7 +44,7 @@ namespace GaFan
 
         protected override string DishesTypePath()
         {
-            return string.Empty;
+            return @".//div[@class='main']/div[@class='list_left']/div[@id='tab_div_0']/div[@id='container']/div[@class='sidebox']/ul[@class='foodcon']/li";
         }
 
         protected override string DishesPath()
@@ -95,9 +67,28 @@ namespace GaFan
             return string.Empty;
         }
 
-        protected override HtmlNodeCollection GetSiteDishTypeList()
+        protected override string GetDishesHref(HtmlNode dishTypeNode)
         {
-            return new HtmlNodeCollection(null);
+            var funName = dishTypeNode.GetAttributes("onclick");
+            if (string.IsNullOrEmpty(funName))
+            {
+                return string.Empty;
+            }
+            const string regex = @"ajaxDish\(this,'(\d*)','(\d*)'\)";
+            if (!Regex.IsMatch(funName, regex))
+            {
+                return string.Empty;
+            }
+            var matchCollection = Regex.Match(funName, regex);
+            var resId = matchCollection.Groups[1].Value;
+            var preId = matchCollection.Groups[2].Value;
+            if (string.IsNullOrEmpty(preId) || string.IsNullOrEmpty(preId))
+            {
+                return string.Empty;
+            }
+            return
+                string.Format(
+                    @"http://www.gafan.cn/orderAction!ajaxDish.do?resId={0}&preId={1}&page.size=10", resId, preId);
         }
     }
 }

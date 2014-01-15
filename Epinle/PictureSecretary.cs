@@ -67,7 +67,7 @@ namespace Epinle
         //    return new List<Maticsoft.Model.BusPhotoAlbum>();
         //}
 
-        public override string PicturePath()
+        public override string PicturePath(string albumType)
         {
             return string.Empty;
         }

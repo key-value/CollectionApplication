@@ -111,9 +111,10 @@
             this.chbShowDishType = new System.Windows.Forms.ComboBox();
             this.chbShowPicBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnShowMessage = new System.Windows.Forms.Button();
-            this.lboxDish = new System.Windows.Forms.ListBox();
             this.lboxPic = new System.Windows.Forms.ListBox();
+            this.btnRemoveDish = new System.Windows.Forms.Button();
+            this.lboxDish = new System.Windows.Forms.ListBox();
+            this.btnShowMessage = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -901,9 +902,9 @@
             // 
             // btnShowDish
             // 
-            this.btnShowDish.Location = new System.Drawing.Point(281, 15);
+            this.btnShowDish.Location = new System.Drawing.Point(224, 16);
             this.btnShowDish.Name = "btnShowDish";
-            this.btnShowDish.Size = new System.Drawing.Size(127, 31);
+            this.btnShowDish.Size = new System.Drawing.Size(117, 31);
             this.btnShowDish.TabIndex = 80;
             this.btnShowDish.Text = "查看菜品";
             this.btnShowDish.UseVisualStyleBackColor = true;
@@ -923,7 +924,7 @@
             // 
             this.chbShowDishType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chbShowDishType.FormattingEnabled = true;
-            this.chbShowDishType.Location = new System.Drawing.Point(15, 18);
+            this.chbShowDishType.Location = new System.Drawing.Point(3, 18);
             this.chbShowDishType.Name = "chbShowDishType";
             this.chbShowDishType.Size = new System.Drawing.Size(215, 24);
             this.chbShowDishType.TabIndex = 81;
@@ -941,6 +942,7 @@
             // 
             this.panel1.Controls.Add(this.lboxPic);
             this.panel1.Controls.Add(this.chbShowPicBox);
+            this.panel1.Controls.Add(this.btnRemoveDish);
             this.panel1.Controls.Add(this.btnShowDish);
             this.panel1.Controls.Add(this.chbShowDishType);
             this.panel1.Controls.Add(this.btnShow);
@@ -949,25 +951,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1422, 59);
             this.panel1.TabIndex = 82;
-            // 
-            // btnShowMessage
-            // 
-            this.btnShowMessage.Location = new System.Drawing.Point(7, 716);
-            this.btnShowMessage.Name = "btnShowMessage";
-            this.btnShowMessage.Size = new System.Drawing.Size(82, 47);
-            this.btnShowMessage.TabIndex = 83;
-            this.btnShowMessage.Text = "No";
-            this.btnShowMessage.UseVisualStyleBackColor = true;
-            this.btnShowMessage.Click += new System.EventHandler(this.btnShowMessage_Click);
-            // 
-            // lboxDish
-            // 
-            this.lboxDish.FormattingEnabled = true;
-            this.lboxDish.ItemHeight = 12;
-            this.lboxDish.Location = new System.Drawing.Point(845, 7);
-            this.lboxDish.Name = "lboxDish";
-            this.lboxDish.Size = new System.Drawing.Size(283, 52);
-            this.lboxDish.TabIndex = 84;
             // 
             // lboxPic
             // 
@@ -978,11 +961,40 @@
             this.lboxPic.Size = new System.Drawing.Size(283, 52);
             this.lboxPic.TabIndex = 84;
             // 
+            // btnRemoveDish
+            // 
+            this.btnRemoveDish.Location = new System.Drawing.Point(343, 16);
+            this.btnRemoveDish.Name = "btnRemoveDish";
+            this.btnRemoveDish.Size = new System.Drawing.Size(117, 31);
+            this.btnRemoveDish.TabIndex = 80;
+            this.btnRemoveDish.Text = "删除";
+            this.btnRemoveDish.UseVisualStyleBackColor = true;
+            this.btnRemoveDish.Click += new System.EventHandler(this.btnRemoveDish_Click);
+            // 
+            // lboxDish
+            // 
+            this.lboxDish.FormattingEnabled = true;
+            this.lboxDish.ItemHeight = 12;
+            this.lboxDish.Location = new System.Drawing.Point(845, 7);
+            this.lboxDish.Name = "lboxDish";
+            this.lboxDish.Size = new System.Drawing.Size(283, 52);
+            this.lboxDish.TabIndex = 84;
+            // 
+            // btnShowMessage
+            // 
+            this.btnShowMessage.Location = new System.Drawing.Point(7, 716);
+            this.btnShowMessage.Name = "btnShowMessage";
+            this.btnShowMessage.Size = new System.Drawing.Size(82, 59);
+            this.btnShowMessage.TabIndex = 83;
+            this.btnShowMessage.Text = "No";
+            this.btnShowMessage.UseVisualStyleBackColor = true;
+            this.btnShowMessage.Click += new System.EventHandler(this.btnShowMessage_Click);
+            // 
             // ComparatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1524, 720);
+            this.ClientSize = new System.Drawing.Size(1524, 782);
             this.Controls.Add(this.btnShowMessage);
             this.Controls.Add(this.lblPic);
             this.Controls.Add(this.lblDish);
@@ -1116,5 +1128,6 @@
         private System.Windows.Forms.Button btnShowMessage;
         private System.Windows.Forms.ListBox lboxPic;
         private System.Windows.Forms.ListBox lboxDish;
+        private System.Windows.Forms.Button btnRemoveDish;
     }
 }

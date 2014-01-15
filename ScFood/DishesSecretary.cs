@@ -4,13 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using AbstractSite;
 using ISite;
 using Maticsoft.Model;
 using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace ScFood
 {
-    public class DishesSecretary : IDishes
+    public class DishesSecretary : AbstractDishes, IDishes
     {
         private StorePicture storePictureBll = new StorePicture();
         Maticsoft.BLL.Dishes dishesBll = new Maticsoft.BLL.Dishes();
@@ -19,9 +20,6 @@ namespace ScFood
             DishList = new List<IDishSiteModel>();
             PageUrl = @"http://sz.echiele.com";
         }
-        public string PageUrl { get; set; }
-
-        public string PicType { get; set; }
 
         public void GetDish(IDishSiteModel dishSiteModel, string storeID)
         {
@@ -52,18 +50,38 @@ namespace ScFood
             dishesBll.Add(dishes);
         }
 
-        public List<IDishSiteModel> DishList { get; set; }
-        bool IDishes.Conversion()
+        public override bool Conversion()
         {
             return false;
         }
-        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
+        public override List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
         {
             return dishesTyepList;
         }
 
-        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+        protected override string GetDishesName(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
 
-        public event IDelegate.LabelEventHandler LabelEventHandler;
+        protected override decimal GetDishesMoney(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetDishesBrief(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetPictureHref(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string DishPath()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

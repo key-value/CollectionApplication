@@ -3,62 +3,60 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using AbstractSite;
+using GaFan.Model;
 using ISite;
+using Maticsoft.BLL;
 using Maticsoft.Model;
+using DishesTyep = Maticsoft.Model.DishesTyep;
 using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace GaFan
 {
-    public class DishesSecretary : IDishes
+    public class DishesSecretary : AbstractDishesJson, IDishes
     {
-        private StorePicture storePictureBll = new StorePicture();
-        Maticsoft.BLL.Dishes dishesBll = new Maticsoft.BLL.Dishes();
         public DishesSecretary()
+        { DishList = new List<IDishSiteModel>(); }
+
+        public override bool Conversion()
         {
-            DishList = new List<IDishSiteModel>();
-            PageUrl = @"www.cyooy.com";
+            return true;
         }
-        public string PageUrl { get; set; }
+
+        public override string GetDishUrl(DishesTyep dishType, ref int pageNum)
+        {
+            if (string.IsNullOrEmpty(dishType.DishHref))
+            {
+                return string.Empty;
+            }
+            return string.Format("{0}&pager.offset={1}", dishType.DishHref, pageNum * 10);
+        }
+
+        protected override decimal GetDishesMoney(IDishSiteModel dishesNode)
+        {
+            decimal dishesMoney = 0;
+            decimal.TryParse(dishesNode.DishesMoney, out dishesMoney);
+            return dishesMoney;
+        }
+
 
         public string PicType { get; set; }
 
         public void GetDish(IDishSiteModel dishSiteModel, string storeID)
         {
-            var dishes = new Maticsoft.Model.Dishes
-            {
-                DishesID = Guid.NewGuid().ToString(),
-                DishesName = dishSiteModel.DishName,
-                DishesMoney = dishSiteModel.DishesMoney,
-                dishTypeID = dishSiteModel.DishTypeID,
-                StoreId = storeID,
-                DishesUnit = string.IsNullOrEmpty(dishSiteModel.DishesUnit) ? "份" : dishSiteModel.DishesUnit
-            };
-            if (!string.IsNullOrEmpty(dishSiteModel.PictureName))
-            {
-                var storePicture = new Maticsoft.Model.StorePicture();
-                storePicture.PID = Guid.NewGuid().ToString();
-                storePicture.PictureName = string.Format("{0}.jpg", storePicture.PID);
-                storePicture.PicType = "Food";
-                storePicture.PicturePath = PageUrl + dishSiteModel.PictureName;
-                storePicture.StoreId = storeID;
-                storePictureBll.Add(storePicture);
-                dishes.PictureName = storePicture.PictureName;
-            }
-            dishesBll.Add(dishes);
+
         }
 
         public List<IDishSiteModel> DishList { get; set; }
-        bool IDishes.Conversion()
-        {
-            return false;
-        }
-        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
-        {
-            return dishesTyepList;
-        }
 
-        public event IDelegate.CatalogueEventHandler CataloEventHandler;
-
-        public event IDelegate.LabelEventHandler LabelEventHandler;
+        protected override List<IDishSiteModel> GetDishList(string jsonText)
+        {
+            var dishResult = JsonHelper.JsonToObj<DishResult>(jsonText);
+            if (dishResult == null || dishResult.data == null)
+            {
+                return new List<IDishSiteModel>();
+            }
+            return dishResult.data.Cast<IDishSiteModel>().ToList();
+        }
     }
 }

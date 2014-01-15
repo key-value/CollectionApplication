@@ -23,7 +23,7 @@ namespace AbstractSite
             get { return "PhotoAlbum"; }
         }
 
-        public abstract string PicturePath();
+        public abstract string PicturePath(string albumType);
         public string StorePictureUrl { get; set; }
 
         public virtual List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
@@ -116,14 +116,14 @@ namespace AbstractSite
         {
             var baseCollectionSite = new BaseCollectionSite(GetPageUrl(storeInfo, albumType, pageNum));
             var pictureHtmlNode = baseCollectionSite.BaseHtmlNode;
-            var pictureNodeList = pictureHtmlNode.SelectNodes(PicturePath());
+            var pictureNodeList = pictureHtmlNode.SelectNodes(PicturePath(albumType));
             if (FilterPage(pictureNodeList, ref pageNum))
             {
                 return new List<Maticsoft.Model.StorePicture>();
             }
             return SavePicture(storeInfo, pictureNodeList, busphotoAlbumTable);
         }
-        protected virtual bool FilterPage(IEnumerable<HtmlNode> pictureHtmlNode, ref int pageNum)
+        protected virtual bool FilterPage(HtmlNodeCollection pictureHtmlNode, ref int pageNum)
         {
             if (pictureHtmlNode == null)
             {

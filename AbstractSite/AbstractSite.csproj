@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AbstractCatalogue.cs" />
     <Compile Include="AbstractDishes.cs" />
+    <Compile Include="AbstractDishesJson.cs" />
     <Compile Include="AbstractDishType.cs" />
     <Compile Include="AbstractDishTypeJson.cs" />
     <Compile Include="AbstractPicture.cs" />

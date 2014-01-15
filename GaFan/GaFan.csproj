@@ -45,6 +45,8 @@
     <Compile Include="CatalogueSecretary.cs" />
     <Compile Include="DishesSecretary.cs" />
     <Compile Include="DishTypeSecretary.cs" />
+    <Compile Include="Model\DishResult.cs" />
+    <Compile Include="Model\GaFanDishModel.cs" />
     <Compile Include="PictureSecretary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreSecretary.cs" />

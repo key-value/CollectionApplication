@@ -39,7 +39,7 @@ namespace AbstractSite
             foreach (var dishTypeNode in dishTypeNodeList)
             {
                 var dishTypeName = GetDishTypeName(dishTypeNode);
-                if (string.IsNullOrWhiteSpace(dishTypeName))
+                if (FilterDishTypeName(dishTypeName))
                 {
                     continue;
                 }
@@ -52,10 +52,10 @@ namespace AbstractSite
                         DishesTypeName = dishTypeName,
                         BusinessID = StoreInfo.OldStoreId,
                         CreateDate = DateTime.Now,
-                        DishHref = GetDishesHref(dishTypeNode),
                     };
                     dishTypeList.Add(dishesTypeInfo);
                 }
+                dishesTypeInfo.DishHref = GetDishesHref(dishTypeNode);
                 SaveIngDish(dishTypeName, string.Empty);
                 var dishNodeList = GetDishInfoList(dishTypeNode);
                 if (dishNodeList == null)
@@ -65,7 +65,7 @@ namespace AbstractSite
                 foreach (var dishNode in dishNodeList)
                 {
                     var dishName = GetDishName(dishNode).ClearSiteCode();
-                    if (string.IsNullOrWhiteSpace(dishName))
+                    if (FilterDishName(dishName))
                     {
                         continue;
                     }
@@ -94,6 +94,16 @@ namespace AbstractSite
             }
             FinishSaveDish();
             return dishTypeList;
+        }
+
+        protected virtual bool FilterDishName(string dishName)
+        {
+            return string.IsNullOrWhiteSpace(dishName);
+        }
+
+        protected virtual bool FilterDishTypeName(string dishTypeName)
+        {
+            return string.IsNullOrWhiteSpace(dishTypeName);
         }
 
         protected virtual string GetDishesHref(HtmlAgilityPack.HtmlNode dishTypeNode)

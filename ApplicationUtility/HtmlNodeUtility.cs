@@ -24,5 +24,15 @@ namespace ApplicationUtility
             }
             return string.Empty;
         }
+
+        public static string GetAttributes(this HtmlNode htmlNode, string attributesName)
+        {
+            if (htmlNode == null)
+            {
+                return string.Empty;
+            }
+            return htmlNode.Attributes.Contains(attributesName) ? htmlNode.Attributes[attributesName].Value : string.Empty;
+        }
+
     }
 }

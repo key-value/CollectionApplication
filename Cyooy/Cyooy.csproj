@@ -57,6 +57,10 @@
       <Project>{29F6C4A5-F9B7-48D0-9B57-F73A909D98ED}</Project>
       <Name>AbstractSite</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ApplicationUtility\ApplicationUtility.csproj">
+      <Project>{9e63c6e7-af70-41b9-a5ec-01d5aa7d3034}</Project>
+      <Name>ApplicationUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{38d7aa58-c95b-449b-86c6-a8073a56e11f}</Project>
       <Name>BLL</Name>

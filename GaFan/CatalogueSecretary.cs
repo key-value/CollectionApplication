@@ -24,8 +24,9 @@ namespace GaFan
             ImgNodePath = @".//div[@class='img']/a/img";
             PageNodePath =
                @".//div[@class='main']/div[@class='list_left']/div[@class='list_picList']/div[@id='tab_div_0']/div[@class='list_box']/div[@class='flickr']/a";
-            NextPage = PageUrl;
-            BeforePage = PageUrl;
+
+            NextPageText = @"list_next.gif";
+            BeforePageText = @"list_prev.gif";
         }
         #region
 
@@ -138,6 +139,11 @@ namespace GaFan
         }
 
 
+        //protected override bool FilterPageText(HtmlNode htmlNode, string pageText)
+        //{
+        //    return htmlNode.OuterHtml.Contains(pageText);
+        //}
+
         protected override void GetPage(HtmlNode pageNode)
         {
             var spanNode = pageNode.SelectSingleNode(@"../span[@class='current']");
@@ -183,11 +189,11 @@ namespace GaFan
             return priceNum;
         }
 
-        private string GetStoreTag(HtmlNode restaurant)
-        {
-            var xpath = @".//div[@class='f_left']/div[@style='clear:both']/div[@class='txt']/span";
-            return CollectionNodeText.GetNodeListContainsInnerText(restaurant, xpath, @"菜系：");
-        }
+        //private string GetStoreTag(HtmlNode restaurant)
+        //{
+        //    var xpath = @".//div[@class='f_left']/div[@style='clear:both']/div[@class='txt']/span";
+        //    return CollectionNodeText.GetNodeListContainsInnerText(restaurant, xpath, @"菜系：");
+        //}
 
         public string GetAddress(HtmlNode htmlNode)
         {

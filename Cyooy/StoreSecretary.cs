@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AbstractSite;
 using HtmlAgilityPack;
 using ISite;
 using Maticsoft.BLL;
@@ -10,70 +11,55 @@ using StoreInfo = Maticsoft.Model.StoreInfo;
 
 namespace Cyooy
 {
-    public class StoreSecretary : IStore
+    public class StoreSecretary : AbstractStore, IStore
     {
-        public string PageUrl { get; set; }
-        public StoreInfo GetStoreInfo(Catalogue catalogue)
+
+        public StoreSecretary()
         {
-            var storePath = @".//div[@align='center']/div[@id='container']";
-            var baseCollectionSite = new BaseCollectionSite(PageUrl);
-            StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNode;
-            StoreInfoHtmlNode = StoreInfoHtmlNode.SelectSingleNode(storePath);
-            if (StoreInfoHtmlNode == null)
-            {
-                return new NullStoreInfo();
-            }
-            int minPrice;
-            int maxPrice;
-            PeoplePrice(out minPrice, out maxPrice);
-            var storeInfo = new StoreInfo();
-            storeInfo.storeId = catalogue.StoreId;
-            storeInfo.Fid = catalogue.FId;
-            storeInfo.Facilities = GetFacilities();
-            storeInfo.payCar = GetPayCar();
-            storeInfo.BasicIntroduction = GetBasicIntroduction();
-            storeInfo.subway = Subway();
-            storeInfo.bus = GetBus();
-            storeInfo.box = Getbox();
-            storeInfo.MaxPrice = maxPrice;
-            storeInfo.MinPrice = minPrice;
-            storeInfo.StorePhone = GetPhoneNum();
-            storeInfo.StoreHours = GetWorkTime();
-            storeInfo.StoreTag = StoreTagText();
+            StorePath = @".//div[@align='center']/div[@id='container']";
+        }
+        //public StoreInfo GetStoreInfo(Catalogue catalogue)
+        //{
+        //    var storePath = @".//div[@align='center']/div[@id='container']";
+        //    var baseCollectionSite = new BaseCollectionSite(PageUrl);
+        //    StoreInfoHtmlNode = baseCollectionSite.BaseHtmlNode;
+        //    StoreInfoHtmlNode = StoreInfoHtmlNode.SelectSingleNode(storePath);
+        //    if (StoreInfoHtmlNode == null)
+        //    {
+        //        return new NullStoreInfo();
+        //    }
+        //    int minPrice;
+        //    int maxPrice;
+        //    PeoplePrice(out minPrice, out maxPrice);
+        //    var storeInfo = new StoreInfo();
+        //    storeInfo.storeId = catalogue.StoreId;
+        //    storeInfo.Fid = catalogue.FId;
+        //    storeInfo.Facilities = GetFacilities();
+        //    storeInfo.payCar = GetPayCar();
+        //    storeInfo.BasicIntroduction = GetBasicIntroduction();
+        //    storeInfo.subway = Subway();
+        //    storeInfo.bus = GetBus();
+        //    storeInfo.box = Getbox();
+        //    storeInfo.MaxPrice = maxPrice;
+        //    storeInfo.MinPrice = minPrice;
+        //    storeInfo.StorePhone = GetPhoneNum();
+        //    storeInfo.StoreHours = GetWorkTime();
+        //    storeInfo.StoreTag = StoreTagText();
+        //    storeInfo.StoreName = catalogue.title;
+        //    storeInfo.picName = catalogue.picName;
+        //    storeInfo.carPark = GetCarPark();
+        //    storeInfo.StoreAddress = GetAddress();
+        //    storeInfo.StoreHours = GetWorkTime();
+        //    return storeInfo;
+        //}
+        protected override StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
+        {
             storeInfo.StoreName = catalogue.title;
-            storeInfo.picName = catalogue.picName.Trim();
-            storeInfo.carPark = GetCarPark();
-            storeInfo.StoreAddress = GetAddress();
-            storeInfo.StoreHours = GetWorkTime();
+            storeInfo.StorePictureHref = catalogue.StorePictureHref;
             return storeInfo;
         }
-        public HtmlNode StoreInfoHtmlNode
-        {
-            get;
-            set;
-        }
 
-        public string GetFacilities()
-        {
-            return string.Empty;
-        }
-
-        public string Subway()
-        {
-            return string.Empty;
-        }
-
-        public string GetCarPark()
-        {
-            return string.Empty;
-        }
-
-        public string GetBus()
-        {
-            return string.Empty;
-        }
-
-        public string StoreTagText()
+        public override string StoreTagText()
         {
             var storeTag = new StringBuilder();
             var xpath = @".//div[@id='content']/div[@id='restaurantInfo']/div[@class='left']/ul/li/a[@target='_blank']";
@@ -89,7 +75,7 @@ namespace Cyooy
             return storeTag.ToString();
         }
 
-        public void PeoplePrice(out int minPrice, out int maxPrice)
+        public override void PeoplePrice(out int minPrice, out int maxPrice)
         {
             minPrice = 0;
             maxPrice = 0;
@@ -126,7 +112,7 @@ namespace Cyooy
 
         }
 
-        public string GetAddress()
+        public override string GetAddress()
         {
             var xpath = @".//div[@id='content']/div[@id='restaurantInfo']/div[@class='left']/ul/li";
             var addressNodeList = StoreInfoHtmlNode.SelectNodes(xpath) ?? new HtmlNodeCollection(null);
@@ -144,7 +130,7 @@ namespace Cyooy
             return string.Empty;
         }
 
-        public string GetPhoneNum()
+        public override string GetPhoneNum()
         {
             var xpath = @".//div[@id='content']/div[@id='restaurantInfo']/div[@class='left']/ul/li";
             var phoneNumNodeList = StoreInfoHtmlNode.SelectNodes(xpath) ?? new HtmlNodeCollection(null);
@@ -162,7 +148,7 @@ namespace Cyooy
             return string.Empty;
         }
 
-        public string GetWorkTime()
+        public override string GetWorkTime()
         {
             var xpath = @".//div[@id='content']/div[@id='restaurantInfo']/div[@class='left']/ul/li";
             var phoneNumNodeList = StoreInfoHtmlNode.SelectNodes(xpath) ?? new HtmlNodeCollection(null);
@@ -180,12 +166,7 @@ namespace Cyooy
             return string.Empty;
         }
 
-        public bool GetPayCar()
-        {
-            return false;
-        }
-
-        public string GetBasicIntroduction()
+        public override string GetBasicIntroduction()
         {
             var xpath = @".//div[@id='content']/div[@id='restaurantInfo']/div[@class='clearboth lineHeight15 fontSize10 fontInfo']";
             var basicIntroductionNode = StoreInfoHtmlNode.SelectSingleNode(xpath);
@@ -195,15 +176,5 @@ namespace Cyooy
             }
             return basicIntroductionNode.InnerText.Trim();
         }
-
-        public bool Getbox()
-        {
-            return false;
-        }
-
-        public event IDelegate.CatalogueEventHandler CataloEventHandler;
-
-
-        public event IDelegate.LabelEventHandler LabelEventHandler;
     }
 }

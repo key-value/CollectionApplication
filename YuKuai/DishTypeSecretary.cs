@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using AbstractSite;
 using ISite;
 using Maticsoft.BLL;
 using Maticsoft.Model;
+using DishesTyep = Maticsoft.Model.DishesTyep;
 
 namespace YuKuai
 {
-    public class DishTypeSecretary : IDishType
+    public class DishTypeSecretary : AbstractDishType, IDishType
     {
         public DishTypeSecretary()
         {
             _generalEntityList = new List<IDishSiteModel>();
+            PictureUrl = @"http://www.cyooy.com/";
         }
         private string _pageUrl = string.Empty;
 
-        public string PageUrl
+        public override string PageUrl
         {
             get
             {
@@ -41,28 +44,34 @@ namespace YuKuai
             return _generalEntityList;
         }
 
-        private string _pictureUrl;
-        public string PictureUrl
+        public override List<DishesTyep> UpdateDishType()
         {
-            get { return @"http://www.cyooy.com/"; }
-            set { _pictureUrl = value; }
+            return new List<DishesTyep>();
         }
 
-        public string RestaurantId { get; set; }
-
-        public Maticsoft.Model.StoreInfo StoreInfo { get; set; }
-
-
-
-
-        public List<Maticsoft.Model.DishesTyep> UpdateDishType()
+        protected override string DishesTypePath()
         {
             throw new NotImplementedException();
         }
 
+        protected override string DishesPath()
+        {
+            throw new NotImplementedException();
+        }
 
-        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+        protected override string GetDishName(HtmlAgilityPack.HtmlNode dishNode)
+        {
+            throw new NotImplementedException();
+        }
 
-        public event IDelegate.LabelEventHandler LabelEventHandler;
+        protected override decimal GetDishPrice(HtmlAgilityPack.HtmlNode dishNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetDishImg(HtmlAgilityPack.HtmlNode dishNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

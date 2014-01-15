@@ -16,7 +16,8 @@ namespace FanTong
         protected override StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
         {
             storeInfo.StoreName = catalogue.title;
-            storeInfo.picName = catalogue.picName.Trim();
+            //storeInfo.picName = catalogue.picName;
+            storeInfo.StorePictureHref = catalogue.StorePictureHref;
             storeInfo.StoreAddress = catalogue.StoreInfo.StoreAddress;
             storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
             storeInfo.StoreTag += catalogue.StoreInfo.StoreTag;
@@ -106,7 +107,7 @@ namespace FanTong
             var stringBuilder = new StringBuilder();
             if (basicIntroductionTextNode == null)
             {
-                return stringBuilder.ToString();
+                return stringBuilder.ToString().Replace(@"收起", string.Empty);
             }
             return basicIntroductionTextNode.InnerText;
         }

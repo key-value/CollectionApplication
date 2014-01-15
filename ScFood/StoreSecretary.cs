@@ -20,12 +20,13 @@ namespace ScFood
         protected override StoreInfo ChangeStoreInfo(Catalogue catalogue, StoreInfo storeInfo)
         {
             storeInfo.StoreName = catalogue.title;
-            storeInfo.picName = catalogue.picName.Trim();
+            //storeInfo.picName = catalogue.picName.Trim();
             storeInfo.StoreAddress = catalogue.StoreInfo.StoreAddress;
             storeInfo.MaxPrice = catalogue.StoreInfo.MaxPrice;
             storeInfo.StoreTag += catalogue.StoreInfo.StoreTag;
             storeInfo.Facilities += catalogue.StoreInfo.Facilities;
             storeInfo.StorePhone = catalogue.StoreInfo.StorePhone;
+            storeInfo.StorePictureHref = catalogue.StorePictureHref;
             return storeInfo;
         }
 

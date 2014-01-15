@@ -23,7 +23,7 @@ namespace XiaoMiShuSite
             return string.Format(PageUrl, storeInfo.Fid, albumType, pageNum);
         }
 
-        public override string PicturePath()
+        public override string PicturePath(string albumType)
         {
             return @".//div[@class='bdc bgf0 p10']/a/img";
         }

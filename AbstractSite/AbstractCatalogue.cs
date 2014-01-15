@@ -87,6 +87,12 @@ namespace AbstractSite
         }
         #endregion
         #region 页面处理
+
+        protected virtual bool FilterPageText(HtmlNode htmlNode, string pageText)
+        {
+            return htmlNode.InnerHtml.Contains(pageText);
+        }
+
         protected virtual void GetPageNum(HtmlNode catalogueHtmlNode)
         {
             var pageNodeList =
@@ -97,12 +103,12 @@ namespace AbstractSite
                 var nextChange = false;
                 foreach (var pageNode in pageNodeList)
                 {
-                    if (pageNode.InnerHtml.Contains(BeforePageText))
+                    if (FilterPageText(pageNode, BeforePageText))
                     {
                         BeforePage += pageNode.Attributes["href"].Value;
                         beforeChange = true;
                     }
-                    else if (pageNode.InnerText.Contains(NextPageText))
+                    else if (FilterPageText(pageNode, NextPageText))
                     {
                         NextPage += pageNode.Attributes["href"].Value;
                         nextChange = true;

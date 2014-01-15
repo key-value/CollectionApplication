@@ -4,13 +4,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using AbstractSite;
 using ISite;
 using Maticsoft.Model;
 using StorePicture = Maticsoft.BLL.StorePicture;
 
 namespace FanTong
 {
-    public class DishesSecretary : IDishes
+    public class DishesSecretary : AbstractDishes, IDishes
     {
         private StorePicture storePictureBll = new StorePicture();
         Maticsoft.BLL.Dishes dishesBll = new Maticsoft.BLL.Dishes();
@@ -51,19 +52,29 @@ namespace FanTong
             }
             dishesBll.Add(dishes);
         }
-
-        public List<IDishSiteModel> DishList { get; set; }
-        bool IDishes.Conversion()
+        protected override string GetDishesName(HtmlAgilityPack.HtmlNode dishesNode)
         {
-            return false;
-        }
-        public List<DishesTyep> GetDish(List<DishesTyep> dishesTyepList)
-        {
-            return dishesTyepList;
+            throw new NotImplementedException();
         }
 
-        public event IDelegate.CatalogueEventHandler CataloEventHandler;
+        protected override decimal GetDishesMoney(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
 
-        public event IDelegate.LabelEventHandler LabelEventHandler;
+        protected override string GetDishesBrief(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string GetPictureHref(HtmlAgilityPack.HtmlNode dishesNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string DishPath()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

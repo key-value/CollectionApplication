@@ -328,6 +328,7 @@ namespace CollectionForm
             txtStoreHoursSite.SetTextBoxText(string.IsNullOrWhiteSpace(storeInfo.StoreHours) ? "10:00-22:00" : storeInfo.StoreHours);
             txtStoreNameSite.SetTextBoxText(storeInfo.StoreName);
             txtStorePhoneSite.SetTextBoxText(storeInfo.StorePhone);
+            textBox7.SetTextBoxText(storeInfo.StorePictureHref);
         }
         private void ClearStoreEntityText(StoreInfoEntity storeInfoEntity)
         {
@@ -992,6 +993,34 @@ namespace CollectionForm
             var showDishListControl = new ShowDishListControl(busPhotoAlbum.StorePicturesList);
             var pop = new Popup(showDishListControl);
             pop.Show(btnShowDish, false);
+        }
+
+        private void btnRemoveDish_Click(object sender, EventArgs e)
+        {
+            if (catalogueListBox.SelectedIndex < 0)
+            {
+                return;
+            }
+            var catalogueInfo = catalogueListBox.SelectedItem as Catalogue;
+            if (catalogueInfo == null)
+            {
+                return;
+            }
+            var siteStoreInfo = _storeInfoList.Find(x => x.storeId == catalogueInfo.StoreId);
+            if (siteStoreInfo == null)
+            {
+                return;
+            }
+
+            var dishesTyep = chbShowDishType.SelectedItem as DishesTyep;
+            if (dishesTyep == null)
+            {
+                return;
+            }
+            chbShowDishType.DataSource = null;
+            siteStoreInfo.DishTypeList.Remove(dishesTyep);
+            chbShowDishType.DataSource = siteStoreInfo.DishTypeList;
+            chbShowDishType.DisplayMember = "DishesTypeName";
         }
     }
 }

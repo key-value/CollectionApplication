@@ -19,7 +19,7 @@ namespace DianPing
             PageUrl = @"http://www.dianping.com/shop/{0}/photos/tag-{2}?pg={1}";
         }
 
-        public override string PicturePath()
+        public override string PicturePath(string albumType)
         {
             return @".//div[@class='main page-gallery Fix']/div[@class='gallery-list-wrapper page-block']/div[@class='gallery-photo-nav ']/div[@class='picture-square']/div[@class='picture-list']/ul/li[@class='J_list']/div[@class='img']/a/img";
         }

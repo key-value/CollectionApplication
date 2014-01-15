@@ -8,28 +8,29 @@ using Maticsoft.Model;
 
 namespace FanQieKuaiDianSite
 {
-    public class PictureSecretary : AbstractMainSite, IPicture
+    public class PictureSecretary : AbstractPhotoAlbum, IPicture
     {
 
         public List<Maticsoft.Model.BusPhotoAlbum> SaveAlbumTables(Maticsoft.Model.StoreInfo storeInfo)
         {
             return new List<Maticsoft.Model.BusPhotoAlbum>();
         }
-        public string _pageUrl { get; set; }
-
-        public string PageUrl { get; set; }
 
         public string PicturePathName { get; set; }
 
-        public void GetPicture(Maticsoft.Model.StoreInfo storeInfo)
+        public override string PicturePath(string albumType)
         {
-            throw new NotImplementedException();
+            return string.Empty;
+        }
+
+        protected override List<string> GetTypeList()
+        {
+            return new List<string>();
         }
 
 
-        public string PicturType
+        public void GetPicture(StoreInfo storeInfo)
         {
-            get { throw new NotImplementedException(); }
         }
     }
 }
