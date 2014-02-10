@@ -50,7 +50,7 @@ namespace YuKuai
 
         protected override List<string> GetTypeList()
         {
-            return new List<string>() { "2", "-2" };
+            return new List<string>() { "-2", "2" };
         }
 
 

@@ -1022,5 +1022,13 @@ namespace CollectionForm
             chbShowDishType.DataSource = siteStoreInfo.DishTypeList;
             chbShowDishType.DisplayMember = "DishesTypeName";
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            webBrowser1.ScriptErrorsSuppressed = true;
+            webBrowser1.Navigate(new Uri(textBox1.Text));
+            var doc = webBrowser1.Document;
+
+        }
     }
 }

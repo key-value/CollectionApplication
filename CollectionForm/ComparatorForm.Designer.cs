@@ -115,6 +115,8 @@
             this.btnRemoveDish = new System.Windows.Forms.Button();
             this.lboxDish = new System.Windows.Forms.ListBox();
             this.btnShowMessage = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -190,7 +192,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(1186, 30);
             this.textBox1.TabIndex = 51;
-            this.textBox1.Text = "http://www.xiaomishu.com/shop/search-s261/";
+            this.textBox1.Text = "http://www.dianping.com/search/category/4/10/r1519";
             // 
             // textBox2
             // 
@@ -990,11 +992,31 @@
             this.btnShowMessage.UseVisualStyleBackColor = true;
             this.btnShowMessage.Click += new System.EventHandler(this.btnShowMessage_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(64, 781);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 84;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(6, 395);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(250, 250);
+            this.webBrowser1.TabIndex = 85;
+            // 
             // ComparatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1524, 782);
+            this.ClientSize = new System.Drawing.Size(1524, 815);
+            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnShowMessage);
             this.Controls.Add(this.lblPic);
             this.Controls.Add(this.lblDish);
@@ -1129,5 +1151,7 @@
         private System.Windows.Forms.ListBox lboxPic;
         private System.Windows.Forms.ListBox lboxDish;
         private System.Windows.Forms.Button btnRemoveDish;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }

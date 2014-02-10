@@ -106,6 +106,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
@@ -116,6 +117,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseCollectionSite.cs" />
+    <Compile Include="BrowserSession.cs" />
     <Compile Include="BusPhotoAlbum.cs" />
     <Compile Include="BusPhotoAlbumTable.cs" />
     <Compile Include="City.cs" />
@@ -148,6 +150,10 @@
     <Compile Include="StoreSpecialTag.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApplicationUtility\ApplicationUtility.csproj">
+      <Project>{9E63C6E7-AF70-41B9-A5EC-01D5AA7D3034}</Project>
+      <Name>ApplicationUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{9FE00521-3A8B-42B1-814E-585E99407B2E}</Project>
       <Name>DAL</Name>

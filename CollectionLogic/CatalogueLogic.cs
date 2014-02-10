@@ -31,7 +31,7 @@ namespace CollectionLogic
             }
             catch (System.Exception ex)
             {
-
+                throw ex;
             }
             return new List<Catalogue>();
         }
