@@ -14,7 +14,7 @@ namespace DianPing
     {
         public StoreSecretary()
         {
-            StorePath = @".//div[@class='shop-wrap']/div[@class='main']/div[@class='shop-info shakeable']/div[@class='shop-info-con']/div[@class='pic-txt']/div[@class='txt']/div[@class='shop-info-location']";
+            StorePath = @".//div[@class='shop-wrap ']/div[@class='main']/div[@class='shop-info shakeable']/div[@class='shop-info-con']/div[@class='pic-txt']/div[@class='txt']/div[@class='shop-info-location']";
             ImgNodePath = @"./../../div[@class='pic']/div[@class='thumb-switch']/ul/li/a/img";
         }
 
@@ -32,7 +32,7 @@ namespace DianPing
 
         public bool GetDishTypeSite()
         {
-            const string xpath = @"./../../../../../../../div[@class='shop-wrap']/div[@class='main']/div/div[@class='tabs']/ul/li/a[@class='ga-menu J_menu_tag']";
+            const string xpath = @"./../../../../../../../div[@class='shop-wrap ']/div[@class='main']/div/div[@class='tabs']/ul/li/a[@class='ga-menu J_menu_tag']";
             return CollectionNodeText.GetNodeContainsInnerText(StoreInfoHtmlNode, xpath, @"菜单") != null;
         }
 

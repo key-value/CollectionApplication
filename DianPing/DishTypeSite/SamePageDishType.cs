@@ -46,7 +46,7 @@ namespace DianPing.DishTypeSite
 
         public string DishesTypePath()
         {
-            return @".//div[@class='shop-wrap']/div[@class='main']/div/div[@class='tabs']/ul/li/span[@class='active']/a[@class='ga-menu']";
+            return @".//div[@class='shop-wrap ']/div[@class='main']/div/div[@class='tabs']/ul/li/span[@class='active']/a[@class='ga-menu']";
         }
 
         public string DishesPath()

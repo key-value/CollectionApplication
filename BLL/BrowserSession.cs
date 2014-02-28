@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Cache;
 using System.Text;
 using HtmlAgilityPack;
 
@@ -13,31 +14,35 @@ namespace Maticsoft.BLL
         static BrowserSession()
         {
             Cookies = new CookieCollection();
-            Cookies.Add(new Cookie("TGSeenRecomDealTest", "b", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("TGReviewAB", "a", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("tc", "4", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("t_track", "D5116066:D5116066:T:D5158165:T:D2030113:D2030113:T", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("sid", "gwbp5jb4xdbkalzxxvskke55", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("s_ViewType", "1", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("RecentDealGroupIds", "2030113|5158165|5116066", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("PHOENIX_ID", "0a01677b-1441994edf8-c93d64", "/", ".dianping.com"));
 
 
-            Cookies.Add(new Cookie("lb.dp", "167837962.20480.0000", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("JSESSIONID", "075910FEA7B1E03DC68BF5EDA251DB8A", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("is", "782612742637", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("ipbh", "1387468800000", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("d_p_w", "1391757237622", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("d_p_m", "1391757237622", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("cye", "guangzhou", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("cy", "4", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("ano", "hKzddZUmzwEkAAAAYjhiMmJjNjQtZTNmYS00M2Y5LWFhN2UtYzhjMjZkNjU5Zjg1jIjEjJ8aCy1OxZrlBgJo1je0n3A1", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("aburl", "1", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("abtest", "\"36,92\\|37,94\"", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("_tr.u", "Ui3WxGt4CKAGBEpR", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("_hc.v", "\"\\\"13fbe2f8-258e-4a7f-8202-3acd74ae0418.1389575918\\\"\"", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("__zpspc", "99.2.1389696352.1389696352.1%234%7C%7C%7C%7C%7C", "/", ".dianping.com"));
-            Cookies.Add(new Cookie("__utmz", "1.1391756850.1.1.utmcsr=locoy.com|utmccn=(referral)|utmcmd=referral|utmcct=/show.php", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("JSESSIONID", "075910FEA7B1E03DC68BF5EDA251DB8A", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("PHOENIX_ID", "0a01677b-1441994edf8-c93d64", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("RecentDealGroupIds", "2030113|5158165|5116066", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("TGReviewAB", "a", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("TGSeenRecomDealTest", "b", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("__utmb", "1.17.10.1392021505", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("__utmc", "1", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("abtest", "\"36,92\\|37,94\"", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("cye", "guangzhou", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("lb.dp", "167837962.20480.0000", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("s_ViewType", "1", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("sid", "gwbp5jb4xdbkalzxxvskke55", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("t_track", "D5116066:D5116066:T:D5158165:T:D2030113:D2030113:T", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("tc", "14", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("__utma", "1.2016573675.1391743362.1392009048.1392021505.5", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("__utmz", "1.1391756850.1.1.utmcsr=locoy.com|utmccn=(referral)|utmcmd=referral|utmcct=/show.php", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("__zpspc", "99.2.1389696352.1389696352.1%234%7C%7C%7C%7C%7C", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("_hc.v", "\\\"33e86915-c842-459a-a600-c10f7ad22913.1391743369\\\"\"", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("_hc.v", "\\\"13fbe2f8-258e-4a7f-8202-3acd74ae0418.1389575918\\\"\"", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("_tr.u", "Ui3WxGt4CKAGBEpR", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("aburl", "1", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("ano", "hKzddZUmzwEkAAAAYjhiMmJjNjQtZTNmYS00M2Y5LWFhN2UtYzhjMjZkNjU5Zjg1jIjEjJ8aCy1OxZrlBgJo1je0n3A1", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("cy", "4", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("d_p_m", "1391757237622", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("d_p_w", "1391757237622", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("ipbh", "1387468800000", "/", ".dianping.com"));
+            //Cookies.Add(new Cookie("is", "782612742637", "/", ".dianping.com"));
 
 
         }
@@ -56,6 +61,7 @@ namespace Maticsoft.BLL
         /// </summary>
         public FormElementCollection FormElements { get; set; }
 
+        public string Url;
         /// <summary>
         /// Makes a HTTP GET request to the given URL
         /// </summary>
@@ -71,6 +77,7 @@ namespace Maticsoft.BLL
         public HtmlDocument GetHtmlDocument(string url)
         {
             _isPost = false;
+            Url = url;
             CreateWebRequestObject().Load(url);
             return _htmlDoc;
         }
@@ -99,6 +106,8 @@ namespace Maticsoft.BLL
         private HtmlWeb CreateWebRequestObject()
         {
             HtmlWeb web = new HtmlWeb();
+            //web.UserAgent =
+            //@"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1";
             web.UseCookies = true;
             web.PreRequest = new HtmlWeb.PreRequestHandler(OnPreRequest);
             web.PostResponse = new HtmlWeb.PostResponseHandler(OnAfterResponse);
@@ -112,7 +121,13 @@ namespace Maticsoft.BLL
         protected bool OnPreRequest(HttpWebRequest request)
         {
             request.AllowAutoRedirect = false;
-
+            request.Referer = Url;
+            request.Accept = "text/html, application/xhtml+xml, */*";
+            request.UserAgent = @"Mozilla/5.0 (Windows NT 6.3; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0";
+            request.Headers.Add("Accept-Encoding", "none");
+            request.Headers.Add(@"Accept-Language", "zh-Hans-CN,zh-Hans;q=0.8,en-US;q=0.5,en;q=0.3");
+            request.CachePolicy = new RequestCachePolicy();
+            
             AddCookiesTo(request);               // Add cookies that were saved from previous requests
             if (_isPost) AddPostDataTo(request); // We only need to add post data on a POST request
             return true;

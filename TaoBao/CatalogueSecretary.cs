@@ -17,7 +17,7 @@ namespace TaoBao
     {
         public CatalogueSecretary()
         {
-            PageUrl = @"http://list.bendi.taobao.com/chengdu";
+            PageUrl = @"http://list.bendi.taobao.com/hangzhou";
             CataloguePath = @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='items']/div[@class='list']/ul/li[@class='clearfix place-item']";
             PageNodePath =
                @".//div[@class='main-wrap']/div[@class='col-main']/div[@class='mod']/div[@class='k2-pagination clearfix']/div[@class='option']/a";

@@ -43,5 +43,11 @@ namespace TaoBao
             const string xpath = @"./div[@class='shop-addr']";
             return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Replace(@"地址：", string.Empty).Trim();
         }
+
+        public override string GetWorkTime()
+        {
+            const string xpath = @"./div[@class='shop-other']/span[@class='person-average']/span[@class='shop-time']/span";
+            return CollectionNodeText.GetNodeInnerText(StoreInfoHtmlNode, xpath).Trim();
+        }
     }
 }

@@ -102,6 +102,12 @@
     <Compile Include="AnalysisForm.Designer.cs">
       <DependentUpon>AnalysisForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comparator-A.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comparator-A.Designer.cs">
+      <DependentUpon>Comparator-A.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComparatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </Compile>
     <EmbeddedResource Include="AnalysisForm.resx">
       <DependentUpon>AnalysisForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comparator-A.resx">
+      <DependentUpon>Comparator-A.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ComparatorForm.resx">
       <DependentUpon>ComparatorForm.cs</DependentUpon>

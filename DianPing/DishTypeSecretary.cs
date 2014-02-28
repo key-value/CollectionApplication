@@ -34,7 +34,7 @@ namespace DianPing
         public List<DishType> GetDishType()
         {
             var dishTypeList = new List<DishType>();
-            const string dishesTypePath = @".//div[@class='shop-wrap']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']/div[@class='rec-dishes tab-item active']/div/ul/li";
+            const string dishesTypePath = @".//div[@class='shop-wrap ']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']/div[@class='rec-dishes tab-item active']/div/ul/li";
             var baseCollectionSite = new BaseCollectionSite(PageUrl);
             var dishTypeHtmlNode = baseCollectionSite.BaseHtmlNode;
             var dishNodeList = dishTypeHtmlNode.SelectNodes(dishesTypePath);
@@ -43,7 +43,7 @@ namespace DianPing
                 return dishTypeList;
             }
 
-            var scripNode = baseCollectionSite.BaseHtmlNode.SelectSingleNode(@".//div[@class='shop-wrap']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']/div[@class='rec-dishes tab-item active']/div[@class='pic-list J_toggle']/ul/script");
+            var scripNode = baseCollectionSite.BaseHtmlNode.SelectSingleNode(@".//div[@class='shop-wrap ']/div[@class='main']/div[@id='dish-tag']/div[@class='tab-container']/div[@class='rec-dishes tab-item active']/div[@class='pic-list J_toggle']/ul/script");
             if (scripNode != null && !string.IsNullOrWhiteSpace(scripNode.InnerText))
             {
                 var liNodeList = baseCollectionSite.BaseHtmlNodeCollection(scripNode.InnerText);

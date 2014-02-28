@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using AbstractSite;
@@ -1029,6 +1030,46 @@ namespace CollectionForm
             webBrowser1.Navigate(new Uri(textBox1.Text));
             var doc = webBrowser1.Document;
 
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            var catalogueInfo = catalogueListBox.SelectedItem as Catalogue;
+            if (catalogueInfo == null)
+            {
+                return;
+            }
+            webBrowser1.Navigate(new Uri(catalogueInfo.href));
+        }
+
+
+        public CookieCollection GetCookieContainer()
+        {
+            var container = new CookieCollection();
+
+            if (webBrowser1.Document == null)
+            {
+                return container;
+            }
+            var path = "/";
+            var domain = ".dianping.com";
+            foreach (var cookie in webBrowser1.Document.Cookie.Split(';'))
+            {
+                var name = cookie.Split('=')[0];
+                if (name.Trim() == "JSESSIONID" || name.Trim() == "lb.dp")
+                {
+                    continue;
+                }
+                var value = cookie.Replace(name.Trim(), string.Empty).Replace("=", string.Empty);
+                container.Add(new Cookie(name.Trim(), value.Trim(), path, domain));
+            }
+
+            return container;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            BrowserSession.Cookies = new CookieCollection { GetCookieContainer() };
         }
     }
 }

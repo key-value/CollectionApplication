@@ -1,0 +1,41 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="CollectionApplication.MainWindow"
+        Title="MainWindow" Height="650.25" Width="1000">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="21,21,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="727"/>
+        <Button Name="GoButton" Content="GO" Margin="761,21,165,0" VerticalAlignment="Top" RenderTransformOrigin="0.693,-0.105" Height="66"/>
+        <ListBox HorizontalAlignment="Left" Height="404" Margin="21,153,0,0" VerticalAlignment="Top" Width="155"/>
+        <ComboBox HorizontalAlignment="Left" Margin="21,49,0,0" VerticalAlignment="Top" Width="139" RenderTransformOrigin="0.175,-0.714"/>
+        <ComboBox HorizontalAlignment="Left" Margin="21,75,0,0" VerticalAlignment="Top" Width="139"/>
+        <ComboBox HorizontalAlignment="Left" Margin="21,101,0,0" VerticalAlignment="Top" Width="139"/>
+        <ComboBox HorizontalAlignment="Left" Margin="21,127,0,0" VerticalAlignment="Top" Width="139"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="214,62,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="318,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="407"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="214,99,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="318,141,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="407"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="214,139,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="214,180,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="214,218,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="214,258,0,0" VerticalAlignment="Top"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="214,297,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="181" Margin="181,376,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="567"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="318,182,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="407"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="318,220,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="407"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="318,260,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="407"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="318,299,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="407"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="318,101,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="407"/>
+        <ListBox HorizontalAlignment="Left" Height="0" Margin="134,626,0,0" VerticalAlignment="Top" Width="26"/>
+        <ProgressBar HorizontalAlignment="Left" Height="15" Margin="181,562,0,0" VerticalAlignment="Top" Width="186"/>
+        <ListBox HorizontalAlignment="Left" Height="225" Margin="844,7,0,0" VerticalAlignment="Top" Width="128" ItemsSource="{Binding TheList}">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding TheText}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox HorizontalAlignment="Left" Height="310" Margin="844,247,0,0" VerticalAlignment="Top" Width="128"/>
+    </Grid>
+</Window>

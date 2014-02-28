@@ -117,6 +117,8 @@
             this.btnShowMessage = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -463,7 +465,7 @@
             this.catalogueListBox.FormattingEnabled = true;
             this.catalogueListBox.Location = new System.Drawing.Point(7, 52);
             this.catalogueListBox.Name = "catalogueListBox";
-            this.catalogueListBox.Size = new System.Drawing.Size(189, 612);
+            this.catalogueListBox.Size = new System.Drawing.Size(189, 372);
             this.catalogueListBox.TabIndex = 69;
             this.catalogueListBox.SelectedIndexChanged += new System.EventHandler(this.catalogueListBox_SelectedIndexChanged);
             // 
@@ -994,9 +996,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(64, 781);
+            this.button1.Location = new System.Drawing.Point(7, 781);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(82, 34);
             this.button1.TabIndex = 84;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -1004,17 +1006,39 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(6, 395);
+            this.webBrowser1.Location = new System.Drawing.Point(6, 415);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(250, 250);
+            this.webBrowser1.Size = new System.Drawing.Size(190, 250);
             this.webBrowser1.TabIndex = 85;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(95, 781);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(101, 34);
+            this.button8.TabIndex = 86;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(202, 781);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(94, 34);
+            this.button9.TabIndex = 87;
+            this.button9.Text = "button9";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // ComparatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1524, 815);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnShowMessage);
@@ -1153,5 +1177,7 @@
         private System.Windows.Forms.Button btnRemoveDish;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
